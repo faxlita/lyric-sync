@@ -8,26 +8,50 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', system-ui, sans-serif; background: #07090f; color: #fff; min-height: 100vh; }
 
-  /* NAV */
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 0.5px solid rgba(255,255,255,0.07); position: sticky; top: 0; background: rgba(7,9,15,0.95); backdrop-filter: blur(12px); z-index: 100; }
-  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
-  .nav-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 8px; padding: 3px; }
-  .nav-tab { padding: 6px 16px; border-radius: 6px; border: none; background: transparent; color: rgba(255,255,255,0.4); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
-  .nav-tab.active { background: rgba(255,255,255,0.12); color: #fff; }
+  /* ── PAGE D'ACCUEIL ── */
+  #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 48px; padding: 24px; }
+  .home-logo { font-size: 52px; }
+  .home-title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; text-align: center; }
+  .home-sub { font-size: 15px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -36px; }
+  .home-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .home-btn { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 40px; border-radius: 16px; border: 0.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); cursor: pointer; transition: all 0.2s; min-width: 180px; }
+  .home-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  .home-btn.choral { border-color: rgba(108,92,231,0.4); background: rgba(108,92,231,0.08); }
+  .home-btn.choral:hover { background: rgba(108,92,231,0.15); border-color: rgba(108,92,231,0.6); }
+  .home-btn.admin { border-color: rgba(225,112,85,0.4); background: rgba(225,112,85,0.08); }
+  .home-btn.admin:hover { background: rgba(225,112,85,0.15); border-color: rgba(225,112,85,0.6); }
+  .home-btn-icon { font-size: 32px; }
+  .home-btn-label { font-size: 16px; font-weight: 700; }
+  .home-btn-sub { font-size: 11px; color: rgba(255,255,255,0.4); text-align: center; }
+  .glow-purple { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%); top: 20%; left: 20%; pointer-events: none; }
+  .glow-coral { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(225,112,85,0.08) 0%, transparent 70%); bottom: 20%; right: 20%; pointer-events: none; }
 
-  /* LOGIN OVERLAY */
-  #login-overlay { position: fixed; inset: 0; background: rgba(7,9,15,0.97); display: flex; align-items: center; justify-content: center; z-index: 500; }
-  .login-box { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; width: 340px; display: flex; flex-direction: column; gap: 18px; }
-  .login-title { font-size: 18px; font-weight: 700; text-align: center; }
-  .login-sub { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -10px; }
+  /* ── LOGIN OVERLAY ── */
+  #login-overlay { position: fixed; inset: 0; background: rgba(7,9,15,0.97); display: none; align-items: center; justify-content: center; z-index: 500; }
+  #login-overlay.show { display: flex; }
+  .login-box { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; width: 340px; display: flex; flex-direction: column; gap: 16px; }
   .login-icon { font-size: 36px; text-align: center; }
-  .login-input { width: 100%; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 16px; outline: none; text-align: center; letter-spacing: 0.2em; font-family: monospace; }
+  .login-title { font-size: 18px; font-weight: 700; text-align: center; }
+  .login-sub { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -8px; }
+  .login-input { width: 100%; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 18px; outline: none; text-align: center; letter-spacing: 0.3em; font-family: monospace; }
   .login-input:focus { border-color: rgba(225,112,85,0.5); }
   .login-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
   .login-err { font-size: 12px; color: #e15555; text-align: center; display: none; }
+  .login-back { background: none; border: none; color: rgba(255,255,255,0.3); font-size: 12px; cursor: pointer; text-align: center; }
+  .login-back:hover { color: rgba(255,255,255,0.6); }
 
-  /* READER */
-  #reader { display: flex; height: calc(100vh - 53px); }
+  /* ── NAV ── */
+  nav { display: none; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 0.5px solid rgba(255,255,255,0.07); position: sticky; top: 0; background: rgba(7,9,15,0.95); backdrop-filter: blur(12px); z-index: 100; }
+  nav.show { display: flex; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .nav-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+  .nav-badge.choral { background: rgba(108,92,231,0.2); color: #a29bfe; }
+  .nav-badge.admin { background: rgba(225,112,85,0.2); color: #e17055; }
+  .btn-logout { padding: 6px 14px; border-radius: 6px; border: 0.5px solid rgba(255,255,255,0.12); background: transparent; color: rgba(255,255,255,0.4); font-size: 11px; cursor: pointer; }
+
+  /* ── READER ── */
+  #reader { display: none; height: calc(100vh - 53px); }
+  #reader.show { display: flex; }
   .sidebar { width: 220px; flex-shrink: 0; background: #0a0c17; border-right: 0.5px solid rgba(255,255,255,0.06); padding: 20px 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
   .sidebar-label { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
   .song-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; border: none; background: transparent; text-align: left; width: 100%; }
@@ -38,18 +62,14 @@
   .song-title.active { color: #e17055; }
   .song-artist { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 1px; }
   .empty-lib { font-size: 12px; color: rgba(255,255,255,0.2); text-align: center; padding: 20px 0; }
-
-  /* MAIN PLAYER */
   .player-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-  .lyrics-zone { flex: 1; overflow-y: auto; padding: 40px 60px; display: flex; flex-direction: column; justify-content: center; scrollbar-width: none; position: relative; }
+  .lyrics-zone { flex: 1; overflow-y: auto; padding: 40px 60px; display: flex; flex-direction: column; justify-content: center; scrollbar-width: none; }
   .lyrics-zone::-webkit-scrollbar { display: none; }
   .no-song { text-align: center; color: rgba(255,255,255,0.2); font-size: 14px; }
   .lyric-line { font-size: 13px; color: rgba(255,255,255,0.1); padding: 4px 0; cursor: pointer; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); line-height: 1.3; user-select: none; }
   .lyric-line.prev1 { font-size: 16px; color: rgba(255,255,255,0.45); font-weight: 500; }
   .lyric-line.active { font-size: 30px; color: #fff; font-weight: 700; text-shadow: 0 0 40px rgba(225,112,85,0.6); }
   .lyric-line.next1 { font-size: 16px; color: rgba(255,255,255,0.45); font-weight: 500; }
-
-  /* PLAYER BAR */
   .player-bar { background: rgba(10,12,23,0.97); border-top: 0.5px solid rgba(255,255,255,0.07); padding: 14px 28px 18px; }
   .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   .bar-info { display: flex; align-items: center; gap: 12px; }
@@ -68,12 +88,12 @@
   .progress-dot { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; background: #e17055; box-shadow: 0 0 8px rgba(225,112,85,0.6); transition: left 0.25s linear; pointer-events: none; }
   input[type=range] { accent-color: #e17055; }
 
-  /* ADMIN */
+  /* ── ADMIN ── */
   #admin { display: none; max-width: 900px; margin: 0 auto; padding: 28px 24px; }
-  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  #admin.show { display: block; }
+  .admin-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
   .section-title { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.8); }
   .btn-add { padding: 7px 16px; border-radius: 7px; border: 0.5px solid rgba(225,112,85,0.4); background: rgba(225,112,85,0.1); color: #e17055; font-size: 12px; font-weight: 500; cursor: pointer; }
-  .btn-logout { padding: 7px 16px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.4); font-size: 12px; cursor: pointer; }
   .song-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
   .song-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 0.5px solid rgba(255,255,255,0.07); }
   .song-row-cover { width: 38px; height: 38px; border-radius: 7px; background: linear-gradient(135deg,#e17055,#d63031); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
@@ -82,8 +102,6 @@
   .song-row-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
   .btn-edit { padding: 5px 12px; border-radius: 6px; border: 0.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.5); font-size: 11px; cursor: pointer; margin-right: 6px; }
   .btn-del { padding: 5px 12px; border-radius: 6px; border: 0.5px solid rgba(225,85,85,0.3); background: transparent; color: rgba(225,85,85,0.7); font-size: 11px; cursor: pointer; }
-
-  /* FORM */
   .form-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
   .form-header { padding: 14px 20px; border-bottom: 0.5px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; }
   .form-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 7px; padding: 3px; }
@@ -109,14 +127,11 @@
   .tap-hint { font-size: 11px; color: rgba(255,255,255,0.25); }
   .form-footer { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 12px; display: flex; justify-content: flex-end; }
   .btn-publish { padding: 9px 24px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
-
-  /* CHANGE PASSWORD */
-  .pwd-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
   .pwd-row { display: flex; gap: 10px; align-items: flex-end; }
   .btn-save-pwd { padding: 9px 20px; border-radius: 7px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 
-  /* TOAST */
-  .toast { position: fixed; top: 70px; right: 24px; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  /* ── TOAST ── */
+  .toast { position: fixed; top: 20px; right: 24px; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .toast.ok { background: rgba(0,184,148,0.15); border: 0.5px solid rgba(0,184,148,0.4); color: #00b894; }
   .toast.err { background: rgba(225,85,85,0.15); border: 0.5px solid rgba(225,85,85,0.4); color: #e15555; }
   .toast.show { opacity: 1; }
@@ -125,30 +140,57 @@
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
+<!-- HALOS -->
+<div class="glow-purple"></div>
+<div class="glow-coral"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ── PAGE D'ACCUEIL ── -->
+<div id="home">
+  <div class="home-logo">🎵</div>
+  <div>
+    <div class="home-title">LyricSync</div>
+    <div class="home-sub">Suivez les paroles en temps réel</div>
+  </div>
+  <div class="home-btns">
+    <div class="home-btn choral" onclick="enterChoral()">
+      <div class="home-btn-icon">🎶</div>
+      <div class="home-btn-label">Choral</div>
+      <div class="home-btn-sub">Écouter et suivre<br>les paroles</div>
+    </div>
+    <div class="home-btn admin" onclick="enterAdmin()">
+      <div class="home-btn-icon">🔐</div>
+      <div class="home-btn-label">Admin</div>
+      <div class="home-btn-sub">Gérer les chansons<br>et les lyrics</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LOGIN OVERLAY ── -->
 <div id="login-overlay">
   <div class="login-box">
     <div class="login-icon">🔐</div>
     <div class="login-title">Accès Admin</div>
     <div class="login-sub">Entrez le mot de passe pour continuer</div>
     <input class="login-input" type="password" id="login-input" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter') doLogin()" />
-    <div class="login-err" id="login-err">Mot de passe incorrect</div>
+    <div class="login-err" id="login-err">Mot de passe incorrect ❌</div>
     <button class="login-btn" onclick="doLogin()">Accéder →</button>
+    <button class="login-back" onclick="closeLogin()">← Retour à l'accueil</button>
   </div>
 </div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">🎵 LyricSync</div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showView('reader')">Écouter</button>
-    <button class="nav-tab" onclick="goAdmin()">Admin 🔒</button>
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-logo" onclick="goHome()">
+    🎵 LyricSync
+    <span class="nav-badge" id="nav-badge"></span>
   </div>
+  <button class="btn-logout" onclick="goHome()">← Accueil</button>
 </nav>
 
-<div class="toast" id="toast"></div>
-
-<!-- READER -->
+<!-- ── READER ── -->
 <div id="reader">
   <div class="sidebar">
     <div class="sidebar-label">Bibliothèque</div>
@@ -161,7 +203,7 @@
     <div class="player-bar">
       <div class="bar-top">
         <div class="bar-info">
-          <div class="bar-cover" id="bar-cover">🎵</div>
+          <div class="bar-cover">🎵</div>
           <div>
             <div class="bar-title" id="bar-title">—</div>
             <div class="bar-artist" id="bar-artist"></div>
@@ -179,7 +221,7 @@
       </div>
       <div class="bar-progress">
         <span class="time-label" id="time-cur">0:00</span>
-        <div class="progress-track" id="progress-track" onclick="seekClick(event)">
+        <div class="progress-track" onclick="seekClick(event)">
           <div class="progress-fill" id="progress-fill" style="width:0%"></div>
           <div class="progress-dot" id="progress-dot" style="left:0%"></div>
         </div>
@@ -189,14 +231,11 @@
   </div>
 </div>
 
-<!-- ADMIN -->
+<!-- ── ADMIN ── -->
 <div id="admin">
-  <div class="admin-header">
+  <div class="admin-topbar">
     <span class="section-title" id="lib-title">Bibliothèque</span>
-    <div style="display:flex;gap:8px">
-      <button class="btn-add" onclick="openForm()">+ Ajouter</button>
-      <button class="btn-logout" onclick="logout()">Déconnexion</button>
-    </div>
+    <button class="btn-add" onclick="openForm()">+ Ajouter</button>
   </div>
   <div class="song-list" id="song-list-admin"><div class="loading">Chargement...</div></div>
 
@@ -210,14 +249,8 @@
     </div>
     <div class="form-body">
       <div class="form-left">
-        <div>
-          <label class="field-label">Titre</label>
-          <input class="field-input" id="f-title" placeholder="Nom de la chanson" />
-        </div>
-        <div>
-          <label class="field-label">Artiste</label>
-          <input class="field-input" id="f-artist" placeholder="Nom de l'artiste" />
-        </div>
+        <div><label class="field-label">Titre</label><input class="field-input" id="f-title" placeholder="Nom de la chanson" /></div>
+        <div><label class="field-label">Artiste</label><input class="field-input" id="f-artist" placeholder="Nom de l'artiste" /></div>
         <div>
           <label class="field-label">URL du MP3</label>
           <input class="field-input" id="f-audio" placeholder="https://... lien direct MP3" />
@@ -227,47 +260,30 @@
       <div class="form-right">
         <div id="tap-panel">
           <label class="field-label">Paroles (une ligne par ligne)</label>
-          <div id="tap-input-area">
-            <textarea class="field-textarea" id="f-raw" placeholder="Is this the real life?&#10;Is this just fantasy?&#10;Caught in a landslide..."></textarea>
-          </div>
-          <div id="tap-sync-area" style="display:none">
-            <div class="tap-lines" id="tap-lines-view"></div>
-          </div>
-          <div class="tap-actions" id="tap-actions">
-            <button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button>
-          </div>
+          <div id="tap-input-area"><textarea class="field-textarea" id="f-raw" placeholder="Is this the real life?&#10;Is this just fantasy?&#10;Caught in a landslide..."></textarea></div>
+          <div id="tap-sync-area" style="display:none"><div class="tap-lines" id="tap-lines-view"></div></div>
+          <div class="tap-actions" id="tap-actions"><button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button></div>
           <div class="tap-hint" id="tap-hint"></div>
         </div>
         <div id="lrc-panel" style="display:none">
           <label class="field-label">Contenu LRC</label>
-          <textarea class="field-textarea" id="f-lrc" placeholder="[00:12.00] Is this the real life?&#10;[00:15.50] Is this just fantasy?&#10;[00:19.20] Caught in a landslide..."></textarea>
+          <textarea class="field-textarea" id="f-lrc" placeholder="[00:12.00] Is this the real life?&#10;[00:15.50] Is this just fantasy?"></textarea>
           <div style="font-size:11px;color:rgba(255,255,255,0.25)">Format : [MM:SS.cc] texte — compatible lrclib.net</div>
         </div>
-        <div class="form-footer">
-          <button class="btn-publish" onclick="saveSong()">Publier la chanson</button>
-        </div>
+        <div class="form-footer"><button class="btn-publish" onclick="saveSong()">Publier la chanson</button></div>
       </div>
     </div>
   </div>
 
-  <!-- CHANGER MOT DE PASSE -->
   <div class="form-card">
-    <div class="form-header">
-      <span class="section-title">🔑 Changer le mot de passe admin</span>
-    </div>
-    <div style="padding:18px">
+    <div class="form-header"><span class="section-title">🔑 Changer le mot de passe admin</span></div>
+    <div style="padding:18px;display:flex;flex-direction:column;gap:12px">
       <div class="pwd-row">
-        <div style="flex:1">
-          <label class="field-label">Nouveau mot de passe</label>
-          <input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe" />
-        </div>
-        <div style="flex:1">
-          <label class="field-label">Confirmer</label>
-          <input class="field-input" type="password" id="confirm-pwd" placeholder="Confirmer" />
-        </div>
+        <div style="flex:1"><label class="field-label">Nouveau mot de passe</label><input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe" /></div>
+        <div style="flex:1"><label class="field-label">Confirmer</label><input class="field-input" type="password" id="confirm-pwd" placeholder="Confirmer" /></div>
         <button class="btn-save-pwd" onclick="changePassword()">Enregistrer</button>
       </div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:8px">Le mot de passe est sauvegardé dans Firebase — il sera demandé à chaque connexion.</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.25)">Le mot de passe est sauvegardé dans Firebase.</div>
     </div>
   </div>
 </div>
@@ -292,33 +308,46 @@ const db = getFirestore(app);
 const songsCol = collection(db, "songs");
 const configDoc = doc(db, "config", "admin");
 
-// ── STATE ──
-let songs = [], currentSong = null, playing = false, currentTime = 0;
-let activeIdx = 0, simInterval = null, editId = null, currentTab = 'tap';
-let tapLines = [], tapIdx = 0, tapTime = 0, tapInterval = null, tapRunning = false;
-let adminPassword = "7625";
-let isLoggedIn = false;
+let songs=[], currentSong=null, playing=false, currentTime=0, activeIdx=0;
+let simInterval=null, editId=null, currentTab='tap';
+let tapLines=[], tapIdx=0, tapTime=0, tapInterval=null, tapRunning=false;
+let adminPassword="7625";
 const audio = document.getElementById('audio');
 
-// ── LOAD PASSWORD FROM FIREBASE ──
+// ── CONFIG ──
 async function loadConfig() {
   try {
     const snap = await getDoc(configDoc);
-    if (snap.exists() && snap.data().password) {
-      adminPassword = snap.data().password;
-    } else {
-      await setDoc(configDoc, { password: "7625" });
-    }
-  } catch(e) { console.log("Config not loaded", e); }
+    if (snap.exists() && snap.data().password) adminPassword = snap.data().password;
+    else await setDoc(configDoc, { password: "7625" });
+  } catch(e) {}
 }
 
-// ── LOGIN ──
+// ── NAVIGATION ──
+window.enterChoral = function() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('nav').classList.add('show');
+  document.getElementById('reader').classList.add('show');
+  document.getElementById('nav-badge').textContent = 'Choral';
+  document.getElementById('nav-badge').className = 'nav-badge choral';
+}
+
+window.enterAdmin = function() {
+  document.getElementById('login-overlay').classList.add('show');
+  document.getElementById('login-input').value = '';
+  document.getElementById('login-err').style.display = 'none';
+  setTimeout(() => document.getElementById('login-input').focus(), 100);
+}
+
 window.doLogin = function() {
   const val = document.getElementById('login-input').value;
   if (val === adminPassword) {
-    isLoggedIn = true;
-    document.getElementById('login-overlay').style.display = 'none';
-    document.getElementById('login-err').style.display = 'none';
+    document.getElementById('login-overlay').classList.remove('show');
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('nav').classList.add('show');
+    document.getElementById('admin').classList.add('show');
+    document.getElementById('nav-badge').textContent = 'Admin';
+    document.getElementById('nav-badge').className = 'nav-badge admin';
   } else {
     document.getElementById('login-err').style.display = 'block';
     document.getElementById('login-input').value = '';
@@ -326,38 +355,20 @@ window.doLogin = function() {
   }
 }
 
-window.logout = function() {
-  isLoggedIn = false;
-  showView('reader');
+window.closeLogin = function() {
+  document.getElementById('login-overlay').classList.remove('show');
 }
 
-window.goAdmin = function() {
-  if (isLoggedIn) {
-    showView('admin');
-  } else {
-    document.getElementById('login-overlay').style.display = 'flex';
-    document.getElementById('login-input').value = '';
-    document.getElementById('login-err').style.display = 'none';
-    setTimeout(() => document.getElementById('login-input').focus(), 100);
-    // After login, go to admin
-    const orig = window.doLogin;
-    window.doLogin = function() {
-      const val = document.getElementById('login-input').value;
-      if (val === adminPassword) {
-        isLoggedIn = true;
-        document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('login-err').style.display = 'none';
-        showView('admin');
-        window.doLogin = orig;
-      } else {
-        document.getElementById('login-err').style.display = 'block';
-        document.getElementById('login-input').value = '';
-      }
-    }
-  }
+window.goHome = function() {
+  document.getElementById('home').style.display = 'flex';
+  document.getElementById('nav').classList.remove('show');
+  document.getElementById('reader').classList.remove('show');
+  document.getElementById('admin').classList.remove('show');
+  stopSim(); playing = false;
+  document.getElementById('play-btn').textContent = '▶';
 }
 
-// ── CHANGE PASSWORD ──
+// ── PASSWORD ──
 window.changePassword = async function() {
   const np = document.getElementById('new-pwd').value.trim();
   const cp = document.getElementById('confirm-pwd').value.trim();
@@ -371,20 +382,19 @@ window.changePassword = async function() {
   toast('Mot de passe mis à jour !', 'ok');
 }
 
-// ── FIREBASE SONGS ──
-async function loadSongs() {
-  const q = query(songsCol, orderBy("createdAt", "desc"));
+// ── SONGS ──
+function loadSongs() {
+  const q = query(songsCol, orderBy("createdAt","desc"));
   onSnapshot(q, snap => {
     songs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderSidebarSongs();
-    renderAdminSongs();
+    renderSidebarSongs(); renderAdminSongs();
   });
 }
 
 function renderSidebarSongs() {
   const el = document.getElementById('song-list-reader');
-  if (!songs.length) { el.innerHTML = '<div class="empty-lib">Aucune chanson</div>'; return; }
-  el.innerHTML = songs.map(s => `
+  if (!songs.length) { el.innerHTML='<div class="empty-lib">Aucune chanson</div>'; return; }
+  el.innerHTML = songs.map(s=>`
     <button class="song-item ${currentSong?.id===s.id?'active':''}" onclick="playSong('${s.id}')">
       <div class="song-cover">🎵</div>
       <div>
@@ -397,8 +407,8 @@ function renderSidebarSongs() {
 function renderAdminSongs() {
   const el = document.getElementById('song-list-admin');
   document.getElementById('lib-title').textContent = `Bibliothèque (${songs.length})`;
-  if (!songs.length) { el.innerHTML = '<div class="loading">Aucune chanson — ajoutes-en une !</div>'; return; }
-  el.innerHTML = songs.map(s => `
+  if (!songs.length) { el.innerHTML='<div class="loading">Aucune chanson — ajoutes-en une !</div>'; return; }
+  el.innerHTML = songs.map(s=>`
     <div class="song-row">
       <div class="song-row-cover">🎵</div>
       <div class="song-row-info">
@@ -411,7 +421,7 @@ function renderAdminSongs() {
 }
 
 window.playSong = function(id) {
-  const s = songs.find(x=>x.id===id); if(!s) return;
+  const s=songs.find(x=>x.id===id); if(!s) return;
   currentSong=s; currentTime=0; activeIdx=0; stopSim(); playing=false;
   document.getElementById('play-btn').textContent='▶';
   document.getElementById('bar-title').textContent=s.title;
@@ -424,16 +434,16 @@ function renderLyrics() {
   const zone=document.getElementById('lyrics-zone');
   if(!currentSong||!currentSong.lyrics?.length){zone.innerHTML='<div class="no-song">Aucun lyric pour cette chanson</div>';return;}
   zone.innerHTML=currentSong.lyrics.map((l,i)=>{
-    let cls=''; const diff=i-activeIdx;
-    if(diff===0)cls='active'; else if(diff===-1)cls='prev1'; else if(diff===1)cls='next1';
+    const diff=i-activeIdx;
+    let cls= diff===0?'active':diff===-1?'prev1':diff===1?'next1':'';
     return `<div class="lyric-line ${cls}" id="line-${i}" onclick="seekToLine(${l.time})">${l.text}</div>`;
   }).join('');
   const el=document.getElementById(`line-${activeIdx}`);
-  if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function updateActiveIdx() {
-  if(!currentSong?.lyrics?.length)return;
+  if(!currentSong?.lyrics?.length) return;
   let idx=0;
   for(let i=0;i<currentSong.lyrics.length;i++){if(currentTime>=currentSong.lyrics[i].time)idx=i;}
   if(idx!==activeIdx){activeIdx=idx;renderLyrics();}
@@ -444,6 +454,7 @@ audio.onloadedmetadata=()=>updateProgress();
 audio.onended=()=>{playing=false;document.getElementById('play-btn').textContent='▶';};
 
 function stopSim(){clearInterval(simInterval);simInterval=null;}
+function startSim(){stopSim();simInterval=setInterval(()=>{currentTime+=0.25;updateActiveIdx();updateProgress();},250);}
 
 window.togglePlay=function(){
   if(!currentSong)return;
@@ -453,9 +464,7 @@ window.togglePlay=function(){
   document.getElementById('play-btn').textContent=playing?'⏸':'▶';
 }
 
-function startSim(){stopSim();simInterval=setInterval(()=>{currentTime+=0.25;updateActiveIdx();updateProgress();},250);}
-
-window.skip=function(sec){currentTime=Math.max(0,currentTime+sec);if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();}
+window.skip=function(s){currentTime=Math.max(0,currentTime+s);if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();}
 window.seekToLine=function(t){currentTime=t;if(audio.src)audio.currentTime=t;updateActiveIdx();updateProgress();}
 window.seekClick=function(e){
   const rect=e.currentTarget.getBoundingClientRect(),ratio=(e.clientX-rect.left)/rect.width;
@@ -463,7 +472,7 @@ window.seekClick=function(e){
   currentTime=ratio*dur;if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();
 }
 window.setVol=function(v){audio.volume=parseFloat(v);}
-function fmt(s){const m=Math.floor(s/60);return `${m}:${Math.floor(s%60).toString().padStart(2,'0')}`;}
+function fmt(s){return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;}
 function updateProgress(){
   const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
   const pct=Math.min(100,(currentTime/dur)*100);
@@ -473,12 +482,7 @@ function updateProgress(){
   document.getElementById('time-dur').textContent=fmt(dur);
 }
 
-window.showView=function(v){
-  document.getElementById('reader').style.display=v==='reader'?'flex':'none';
-  document.getElementById('admin').style.display=v==='admin'?'block':'none';
-  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&v==='reader')||(i===1&&v==='admin')));
-}
-
+// ── ADMIN FORM ──
 window.openForm=function(){
   editId=null;
   document.getElementById('form-title').textContent='Nouvelle chanson';
@@ -531,7 +535,7 @@ window.startTap=function(){
   renderTapLines();
   if(audio.src){audio.currentTime=0;audio.play().catch(()=>{});}
   document.getElementById('tap-actions').innerHTML=`<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:11px;color:rgba(255,255,255,0.3);min-width:50px" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
-  document.getElementById('tap-hint').textContent=`Ligne 1 / ${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
+  document.getElementById('tap-hint').textContent=`Ligne 1/${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
   clearInterval(tapInterval);
   tapInterval=setInterval(()=>{tapTime+=0.1;const el=document.getElementById('tap-timer');if(el)el.textContent=fmt(tapTime);},100);
 }
@@ -545,7 +549,7 @@ window.doTap=function(){
     document.getElementById('tap-hint').textContent='Synchronisation terminée ! Tu peux publier.';
     toast('Synchro terminée !','ok');
   } else {
-    document.getElementById('tap-hint').textContent=`Ligne ${tapIdx+1} / ${tapLines.length}`;
+    document.getElementById('tap-hint').textContent=`Ligne ${tapIdx+1}/${tapLines.length}`;
   }
 }
 
@@ -587,7 +591,6 @@ function toast(msg,type){
   el.className=`toast ${type} show`;setTimeout(()=>el.classList.remove('show'),3000);
 }
 
-// ── INIT ──
 await loadConfig();
 loadSongs();
 </script>
