@@ -15,6 +15,17 @@
   .nav-tab { padding: 6px 16px; border-radius: 6px; border: none; background: transparent; color: rgba(255,255,255,0.4); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .nav-tab.active { background: rgba(255,255,255,0.12); color: #fff; }
 
+  /* LOGIN OVERLAY */
+  #login-overlay { position: fixed; inset: 0; background: rgba(7,9,15,0.97); display: flex; align-items: center; justify-content: center; z-index: 500; }
+  .login-box { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; width: 340px; display: flex; flex-direction: column; gap: 18px; }
+  .login-title { font-size: 18px; font-weight: 700; text-align: center; }
+  .login-sub { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -10px; }
+  .login-icon { font-size: 36px; text-align: center; }
+  .login-input { width: 100%; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 16px; outline: none; text-align: center; letter-spacing: 0.2em; font-family: monospace; }
+  .login-input:focus { border-color: rgba(225,112,85,0.5); }
+  .login-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
+  .login-err { font-size: 12px; color: #e15555; text-align: center; display: none; }
+
   /* READER */
   #reader { display: flex; height: calc(100vh - 53px); }
   .sidebar { width: 220px; flex-shrink: 0; background: #0a0c17; border-right: 0.5px solid rgba(255,255,255,0.06); padding: 20px 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
@@ -62,6 +73,7 @@
   .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
   .section-title { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.8); }
   .btn-add { padding: 7px 16px; border-radius: 7px; border: 0.5px solid rgba(225,112,85,0.4); background: rgba(225,112,85,0.1); color: #e17055; font-size: 12px; font-weight: 500; cursor: pointer; }
+  .btn-logout { padding: 7px 16px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.4); font-size: 12px; cursor: pointer; }
   .song-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
   .song-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 0.5px solid rgba(255,255,255,0.07); }
   .song-row-cover { width: 38px; height: 38px; border-radius: 7px; background: linear-gradient(135deg,#e17055,#d63031); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
@@ -72,7 +84,7 @@
   .btn-del { padding: 5px 12px; border-radius: 6px; border: 0.5px solid rgba(225,85,85,0.3); background: transparent; color: rgba(225,85,85,0.7); font-size: 11px; cursor: pointer; }
 
   /* FORM */
-  .form-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; }
+  .form-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
   .form-header { padding: 14px 20px; border-bottom: 0.5px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; }
   .form-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 7px; padding: 3px; }
   .form-tab { padding: 5px 14px; border-radius: 5px; border: none; background: transparent; color: rgba(255,255,255,0.35); font-size: 12px; cursor: pointer; }
@@ -98,28 +110,42 @@
   .form-footer { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 12px; display: flex; justify-content: flex-end; }
   .btn-publish { padding: 9px 24px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
 
+  /* CHANGE PASSWORD */
+  .pwd-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .pwd-row { display: flex; gap: 10px; align-items: flex-end; }
+  .btn-save-pwd { padding: 9px 20px; border-radius: 7px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
   /* TOAST */
   .toast { position: fixed; top: 70px; right: 24px; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .toast.ok { background: rgba(0,184,148,0.15); border: 0.5px solid rgba(0,184,148,0.4); color: #00b894; }
   .toast.err { background: rgba(225,85,85,0.15); border: 0.5px solid rgba(225,85,85,0.4); color: #e15555; }
   .toast.show { opacity: 1; }
-
-  /* LOADING */
   .loading { text-align: center; color: rgba(255,255,255,0.3); font-size: 13px; padding: 20px; }
 </style>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Accès Admin</div>
+    <div class="login-sub">Entrez le mot de passe pour continuer</div>
+    <input class="login-input" type="password" id="login-input" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter') doLogin()" />
+    <div class="login-err" id="login-err">Mot de passe incorrect</div>
+    <button class="login-btn" onclick="doLogin()">Accéder →</button>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">🎵 LyricSync</div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showView('reader')">Écouter</button>
-    <button class="nav-tab" onclick="showView('admin')">Admin</button>
+    <button class="nav-tab" onclick="goAdmin()">Admin 🔒</button>
   </div>
 </nav>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <!-- READER -->
@@ -167,7 +193,10 @@
 <div id="admin">
   <div class="admin-header">
     <span class="section-title" id="lib-title">Bibliothèque</span>
-    <button class="btn-add" onclick="openForm()">+ Ajouter</button>
+    <div style="display:flex;gap:8px">
+      <button class="btn-add" onclick="openForm()">+ Ajouter</button>
+      <button class="btn-logout" onclick="logout()">Déconnexion</button>
+    </div>
   </div>
   <div class="song-list" id="song-list-admin"><div class="loading">Chargement...</div></div>
 
@@ -196,7 +225,6 @@
         </div>
       </div>
       <div class="form-right">
-        <!-- TAP MODE -->
         <div id="tap-panel">
           <label class="field-label">Paroles (une ligne par ligne)</label>
           <div id="tap-input-area">
@@ -210,7 +238,6 @@
           </div>
           <div class="tap-hint" id="tap-hint"></div>
         </div>
-        <!-- LRC MODE -->
         <div id="lrc-panel" style="display:none">
           <label class="field-label">Contenu LRC</label>
           <textarea class="field-textarea" id="f-lrc" placeholder="[00:12.00] Is this the real life?&#10;[00:15.50] Is this just fantasy?&#10;[00:19.20] Caught in a landslide..."></textarea>
@@ -222,48 +249,129 @@
       </div>
     </div>
   </div>
+
+  <!-- CHANGER MOT DE PASSE -->
+  <div class="form-card">
+    <div class="form-header">
+      <span class="section-title">🔑 Changer le mot de passe admin</span>
+    </div>
+    <div style="padding:18px">
+      <div class="pwd-row">
+        <div style="flex:1">
+          <label class="field-label">Nouveau mot de passe</label>
+          <input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe" />
+        </div>
+        <div style="flex:1">
+          <label class="field-label">Confirmer</label>
+          <input class="field-input" type="password" id="confirm-pwd" placeholder="Confirmer" />
+        </div>
+        <button class="btn-save-pwd" onclick="changePassword()">Enregistrer</button>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:8px">Le mot de passe est sauvegardé dans Firebase — il sera demandé à chaque connexion.</div>
+    </div>
+  </div>
 </div>
 
 <audio id="audio"></audio>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, orderBy, query, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ── CONFIG FIREBASE ──────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyDywPlYrZTpT7IlGaqzDroapqJfRWdEkNM",
   authDomain: "lyric-sync-a2494.firebaseapp.com",
   projectId: "lyric-sync-a2494",
   storageBucket: "lyric-sync-a2494.firebasestorage.app",
   messagingSenderId: "1008529505319",
-  appId: "1:1008529505319:web:d5ba535555cb313c4d6202",
-  measurementId: "G-0SDFCZGQDH"
+  appId: "1:1008529505319:web:d5ba535555cb313c4d6202"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const songsCol = collection(db, "songs");
+const configDoc = doc(db, "config", "admin");
 
-// ── STATE ────────────────────────────────────────────────────────
-let songs = [];
-let currentSong = null;
-let playing = false;
-let currentTime = 0;
-let activeIdx = 0;
-let simInterval = null;
-let editId = null;
-let currentTab = 'tap';
-let tapLines = [];
-let tapIdx = 0;
-let tapTime = 0;
-let tapInterval = null;
-let tapRunning = false;
-
+// ── STATE ──
+let songs = [], currentSong = null, playing = false, currentTime = 0;
+let activeIdx = 0, simInterval = null, editId = null, currentTab = 'tap';
+let tapLines = [], tapIdx = 0, tapTime = 0, tapInterval = null, tapRunning = false;
+let adminPassword = "7625";
+let isLoggedIn = false;
 const audio = document.getElementById('audio');
 
-// ── FIREBASE LOAD ────────────────────────────────────────────────
+// ── LOAD PASSWORD FROM FIREBASE ──
+async function loadConfig() {
+  try {
+    const snap = await getDoc(configDoc);
+    if (snap.exists() && snap.data().password) {
+      adminPassword = snap.data().password;
+    } else {
+      await setDoc(configDoc, { password: "7625" });
+    }
+  } catch(e) { console.log("Config not loaded", e); }
+}
+
+// ── LOGIN ──
+window.doLogin = function() {
+  const val = document.getElementById('login-input').value;
+  if (val === adminPassword) {
+    isLoggedIn = true;
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('login-err').style.display = 'none';
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+    document.getElementById('login-input').value = '';
+    document.getElementById('login-input').focus();
+  }
+}
+
+window.logout = function() {
+  isLoggedIn = false;
+  showView('reader');
+}
+
+window.goAdmin = function() {
+  if (isLoggedIn) {
+    showView('admin');
+  } else {
+    document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('login-input').value = '';
+    document.getElementById('login-err').style.display = 'none';
+    setTimeout(() => document.getElementById('login-input').focus(), 100);
+    // After login, go to admin
+    const orig = window.doLogin;
+    window.doLogin = function() {
+      const val = document.getElementById('login-input').value;
+      if (val === adminPassword) {
+        isLoggedIn = true;
+        document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('login-err').style.display = 'none';
+        showView('admin');
+        window.doLogin = orig;
+      } else {
+        document.getElementById('login-err').style.display = 'block';
+        document.getElementById('login-input').value = '';
+      }
+    }
+  }
+}
+
+// ── CHANGE PASSWORD ──
+window.changePassword = async function() {
+  const np = document.getElementById('new-pwd').value.trim();
+  const cp = document.getElementById('confirm-pwd').value.trim();
+  if (!np) { toast('Entrez un mot de passe', 'err'); return; }
+  if (np !== cp) { toast('Les mots de passe ne correspondent pas', 'err'); return; }
+  if (np.length < 4) { toast('Minimum 4 caractères', 'err'); return; }
+  await setDoc(configDoc, { password: np });
+  adminPassword = np;
+  document.getElementById('new-pwd').value = '';
+  document.getElementById('confirm-pwd').value = '';
+  toast('Mot de passe mis à jour !', 'ok');
+}
+
+// ── FIREBASE SONGS ──
 async function loadSongs() {
   const q = query(songsCol, orderBy("createdAt", "desc"));
   onSnapshot(q, snap => {
@@ -273,22 +381,19 @@ async function loadSongs() {
   });
 }
 
-// ── RENDER SIDEBAR ───────────────────────────────────────────────
 function renderSidebarSongs() {
   const el = document.getElementById('song-list-reader');
   if (!songs.length) { el.innerHTML = '<div class="empty-lib">Aucune chanson</div>'; return; }
   el.innerHTML = songs.map(s => `
-    <button class="song-item ${currentSong?.id === s.id ? 'active' : ''}" onclick="playSong('${s.id}')">
+    <button class="song-item ${currentSong?.id===s.id?'active':''}" onclick="playSong('${s.id}')">
       <div class="song-cover">🎵</div>
       <div>
-        <div class="song-title ${currentSong?.id === s.id ? 'active' : ''}">${s.title}</div>
-        <div class="song-artist">${s.artist || ''}</div>
+        <div class="song-title ${currentSong?.id===s.id?'active':''}">${s.title}</div>
+        <div class="song-artist">${s.artist||''}</div>
       </div>
-    </button>
-  `).join('');
+    </button>`).join('');
 }
 
-// ── RENDER ADMIN LIST ────────────────────────────────────────────
 function renderAdminSongs() {
   const el = document.getElementById('song-list-admin');
   document.getElementById('lib-title').textContent = `Bibliothèque (${songs.length})`;
@@ -298,289 +403,192 @@ function renderAdminSongs() {
       <div class="song-row-cover">🎵</div>
       <div class="song-row-info">
         <div class="song-row-title">${s.title}</div>
-        <div class="song-row-sub">${s.artist || ''} · ${s.lyrics?.length || 0} lignes</div>
+        <div class="song-row-sub">${s.artist||''} · ${s.lyrics?.length||0} lignes</div>
       </div>
       <button class="btn-edit" onclick="editSong('${s.id}')">Modifier</button>
       <button class="btn-del" onclick="deleteSong('${s.id}')">Supprimer</button>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ── PLAY SONG ────────────────────────────────────────────────────
 window.playSong = function(id) {
-  const s = songs.find(x => x.id === id);
-  if (!s) return;
-  currentSong = s;
-  currentTime = 0;
-  activeIdx = 0;
-  stopSim();
-  playing = false;
-  document.getElementById('play-btn').textContent = '▶';
-  document.getElementById('bar-title').textContent = s.title;
-  document.getElementById('bar-artist').textContent = s.artist || '';
-  if (s.audioUrl) {
-    audio.src = s.audioUrl;
-    audio.load();
-  } else {
-    audio.src = '';
-  }
-  renderLyrics();
-  renderSidebarSongs();
+  const s = songs.find(x=>x.id===id); if(!s) return;
+  currentSong=s; currentTime=0; activeIdx=0; stopSim(); playing=false;
+  document.getElementById('play-btn').textContent='▶';
+  document.getElementById('bar-title').textContent=s.title;
+  document.getElementById('bar-artist').textContent=s.artist||'';
+  if(s.audioUrl){audio.src=s.audioUrl;audio.load();}else{audio.src='';}
+  renderLyrics(); renderSidebarSongs();
 }
 
-// ── LYRICS RENDER ────────────────────────────────────────────────
 function renderLyrics() {
-  const zone = document.getElementById('lyrics-zone');
-  if (!currentSong || !currentSong.lyrics?.length) {
-    zone.innerHTML = '<div class="no-song">Aucun lyric pour cette chanson</div>';
-    return;
-  }
-  zone.innerHTML = currentSong.lyrics.map((l, i) => {
-    let cls = '';
-    const diff = i - activeIdx;
-    if (diff === 0) cls = 'active';
-    else if (diff === -1) cls = 'prev1';
-    else if (diff === 1) cls = 'next1';
+  const zone=document.getElementById('lyrics-zone');
+  if(!currentSong||!currentSong.lyrics?.length){zone.innerHTML='<div class="no-song">Aucun lyric pour cette chanson</div>';return;}
+  zone.innerHTML=currentSong.lyrics.map((l,i)=>{
+    let cls=''; const diff=i-activeIdx;
+    if(diff===0)cls='active'; else if(diff===-1)cls='prev1'; else if(diff===1)cls='next1';
     return `<div class="lyric-line ${cls}" id="line-${i}" onclick="seekToLine(${l.time})">${l.text}</div>`;
   }).join('');
-  const el = document.getElementById(`line-${activeIdx}`);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const el=document.getElementById(`line-${activeIdx}`);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function updateActiveIdx() {
-  if (!currentSong?.lyrics?.length) return;
-  let idx = 0;
-  for (let i = 0; i < currentSong.lyrics.length; i++) {
-    if (currentTime >= currentSong.lyrics[i].time) idx = i;
-  }
-  if (idx !== activeIdx) { activeIdx = idx; renderLyrics(); }
+  if(!currentSong?.lyrics?.length)return;
+  let idx=0;
+  for(let i=0;i<currentSong.lyrics.length;i++){if(currentTime>=currentSong.lyrics[i].time)idx=i;}
+  if(idx!==activeIdx){activeIdx=idx;renderLyrics();}
 }
 
-// ── AUDIO CONTROLS ───────────────────────────────────────────────
-audio.ontimeupdate = () => {
-  currentTime = audio.currentTime;
-  updateActiveIdx();
-  updateProgress();
-};
-audio.onloadedmetadata = () => updateProgress();
-audio.onended = () => { playing = false; document.getElementById('play-btn').textContent = '▶'; };
+audio.ontimeupdate=()=>{currentTime=audio.currentTime;updateActiveIdx();updateProgress();};
+audio.onloadedmetadata=()=>updateProgress();
+audio.onended=()=>{playing=false;document.getElementById('play-btn').textContent='▶';};
 
-function stopSim() { clearInterval(simInterval); simInterval = null; }
+function stopSim(){clearInterval(simInterval);simInterval=null;}
 
-window.togglePlay = function() {
-  if (!currentSong) return;
-  if (audio.src) {
-    if (playing) { audio.pause(); stopSim(); }
-    else {
-      audio.play().catch(() => startSim());
-      stopSim();
-    }
-  } else {
-    if (playing) stopSim();
-    else startSim();
-  }
-  playing = !playing;
-  document.getElementById('play-btn').textContent = playing ? '⏸' : '▶';
+window.togglePlay=function(){
+  if(!currentSong)return;
+  if(audio.src){if(playing){audio.pause();stopSim();}else{audio.play().catch(()=>startSim());stopSim();}}
+  else{if(playing)stopSim();else startSim();}
+  playing=!playing;
+  document.getElementById('play-btn').textContent=playing?'⏸':'▶';
 }
 
-function startSim() {
-  stopSim();
-  simInterval = setInterval(() => {
-    currentTime += 0.25;
-    updateActiveIdx();
-    updateProgress();
-  }, 250);
+function startSim(){stopSim();simInterval=setInterval(()=>{currentTime+=0.25;updateActiveIdx();updateProgress();},250);}
+
+window.skip=function(sec){currentTime=Math.max(0,currentTime+sec);if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();}
+window.seekToLine=function(t){currentTime=t;if(audio.src)audio.currentTime=t;updateActiveIdx();updateProgress();}
+window.seekClick=function(e){
+  const rect=e.currentTarget.getBoundingClientRect(),ratio=(e.clientX-rect.left)/rect.width;
+  const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
+  currentTime=ratio*dur;if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();
+}
+window.setVol=function(v){audio.volume=parseFloat(v);}
+function fmt(s){const m=Math.floor(s/60);return `${m}:${Math.floor(s%60).toString().padStart(2,'0')}`;}
+function updateProgress(){
+  const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
+  const pct=Math.min(100,(currentTime/dur)*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-dot').style.left=pct+'%';
+  document.getElementById('time-cur').textContent=fmt(currentTime);
+  document.getElementById('time-dur').textContent=fmt(dur);
 }
 
-window.skip = function(sec) {
-  currentTime = Math.max(0, currentTime + sec);
-  if (audio.src) audio.currentTime = currentTime;
-  updateActiveIdx();
-  updateProgress();
+window.showView=function(v){
+  document.getElementById('reader').style.display=v==='reader'?'flex':'none';
+  document.getElementById('admin').style.display=v==='admin'?'block':'none';
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&v==='reader')||(i===1&&v==='admin')));
 }
 
-window.seekToLine = function(t) {
-  currentTime = t;
-  if (audio.src) audio.currentTime = t;
-  updateActiveIdx();
-  updateProgress();
-}
-
-window.seekClick = function(e) {
-  const rect = e.currentTarget.getBoundingClientRect();
-  const ratio = (e.clientX - rect.left) / rect.width;
-  const dur = audio.duration || (currentSong?.lyrics?.slice(-1)[0]?.time + 5) || 60;
-  currentTime = ratio * dur;
-  if (audio.src) audio.currentTime = currentTime;
-  updateActiveIdx();
-  updateProgress();
-}
-
-window.setVol = function(v) { audio.volume = parseFloat(v); }
-
-function fmt(s) { const m = Math.floor(s/60); return `${m}:${Math.floor(s%60).toString().padStart(2,'0')}`; }
-
-function updateProgress() {
-  const dur = audio.duration || (currentSong?.lyrics?.slice(-1)[0]?.time + 5) || 60;
-  const pct = Math.min(100, (currentTime / dur) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-dot').style.left = pct + '%';
-  document.getElementById('time-cur').textContent = fmt(currentTime);
-  document.getElementById('time-dur').textContent = fmt(dur);
-}
-
-// ── VIEWS ────────────────────────────────────────────────────────
-window.showView = function(v) {
-  document.getElementById('reader').style.display = v === 'reader' ? 'flex' : 'none';
-  document.getElementById('admin').style.display = v === 'admin' ? 'block' : 'none';
-  document.querySelectorAll('.nav-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&v==='reader')||(i===1&&v==='admin')));
-}
-
-// ── ADMIN FORM ───────────────────────────────────────────────────
-window.openForm = function() {
-  editId = null;
-  document.getElementById('form-title').textContent = 'Nouvelle chanson';
-  document.getElementById('f-title').value = '';
-  document.getElementById('f-artist').value = '';
-  document.getElementById('f-audio').value = '';
-  document.getElementById('f-raw').value = '';
-  document.getElementById('f-lrc').value = '';
+window.openForm=function(){
+  editId=null;
+  document.getElementById('form-title').textContent='Nouvelle chanson';
+  ['f-title','f-artist','f-audio','f-raw','f-lrc'].forEach(id=>document.getElementById(id).value='');
   resetTap();
-  document.getElementById('form-card').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('form-card').scrollIntoView({behavior:'smooth'});
 }
 
-window.editSong = function(id) {
-  const s = songs.find(x => x.id === id);
-  if (!s) return;
-  editId = id;
-  document.getElementById('form-title').textContent = `Modifier : ${s.title}`;
-  document.getElementById('f-title').value = s.title;
-  document.getElementById('f-artist').value = s.artist || '';
-  document.getElementById('f-audio').value = s.audioUrl || '';
-  const lrc = (s.lyrics||[]).map(l => `[${fmtLRC(l.time)}] ${l.text}`).join('\n');
-  document.getElementById('f-lrc').value = lrc;
+window.editSong=function(id){
+  const s=songs.find(x=>x.id===id);if(!s)return;
+  editId=id;
+  document.getElementById('form-title').textContent=`Modifier : ${s.title}`;
+  document.getElementById('f-title').value=s.title;
+  document.getElementById('f-artist').value=s.artist||'';
+  document.getElementById('f-audio').value=s.audioUrl||'';
+  document.getElementById('f-lrc').value=(s.lyrics||[]).map(l=>`[${fmtLRC(l.time)}] ${l.text}`).join('\n');
   switchTab('lrc');
-  document.getElementById('form-card').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('form-card').scrollIntoView({behavior:'smooth'});
 }
 
-window.deleteSong = async function(id) {
-  if (!confirm('Supprimer cette chanson ?')) return;
-  await deleteDoc(doc(db, 'songs', id));
-  if (currentSong?.id === id) { currentSong = null; document.getElementById('lyrics-zone').innerHTML = '<div class="no-song">Sélectionne une chanson</div>'; }
-  toast('Chanson supprimée', 'ok');
+window.deleteSong=async function(id){
+  if(!confirm('Supprimer cette chanson ?'))return;
+  await deleteDoc(doc(db,'songs',id));
+  if(currentSong?.id===id){currentSong=null;document.getElementById('lyrics-zone').innerHTML='<div class="no-song">Sélectionne une chanson</div>';}
+  toast('Chanson supprimée','ok');
 }
 
-window.switchTab = function(t) {
-  currentTab = t;
-  document.getElementById('tap-panel').style.display = t === 'tap' ? 'block' : 'none';
-  document.getElementById('lrc-panel').style.display = t === 'lrc' ? 'block' : 'none';
-  document.getElementById('tab-tap').classList.toggle('active', t === 'tap');
-  document.getElementById('tab-lrc').classList.toggle('active', t === 'lrc');
+window.switchTab=function(t){
+  currentTab=t;
+  document.getElementById('tap-panel').style.display=t==='tap'?'block':'none';
+  document.getElementById('lrc-panel').style.display=t==='lrc'?'block':'none';
+  document.getElementById('tab-tap').classList.toggle('active',t==='tap');
+  document.getElementById('tab-lrc').classList.toggle('active',t==='lrc');
 }
 
-// ── TAP TO SYNC ──────────────────────────────────────────────────
-function resetTap() {
-  tapLines = []; tapIdx = 0; tapTime = 0; tapRunning = false;
-  clearInterval(tapInterval);
-  document.getElementById('tap-input-area').style.display = 'block';
-  document.getElementById('tap-sync-area').style.display = 'none';
-  document.getElementById('tap-actions').innerHTML = '<button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button>';
-  document.getElementById('tap-hint').textContent = '';
+function resetTap(){
+  tapLines=[];tapIdx=0;tapTime=0;tapRunning=false;clearInterval(tapInterval);
+  document.getElementById('tap-input-area').style.display='block';
+  document.getElementById('tap-sync-area').style.display='none';
+  document.getElementById('tap-actions').innerHTML='<button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button>';
+  document.getElementById('tap-hint').textContent='';
 }
 
-window.startTap = function() {
-  const raw = document.getElementById('f-raw').value.trim().split('\n').filter(Boolean);
-  if (!raw.length) { toast('Colle les paroles d\'abord', 'err'); return; }
-  tapLines = raw.map(text => ({ text, time: null }));
-  tapIdx = 0; tapTime = 0; tapRunning = true;
-  document.getElementById('tap-input-area').style.display = 'none';
-  document.getElementById('tap-sync-area').style.display = 'block';
+window.startTap=function(){
+  const raw=document.getElementById('f-raw').value.trim().split('\n').filter(Boolean);
+  if(!raw.length){toast("Colle les paroles d'abord",'err');return;}
+  tapLines=raw.map(text=>({text,time:null}));tapIdx=0;tapTime=0;tapRunning=true;
+  document.getElementById('tap-input-area').style.display='none';
+  document.getElementById('tap-sync-area').style.display='block';
   renderTapLines();
-  if (audio.src) { audio.currentTime = 0; audio.play().catch(()=>{}); }
+  if(audio.src){audio.currentTime=0;audio.play().catch(()=>{});}
+  document.getElementById('tap-actions').innerHTML=`<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:11px;color:rgba(255,255,255,0.3);min-width:50px" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
+  document.getElementById('tap-hint').textContent=`Ligne 1 / ${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
   clearInterval(tapInterval);
-  tapInterval = setInterval(() => { tapTime += 0.1; }, 100);
-  document.getElementById('tap-actions').innerHTML = `<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:11px;color:rgba(255,255,255,0.3);min-width:50px" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
-  document.getElementById('tap-hint').textContent = `Ligne 1 / ${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
-  const timerEl = document.getElementById('tap-timer');
-  if (timerEl) { clearInterval(tapInterval); tapInterval = setInterval(() => { tapTime += 0.1; if(timerEl) timerEl.textContent = fmt(tapTime); }, 100); }
+  tapInterval=setInterval(()=>{tapTime+=0.1;const el=document.getElementById('tap-timer');if(el)el.textContent=fmt(tapTime);},100);
 }
 
-window.doTap = function() {
-  if (!tapRunning || tapIdx >= tapLines.length) return;
-  tapLines[tapIdx].time = tapTime;
-  tapIdx++;
-  renderTapLines();
-  if (tapIdx >= tapLines.length) {
-    clearInterval(tapInterval); tapRunning = false;
-    audio.pause();
-    document.getElementById('tap-actions').innerHTML = '<button class="btn-reset" onclick="resetTap()">Recommencer</button>';
-    document.getElementById('tap-hint').textContent = 'Synchronisation terminée ! Tu peux publier.';
-    toast('Synchro terminée !', 'ok');
+window.doTap=function(){
+  if(!tapRunning||tapIdx>=tapLines.length)return;
+  tapLines[tapIdx].time=tapTime;tapIdx++;renderTapLines();
+  if(tapIdx>=tapLines.length){
+    clearInterval(tapInterval);tapRunning=false;audio.pause();
+    document.getElementById('tap-actions').innerHTML='<button class="btn-reset" onclick="resetTap()">Recommencer</button>';
+    document.getElementById('tap-hint').textContent='Synchronisation terminée ! Tu peux publier.';
+    toast('Synchro terminée !','ok');
   } else {
-    document.getElementById('tap-hint').textContent = `Ligne ${tapIdx + 1} / ${tapLines.length}`;
+    document.getElementById('tap-hint').textContent=`Ligne ${tapIdx+1} / ${tapLines.length}`;
   }
 }
 
-function renderTapLines() {
-  const el = document.getElementById('tap-lines-view');
-  el.innerHTML = tapLines.map((l, i) => {
-    let cls = i < tapIdx ? 'done' : i === tapIdx ? 'current' : 'pending';
-    return `<div class="tap-line ${cls}"><span class="tap-time">[${l.time !== null ? fmtLRC(l.time) : '--:--.--'}]</span><span>${l.text}</span></div>`;
+function renderTapLines(){
+  const el=document.getElementById('tap-lines-view');
+  el.innerHTML=tapLines.map((l,i)=>{
+    let cls=i<tapIdx?'done':i===tapIdx?'current':'pending';
+    return `<div class="tap-line ${cls}"><span class="tap-time">[${l.time!==null?fmtLRC(l.time):'--:--.--'}]</span><span>${l.text}</span></div>`;
   }).join('');
-  const cur = el.querySelectorAll('.tap-line')[tapIdx];
-  if (cur) cur.scrollIntoView({ block: 'nearest' });
+  const cur=el.querySelectorAll('.tap-line')[tapIdx];
+  if(cur)cur.scrollIntoView({block:'nearest'});
 }
 
-// ── LRC PARSE ────────────────────────────────────────────────────
-function parseLRC(text) {
-  const lines = [];
-  for (const raw of text.split('\n')) {
-    const m = raw.match(/^\[(\d+):(\d+)\.?(\d*)\]\s*(.*)$/);
-    if (m) {
-      const t = parseInt(m[1])*60 + parseInt(m[2]) + (m[3] ? parseInt(m[3].padEnd(2,'0'))/100 : 0);
-      if (m[4].trim()) lines.push({ time: t, text: m[4] });
-    }
+function parseLRC(text){
+  const lines=[];
+  for(const raw of text.split('\n')){
+    const m=raw.match(/^\[(\d+):(\d+)\.?(\d*)\]\s*(.*)$/);
+    if(m){const t=parseInt(m[1])*60+parseInt(m[2])+(m[3]?parseInt(m[3].padEnd(2,'0'))/100:0);if(m[4].trim())lines.push({time:t,text:m[4]});}
   }
-  return lines.sort((a,b) => a.time - b.time);
+  return lines.sort((a,b)=>a.time-b.time);
 }
 
-function fmtLRC(s) {
-  const m = Math.floor(s/60), sec = Math.floor(s%60), cs = Math.round((s%1)*100);
-  return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}.${cs.toString().padStart(2,'0')}`;
-}
+function fmtLRC(s){const m=Math.floor(s/60),sec=Math.floor(s%60),cs=Math.round((s%1)*100);return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}.${cs.toString().padStart(2,'0')}`;}
 
-// ── SAVE ─────────────────────────────────────────────────────────
-window.saveSong = async function() {
-  const title = document.getElementById('f-title').value.trim();
-  if (!title) { toast('Titre requis', 'err'); return; }
-  let lyrics = [];
-  if (currentTab === 'lrc') {
-    lyrics = parseLRC(document.getElementById('f-lrc').value);
-    if (!lyrics.length) { toast('Format LRC invalide', 'err'); return; }
-  } else {
-    lyrics = tapLines.filter(l => l.time !== null).map(l => ({ time: l.time, text: l.text }));
-    if (!lyrics.length) { toast('Lance la synchro d\'abord', 'err'); return; }
-  }
-  const data = { title, artist: document.getElementById('f-artist').value.trim(), audioUrl: document.getElementById('f-audio').value.trim(), lyrics, createdAt: Date.now() };
-  if (editId) {
-    await updateDoc(doc(db, 'songs', editId), data);
-    toast('Chanson mise à jour !', 'ok');
-  } else {
-    await addDoc(songsCol, data);
-    toast('Chanson publiée !', 'ok');
-  }
+window.saveSong=async function(){
+  const title=document.getElementById('f-title').value.trim();
+  if(!title){toast('Titre requis','err');return;}
+  let lyrics=[];
+  if(currentTab==='lrc'){lyrics=parseLRC(document.getElementById('f-lrc').value);if(!lyrics.length){toast('Format LRC invalide','err');return;}}
+  else{lyrics=tapLines.filter(l=>l.time!==null).map(l=>({time:l.time,text:l.text}));if(!lyrics.length){toast("Lance la synchro d'abord",'err');return;}}
+  const data={title,artist:document.getElementById('f-artist').value.trim(),audioUrl:document.getElementById('f-audio').value.trim(),lyrics,createdAt:Date.now()};
+  if(editId){await updateDoc(doc(db,'songs',editId),data);toast('Chanson mise à jour !','ok');}
+  else{await addDoc(songsCol,data);toast('Chanson publiée !','ok');}
   openForm();
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────
-function toast(msg, type) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `toast ${type} show`;
-  setTimeout(() => el.classList.remove('show'), 3000);
+function toast(msg,type){
+  const el=document.getElementById('toast');el.textContent=msg;
+  el.className=`toast ${type} show`;setTimeout(()=>el.classList.remove('show'),3000);
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
+// ── INIT ──
+await loadConfig();
 loadSongs();
 </script>
 </body>
