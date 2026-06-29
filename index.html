@@ -522,6 +522,14 @@ function resetTap(){
 window.startTap=function(){
   const raw=document.getElementById('f-raw').value.trim().split('\n').filter(Boolean);
   if(!raw.length){toast("Colle les paroles d'abord",'err');return;}
+  
+  // CORRECTION : Charger le lien audio avant de lancer la musique
+  const inputUrl = document.getElementById('f-audio').value.trim();
+  if(inputUrl) {
+    audio.src = inputUrl;
+    audio.load();
+  }
+
   tapLines=raw.map(text=>({text,time:null}));tapIdx=0;tapTime=0;tapRunning=true;
   document.getElementById('tap-input-area').style.display='none';
   document.getElementById('tap-sync-area').style.display='block';
