@@ -3,139 +3,191 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LyricSync</title>
+<title>L'Hira'ycs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
 <style>
+  :root {
+    /* Palette L'Hira'ycs */
+    --bg-main: #006d77;
+    --bg-surface: rgba(131, 197, 190, 0.15); /* Soft Cyan translucide */
+    --bg-surface-hover: rgba(131, 197, 190, 0.25);
+    --bg-darker: rgba(0, 0, 0, 0.25);
+    
+    --text-main: #edf6f9; /* Off-White */
+    --text-muted: #83c5be; /* Soft Cyan */
+    
+    --accent: #e29578; /* Warm Terracotta */
+    --accent-glow: rgba(226, 149, 120, 0.5);
+    --accent-light: #ffddd2; /* Light Peach */
+    
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: #07090f; color: #fff; min-height: 100vh; }
+  body { font-family: var(--font-body); background: var(--bg-main); color: var(--text-main); min-height: 100vh; overflow-x: hidden; }
 
   /* ── PAGE D'ACCUEIL ── */
-  #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 48px; padding: 24px; }
-  .home-logo { font-size: 52px; }
-  .home-title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; text-align: center; }
-  .home-sub { font-size: 15px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -36px; }
-  .home-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .home-btn { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 40px; border-radius: 16px; border: 0.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); cursor: pointer; transition: all 0.2s; min-width: 180px; }
-  .home-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-  .home-btn.choral { border-color: rgba(108,92,231,0.4); background: rgba(108,92,231,0.08); }
-  .home-btn.choral:hover { background: rgba(108,92,231,0.15); border-color: rgba(108,92,231,0.6); }
-  .home-btn.admin { border-color: rgba(225,112,85,0.4); background: rgba(225,112,85,0.08); }
-  .home-btn.admin:hover { background: rgba(225,112,85,0.15); border-color: rgba(225,112,85,0.6); }
-  .home-btn-icon { font-size: 32px; }
-  .home-btn-label { font-size: 16px; font-weight: 700; }
-  .home-btn-sub { font-size: 11px; color: rgba(255,255,255,0.4); text-align: center; }
-  .glow-purple { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%); top: 20%; left: 20%; pointer-events: none; }
-  .glow-coral { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(225,112,85,0.08) 0%, transparent 70%); bottom: 20%; right: 20%; pointer-events: none; }
+  #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 48px; padding: 24px; position: relative; z-index: 10; }
+  .home-logo { font-size: 56px; filter: drop-shadow(0 4px 12px var(--accent-glow)); }
+  .home-title { font-family: var(--font-display); font-size: 42px; font-weight: 800; letter-spacing: -0.02em; text-align: center; color: var(--text-main); }
+  .home-sub { font-size: 16px; color: var(--text-muted); text-align: center; margin-top: -36px; font-weight: 500; }
+  .home-btns { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+  
+  /* Retrait des bordures fines au profit de surfaces douces */
+  .home-btn { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 32px 40px; border-radius: 20px; border: none; background: var(--bg-surface); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); min-width: 180px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .home-btn:hover { background: var(--bg-surface-hover); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+  .home-btn.choral { color: var(--accent-light); }
+  .home-btn.admin { color: var(--text-muted); }
+  .home-btn-icon { font-size: 36px; }
+  .home-btn-label { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-main); }
+  .home-btn-sub { font-size: 12px; color: inherit; text-align: center; opacity: 0.8; }
+  
+  /* Halos d'ambiance adaptés à la nouvelle palette */
+  .glow-purple { position: fixed; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(131, 197, 190, 0.15) 0%, transparent 70%); top: -10%; left: -10%; pointer-events: none; z-index: 1; }
+  .glow-coral { position: fixed; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, rgba(226, 149, 120, 0.1) 0%, transparent 70%); bottom: -20%; right: -10%; pointer-events: none; z-index: 1; }
 
   /* ── LOGIN OVERLAY ── */
-  #login-overlay { position: fixed; inset: 0; background: rgba(7,9,15,0.97); display: none; align-items: center; justify-content: center; z-index: 500; }
+  #login-overlay { position: fixed; inset: 0; background: rgba(0, 91, 99, 0.95); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 500; }
   #login-overlay.show { display: flex; }
-  .login-box { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; width: 340px; display: flex; flex-direction: column; gap: 16px; }
+  .login-box { background: var(--bg-main); border-radius: 24px; padding: 40px; width: 340px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
   .login-icon { font-size: 36px; text-align: center; }
-  .login-title { font-size: 18px; font-weight: 700; text-align: center; }
-  .login-sub { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -8px; }
-  .login-input { width: 100%; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 18px; outline: none; text-align: center; letter-spacing: 0.3em; font-family: monospace; }
-  .login-input:focus { border-color: rgba(225,112,85,0.5); }
-  .login-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
-  .login-err { font-size: 12px; color: #e15555; text-align: center; display: none; }
-  .login-back { background: none; border: none; color: rgba(255,255,255,0.3); font-size: 12px; cursor: pointer; text-align: center; }
-  .login-back:hover { color: rgba(255,255,255,0.6); }
+  .login-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; text-align: center; }
+  .login-sub { font-size: 13px; color: var(--text-muted); text-align: center; margin-top: -8px; }
+  .login-input { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 12px; padding: 14px; color: var(--text-main); font-size: 20px; outline: none; text-align: center; letter-spacing: 0.2em; font-family: monospace; transition: border-color 0.2s; }
+  .login-input:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); }
+  .login-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .login-btn:hover { background: var(--accent-light); transform: scale(1.02); }
+  .login-err { font-size: 12px; color: var(--accent-light); text-align: center; display: none; background: rgba(255, 221, 210, 0.1); padding: 8px; border-radius: 6px; }
+  .login-back { background: none; border: none; color: var(--text-muted); font-size: 13px; font-weight: 500; cursor: pointer; text-align: center; padding-top: 8px; }
+  .login-back:hover { color: var(--text-main); }
 
   /* ── NAV ── */
-  nav { display: none; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 0.5px solid rgba(255,255,255,0.07); position: sticky; top: 0; background: rgba(7,9,15,0.95); backdrop-filter: blur(12px); z-index: 100; }
+  nav { display: none; align-items: center; justify-content: space-between; padding: 16px 28px; position: sticky; top: 0; background: rgba(0, 109, 119, 0.9); backdrop-filter: blur(16px); z-index: 100; box-shadow: 0 4px 24px rgba(0,0,0,0.05); }
   nav.show { display: flex; }
-  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; cursor: pointer; }
-  .nav-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
-  .nav-badge.choral { background: rgba(108,92,231,0.2); color: #a29bfe; }
-  .nav-badge.admin { background: rgba(225,112,85,0.2); color: #e17055; }
-  .btn-logout { padding: 6px 14px; border-radius: 6px; border: 0.5px solid rgba(255,255,255,0.12); background: transparent; color: rgba(255,255,255,0.4); font-size: 11px; cursor: pointer; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 18px; font-weight: 700; cursor: pointer; }
+  .nav-badge { font-family: var(--font-body); font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .nav-badge.choral { background: var(--bg-surface); color: var(--accent-light); }
+  .nav-badge.admin { background: var(--bg-surface); color: var(--text-muted); }
+  .btn-logout { padding: 8px 16px; border-radius: 8px; border: none; background: var(--bg-surface); color: var(--text-main); font-weight: 500; font-size: 12px; cursor: pointer; transition: background 0.2s; }
+  .btn-logout:hover { background: var(--bg-surface-hover); }
 
-  /* ── READER ── */
-  #reader { display: none; height: calc(100vh - 53px); }
+  /* ── READER (Mode Choral) ── */
+  #reader { display: none; height: calc(100vh - 65px); }
   #reader.show { display: flex; }
-  .sidebar { width: 220px; flex-shrink: 0; background: #0a0c17; border-right: 0.5px solid rgba(255,255,255,0.06); padding: 20px 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-  .sidebar-label { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-  .song-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; border: none; background: transparent; text-align: left; width: 100%; }
-  .song-item:hover { background: rgba(255,255,255,0.05); }
-  .song-item.active { background: rgba(225,112,85,0.12); }
-  .song-cover { width: 38px; height: 38px; border-radius: 7px; background: linear-gradient(135deg,#e17055,#d63031); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-  .song-title { font-size: 12px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .song-title.active { color: #e17055; }
-  .song-artist { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-  .empty-lib { font-size: 12px; color: rgba(255,255,255,0.2); text-align: center; padding: 20px 0; }
-  .player-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-  .lyrics-zone { flex: 1; overflow-y: auto; padding: 40px 60px; display: flex; flex-direction: column; justify-content: center; scrollbar-width: none; }
+  .sidebar { width: 260px; flex-shrink: 0; background: var(--bg-darker); padding: 24px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+  .sidebar-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px; padding-left: 8px; }
+  .song-item { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 12px; cursor: pointer; transition: all 0.2s; border: none; background: transparent; text-align: left; width: 100%; }
+  .song-item:hover { background: var(--bg-surface); }
+  .song-item.active { background: rgba(226, 149, 120, 0.15); }
+  .song-cover { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .song-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .song-title.active { color: var(--accent-light); }
+  .song-artist { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+  .empty-lib { font-size: 13px; color: var(--text-muted); text-align: center; padding: 30px 0; }
+  .player-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .lyrics-zone { flex: 1; overflow-y: auto; padding: 60px; display: flex; flex-direction: column; justify-content: center; scrollbar-width: none; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
   .lyrics-zone::-webkit-scrollbar { display: none; }
-  .no-song { text-align: center; color: rgba(255,255,255,0.2); font-size: 14px; }
-  .lyric-line { font-size: 13px; color: rgba(255,255,255,0.1); padding: 4px 0; cursor: pointer; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); line-height: 1.3; user-select: none; }
-  .lyric-line.prev1 { font-size: 16px; color: rgba(255,255,255,0.45); font-weight: 500; }
-  .lyric-line.active { font-size: 30px; color: #fff; font-weight: 700; text-shadow: 0 0 40px rgba(225,112,85,0.6); }
-  .lyric-line.next1 { font-size: 16px; color: rgba(255,255,255,0.45); font-weight: 500; }
-  .player-bar { background: rgba(10,12,23,0.97); border-top: 0.5px solid rgba(255,255,255,0.07); padding: 14px 28px 18px; }
-  .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-  .bar-info { display: flex; align-items: center; gap: 12px; }
-  .bar-cover { width: 40px; height: 40px; border-radius: 7px; background: linear-gradient(135deg,#e17055,#d63031); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .bar-title { font-size: 13px; font-weight: 600; }
-  .bar-artist { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-  .bar-controls { display: flex; align-items: center; gap: 14px; }
-  .ctrl { background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 18px; padding: 4px; }
-  .ctrl-play { width: 44px; height: 44px; border-radius: 50%; background: #e17055; border: none; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(225,112,85,0.4); }
-  .bar-volume { display: flex; align-items: center; gap: 8px; min-width: 120px; }
-  .bar-progress { display: flex; align-items: center; gap: 10px; }
-  .time-label { font-size: 10px; color: rgba(255,255,255,0.35); min-width: 32px; }
+  .no-song { text-align: center; color: var(--text-muted); font-size: 16px; font-family: var(--font-display); }
+  
+  /* L'élément Signature : Le Halo de Scène */
+  .lyric-line { font-family: var(--font-display); font-size: 16px; color: rgba(131, 197, 190, 0.3); padding: 8px 0; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); line-height: 1.4; user-select: none; font-weight: 500; transform-origin: left center; }
+  .lyric-line:hover { color: var(--text-muted); }
+  .lyric-line.prev1, .lyric-line.next1 { font-size: 22px; color: var(--text-muted); opacity: 0.8; }
+  .lyric-line.active { font-size: 40px; color: var(--accent); font-weight: 800; text-shadow: 0 4px 24px var(--accent-glow); transform: scale(1.02); letter-spacing: -0.01em; }
+  
+  .player-bar { background: var(--bg-darker); backdrop-filter: blur(12px); padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .bar-info { display: flex; align-items: center; gap: 16px; width: 30%; }
+  .bar-cover { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .bar-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-main); }
+  .bar-artist { font-size: 12px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+  .bar-controls { display: flex; align-items: center; gap: 24px; justify-content: center; flex: 1; }
+  .ctrl { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 20px; transition: color 0.2s; }
+  .ctrl:hover { color: var(--text-main); }
+  .ctrl-play { width: 52px; height: 52px; border-radius: 50%; background: var(--text-main); border: none; color: var(--bg-main); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .ctrl-play:hover { transform: scale(1.05); background: var(--accent-light); }
+  .bar-volume { display: flex; align-items: center; gap: 12px; width: 30%; justify-content: flex-end; }
+  .bar-progress { display: flex; align-items: center; gap: 16px; }
+  .time-label { font-size: 11px; color: var(--text-muted); min-width: 40px; font-weight: 500; font-family: monospace; letter-spacing: 0.05em; }
   .time-label.right { text-align: right; }
-  .progress-track { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; cursor: pointer; position: relative; }
-  .progress-fill { height: 100%; background: #e17055; border-radius: 2px; transition: width 0.25s linear; }
-  .progress-dot { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; background: #e17055; box-shadow: 0 0 8px rgba(225,112,85,0.6); transition: left 0.25s linear; pointer-events: none; }
-  input[type=range] { accent-color: #e17055; }
+  .progress-track { flex: 1; height: 6px; background: rgba(0,0,0,0.2); border-radius: 3px; cursor: pointer; position: relative; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.1s linear; }
+  /* Custom Range Input */
+  input[type=range] { -webkit-appearance: none; background: transparent; cursor: pointer; }
+  input[type=range]::-webkit-slider-runnable-track { background: rgba(0,0,0,0.2); height: 4px; border-radius: 2px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: var(--text-main); margin-top: -4px; }
 
   /* ── ADMIN ── */
-  #admin { display: none; max-width: 900px; margin: 0 auto; padding: 28px 24px; }
+  #admin { display: none; max-width: 1000px; margin: 0 auto; padding: 32px 24px; position: relative; z-index: 10; }
   #admin.show { display: block; }
-  .admin-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .section-title { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.8); }
-  .btn-add { padding: 7px 16px; border-radius: 7px; border: 0.5px solid rgba(225,112,85,0.4); background: rgba(225,112,85,0.1); color: #e17055; font-size: 12px; font-weight: 500; cursor: pointer; }
-  .song-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
-  .song-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 0.5px solid rgba(255,255,255,0.07); }
-  .song-row-cover { width: 38px; height: 38px; border-radius: 7px; background: linear-gradient(135deg,#e17055,#d63031); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .admin-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .section-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-main); }
+  .btn-add { padding: 10px 20px; border-radius: 10px; border: none; background: var(--bg-surface); color: var(--text-main); font-family: var(--font-display); font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .btn-add:hover { background: var(--accent); color: var(--bg-main); }
+  .song-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+  .song-row { display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-darker); border-radius: 16px; transition: background 0.2s; }
+  .song-row:hover { background: var(--bg-surface); }
+  .song-row-cover { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
   .song-row-info { flex: 1; }
-  .song-row-title { font-size: 13px; font-weight: 500; }
-  .song-row-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-  .btn-edit { padding: 5px 12px; border-radius: 6px; border: 0.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.5); font-size: 11px; cursor: pointer; margin-right: 6px; }
-  .btn-del { padding: 5px 12px; border-radius: 6px; border: 0.5px solid rgba(225,85,85,0.3); background: transparent; color: rgba(225,85,85,0.7); font-size: 11px; cursor: pointer; }
-  .form-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
-  .form-header { padding: 14px 20px; border-bottom: 0.5px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; }
-  .form-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 7px; padding: 3px; }
-  .form-tab { padding: 5px 14px; border-radius: 5px; border: none; background: transparent; color: rgba(255,255,255,0.35); font-size: 12px; cursor: pointer; }
-  .form-tab.active { background: rgba(255,255,255,0.1); color: #fff; }
-  .form-body { display: flex; }
-  .form-left { width: 240px; flex-shrink: 0; padding: 18px; border-right: 0.5px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; gap: 12px; }
-  .form-right { flex: 1; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-  .field-label { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; display: block; }
-  .field-input { width: 100%; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 7px; padding: 8px 10px; color: #fff; font-size: 13px; outline: none; font-family: inherit; }
-  .field-input:focus { border-color: rgba(225,112,85,0.4); }
-  .field-textarea { width: 100%; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 12px; font-family: monospace; resize: vertical; outline: none; line-height: 1.7; min-height: 180px; }
-  .tap-lines { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px; max-height: 200px; overflow-y: auto; }
-  .tap-line { padding: 3px 0; font-size: 12px; display: flex; gap: 12px; align-items: center; }
-  .tap-line.done { color: rgba(255,255,255,0.4); }
-  .tap-line.current { color: #e17055; font-weight: 600; }
-  .tap-line.pending { color: rgba(255,255,255,0.2); }
-  .tap-time { min-width: 60px; font-size: 10px; font-family: monospace; color: rgba(255,255,255,0.3); }
-  .tap-actions { display: flex; gap: 8px; align-items: center; }
-  .btn-tap { flex: 1; padding: 12px; border-radius: 7px; border: none; background: #e17055; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; }
-  .btn-start { padding: 8px 18px; border-radius: 7px; border: none; background: #e17055; color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
-  .btn-reset { padding: 8px 14px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.4); font-size: 12px; cursor: pointer; }
-  .tap-hint { font-size: 11px; color: rgba(255,255,255,0.25); }
-  .form-footer { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 12px; display: flex; justify-content: flex-end; }
-  .btn-publish { padding: 9px 24px; border-radius: 8px; border: none; background: #e17055; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(225,112,85,0.3); }
-  .pwd-row { display: flex; gap: 10px; align-items: flex-end; }
-  .btn-save-pwd { padding: 9px 20px; border-radius: 7px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .song-row-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+  .song-row-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+  .btn-edit { padding: 8px 16px; border-radius: 8px; border: none; background: var(--bg-surface); color: var(--text-main); font-weight: 500; font-size: 12px; cursor: pointer; margin-right: 8px; transition: background 0.2s; }
+  .btn-edit:hover { background: var(--text-muted); color: var(--bg-main); }
+  .btn-del { padding: 8px 16px; border-radius: 8px; border: none; background: rgba(226, 149, 120, 0.15); color: var(--accent-light); font-weight: 500; font-size: 12px; cursor: pointer; transition: background 0.2s; }
+  .btn-del:hover { background: var(--accent); color: var(--bg-main); }
+  
+  .form-card { background: var(--bg-darker); border-radius: 20px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .form-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.1); }
+  .form-tabs { display: flex; gap: 6px; background: var(--bg-main); border-radius: 10px; padding: 4px; }
+  .form-tab { padding: 8px 16px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .form-tab.active { background: var(--bg-surface); color: var(--text-main); }
+  .form-body { display: flex; flex-wrap: wrap; }
+  .form-left { width: 300px; flex-shrink: 0; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: rgba(0,0,0,0.05); }
+  .form-right { flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 16px; min-width: 300px; }
+  .field-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px; display: block; }
+  .field-input { width: 100%; background: var(--bg-main); border: 2px solid transparent; border-radius: 10px; padding: 12px 14px; color: var(--text-main); font-size: 14px; outline: none; font-family: inherit; font-weight: 500; transition: border-color 0.2s; }
+  .field-input:focus { border-color: var(--text-muted); }
+  .field-textarea { width: 100%; background: var(--bg-main); border: 2px solid transparent; border-radius: 12px; padding: 14px; color: var(--text-main); font-size: 13px; font-family: monospace; resize: vertical; outline: none; line-height: 1.6; min-height: 220px; transition: border-color 0.2s; }
+  .field-textarea:focus { border-color: var(--text-muted); }
+  
+  .tap-lines { background: var(--bg-main); border-radius: 12px; padding: 16px; max-height: 250px; overflow-y: auto; box-shadow: inset 0 2px 10px rgba(0,0,0,0.1); }
+  .tap-line { padding: 6px 0; font-size: 13px; display: flex; gap: 16px; align-items: center; font-weight: 500; }
+  .tap-line.done { color: var(--text-muted); }
+  .tap-line.current { color: var(--accent-light); font-weight: 700; font-size: 14px; }
+  .tap-line.pending { color: rgba(131, 197, 190, 0.3); }
+  .tap-time { min-width: 65px; font-size: 11px; font-family: monospace; color: var(--text-muted); opacity: 0.7; }
+  .tap-actions { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
+  .btn-tap { flex: 1; padding: 16px; border-radius: 12px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 18px; font-weight: 800; cursor: pointer; transition: all 0.1s; box-shadow: 0 4px 16px rgba(226, 149, 120, 0.3); }
+  .btn-tap:active { transform: scale(0.98); background: var(--accent-light); }
+  .btn-start { padding: 12px 24px; border-radius: 10px; border: none; background: var(--text-main); color: var(--bg-main); font-family: var(--font-display); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .btn-start:hover { background: var(--accent-light); }
+  .btn-reset { padding: 12px 20px; border-radius: 10px; border: none; background: var(--bg-surface); color: var(--text-main); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn-reset:hover { background: var(--bg-surface-hover); }
+  .tap-hint { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  
+  .form-footer { padding-top: 16px; display: flex; justify-content: flex-end; width: 100%; }
+  .btn-publish { padding: 14px 32px; border-radius: 12px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 15px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(226, 149, 120, 0.3); }
+  .btn-publish:hover { background: var(--accent-light); transform: translateY(-2px); }
+  
+  .pwd-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+  .btn-save-pwd { padding: 12px 24px; border-radius: 10px; border: none; background: var(--bg-surface); color: var(--text-main); font-family: var(--font-display); font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .btn-save-pwd:hover { background: var(--text-muted); color: var(--bg-main); }
+
+  /* Progress bar upload (gardé par sécurité même si URL directe utilisée) */
+  .upload-progress-container { width: 100%; height: 6px; background: rgba(0,0,0,0.2); border-radius: 3px; display: none; overflow: hidden; margin-top: 8px; }
+  .upload-progress-bar { height: 100%; background: var(--text-muted); width: 0%; transition: width 0.1s linear; }
+  .upload-status-text { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
   /* ── TOAST ── */
-  .toast { position: fixed; top: 20px; right: 24px; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  .toast.ok { background: rgba(0,184,148,0.15); border: 0.5px solid rgba(0,184,148,0.4); color: #00b894; }
-  .toast.err { background: rgba(225,85,85,0.15); border: 0.5px solid rgba(225,85,85,0.4); color: #e15555; }
-  .toast.show { opacity: 1; }
-  .loading { text-align: center; color: rgba(255,255,255,0.3); font-size: 13px; padding: 20px; }
+  .toast { position: fixed; top: 24px; right: 24px; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; z-index: 999; opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; transform: translateY(-10px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .toast.ok { background: var(--bg-surface); color: var(--text-main); border-left: 4px solid var(--text-muted); backdrop-filter: blur(8px); }
+  .toast.err { background: rgba(226, 149, 120, 0.15); color: var(--accent-light); border-left: 4px solid var(--accent); backdrop-filter: blur(8px); }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .loading { text-align: center; color: var(--text-muted); font-size: 14px; font-weight: 500; padding: 24px; }
 </style>
 </head>
 <body>
@@ -148,7 +200,7 @@
 <div id="home">
   <div class="home-logo">🎵</div>
   <div>
-    <div class="home-title">LyricSync</div>
+    <div class="home-title">L'Hira'ycs</div>
     <div class="home-sub">Suivez les paroles en temps réel</div>
   </div>
   <div class="home-btns">
@@ -179,7 +231,7 @@
 
 <nav id="nav">
   <div class="nav-logo" onclick="goHome()">
-    🎵 LyricSync
+    🎵 L'Hira'ycs
     <span class="nav-badge" id="nav-badge"></span>
   </div>
   <button class="btn-logout" onclick="goHome()">← Accueil</button>
@@ -217,8 +269,7 @@
         <span class="time-label" id="time-cur">0:00</span>
         <div class="progress-track" onclick="seekClick(event)">
           <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          <div class="progress-dot" id="progress-dot" style="left:0%"></div>
-        </div>
+          <div class="progress-dot" id="progress-dot" style="left:0%; display:none;"></div> </div>
         <span class="time-label right" id="time-dur">0:00</span>
       </div>
     </div>
@@ -247,7 +298,7 @@
         <div>
           <label class="field-label">URL du MP3</label>
           <input class="field-input" id="f-audio" placeholder="https://... lien direct MP3" />
-          <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:5px">Google Drive, Dropbox, lien direct...</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;font-weight:500;">Google Drive, Dropbox, lien direct...</div>
         </div>
       </div>
       <div class="form-right">
@@ -261,7 +312,7 @@
         <div id="lrc-panel" style="display:none">
           <label class="field-label">Contenu LRC</label>
           <textarea class="field-textarea" id="f-lrc" placeholder="[00:12.00] Is this the real life?&#10;[00:15.50] Is this just fantasy?"></textarea>
-          <div style="font-size:11px;color:rgba(255,255,255,0.25)">Format : [MM:SS.cc] texte — compatible lrclib.net</div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:500;">Format : [MM:SS.cc] texte — compatible lrclib.net</div>
         </div>
         <div class="form-footer"><button class="btn-publish" onclick="saveSong()">Publier la chanson</button></div>
       </div>
@@ -270,13 +321,13 @@
 
   <div class="form-card">
     <div class="form-header"><span class="section-title">🔑 Changer le mot de passe admin</span></div>
-    <div style="padding:18px;display:flex;flex-direction:column;gap:12px">
+    <div style="padding:24px;display:flex;flex-direction:column;gap:12px">
       <div class="pwd-row">
         <div style="flex:1"><label class="field-label">Nouveau mot de passe</label><input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe" /></div>
         <div style="flex:1"><label class="field-label">Confirmer</label><input class="field-input" type="password" id="confirm-pwd" placeholder="Confirmer" /></div>
         <button class="btn-save-pwd" onclick="changePassword()">Enregistrer</button>
       </div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.25)">Le mot de passe est sauvegardé dans Firebase.</div>
+      <div style="font-size:11px;color:var(--text-muted);font-weight:500;">Le mot de passe est sauvegardé dans Firebase.</div>
     </div>
   </div>
 </div>
@@ -470,7 +521,7 @@ function updateProgress(){
   const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
   const pct=Math.min(100,(currentTime/dur)*100);
   document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-dot').style.left=pct+'%';
+  if(document.getElementById('progress-dot')) document.getElementById('progress-dot').style.left=pct+'%';
   document.getElementById('time-cur').textContent=fmt(currentTime);
   document.getElementById('time-dur').textContent=fmt(dur);
 }
@@ -535,7 +586,7 @@ window.startTap=function(){
   document.getElementById('tap-sync-area').style.display='block';
   renderTapLines();
   if(audio.src){audio.currentTime=0;audio.play().catch(()=>{});}
-  document.getElementById('tap-actions').innerHTML=`<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:11px;color:rgba(255,255,255,0.3);min-width:50px" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
+  document.getElementById('tap-actions').innerHTML=`<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:11px;color:var(--text-muted);min-width:50px;font-family:monospace" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
   document.getElementById('tap-hint').textContent=`Ligne 1/${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
   clearInterval(tapInterval);
   tapInterval=setInterval(()=>{tapTime+=0.1;const el=document.getElementById('tap-timer');if(el)el.textContent=fmt(tapTime);},100);
