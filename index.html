@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Manrope:wght@400;500;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -26,6 +26,7 @@
     
     --font-display: 'Syne', sans-serif;
     --font-body: 'Manrope', sans-serif;
+    --font-logo: 'Dancing Script', cursive;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,16 +36,72 @@
   .glow-purple { position: fixed; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, rgba(131, 197, 190, 0.15) 0%, transparent 70%); top: -15%; left: -10%; pointer-events: none; z-index: 1; }
   .glow-coral { position: fixed; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(226, 149, 120, 0.08) 0%, transparent 70%); bottom: -20%; right: -15%; pointer-events: none; z-index: 1; }
 
-  /* ── PAGE D'ACCUEIL ── */
-  #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 40px; padding: 24px; position: relative; z-index: 10; }
-  .home-logo { font-size: 64px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); margin-bottom: -10px; }
+  /* ── PAGE D'ACCUEIL & LOGO ── */
+  #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 32px; padding: 24px; position: relative; z-index: 10; }
   
-  /* MODIFICATION ICI : Le Logo L'Hira'ycs stylisé et le sous-titre démêlé */
-  .home-title { font-family: var(--font-display); font-size: 56px; font-weight: 800; text-align: center; color: var(--text-main); text-shadow: 0 8px 24px rgba(0,0,0,0.15); letter-spacing: -0.04em; line-height: 1; }
-  .home-title .logo-hl { color: var(--accent); font-style: italic; padding: 0 2px; }
-  .home-sub { font-size: 17px; color: var(--text-muted); text-align: center; margin-top: 12px; font-weight: 600; letter-spacing: 0.02em; }
+  /* La note de musique 3D Violette */
+  .home-logo { 
+    font-size: 72px; 
+    color: #9b5de5; 
+    text-shadow: -1px 1px 0 #7122fa, -2px 2px 0 #7122fa, -3px 3px 0 #5e10d7, -4px 4px 15px rgba(0,0,0,0.4);
+    margin-bottom: 0px; 
+    line-height: 1;
+    transform: rotate(-5deg);
+  }
   
-  .home-btns { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+  /* Construction du logo texte */
+  .home-title { 
+    font-family: var(--font-display); 
+    font-size: 56px; 
+    font-weight: 800; 
+    text-align: center; 
+    color: var(--text-main); 
+    text-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+    letter-spacing: -0.02em; 
+    line-height: 1.1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-script { 
+    font-family: var(--font-logo); 
+    font-size: 1.3em; 
+    font-weight: 700; 
+    margin: 0 2px 0 -2px;
+    display: inline-block;
+    transform: translateY(4px);
+  }
+
+  /* L'onde sonore (Soundwave) intégrée */
+  .soundwave {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 32px;
+    margin: 0 6px;
+  }
+  .soundwave .bar {
+    background: var(--text-muted);
+    width: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  .soundwave .bar:nth-child(1) { height: 40%; animation-delay: 0.0s; }
+  .soundwave .bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
+  .soundwave .bar:nth-child(3) { height: 100%; animation-delay: 0.4s; background: var(--text-main); } /* Barre centrale lumineuse */
+  .soundwave .bar:nth-child(4) { height: 60%; animation-delay: 0.6s; }
+  .soundwave .bar:nth-child(5) { height: 30%; animation-delay: 0.8s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.6); }
+    50% { transform: scaleY(1); }
+  }
+
+  .home-sub { font-size: 17px; color: var(--text-muted); text-align: center; margin-top: 8px; font-weight: 500; letter-spacing: 0.02em; }
+  
+  .home-btns { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
   
   .home-btn { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 36px 48px; border-radius: 24px; border: none; background: var(--bg-surface); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
   .home-btn:hover { background: var(--bg-surface-hover); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
@@ -72,9 +129,11 @@
   /* ── NAV ── */
   nav { display: none; align-items: center; justify-content: space-between; padding: 20px 32px; position: sticky; top: 0; background: linear-gradient(to bottom, rgba(0, 109, 119, 0.95), rgba(0, 109, 119, 0.6)); backdrop-filter: blur(20px); z-index: 100; }
   nav.show { display: flex; }
-  .nav-logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 20px; font-weight: 800; cursor: pointer; letter-spacing: -0.02em; }
-  .nav-logo .logo-hl { color: var(--accent); font-style: italic; }
-  .nav-badge { font-family: var(--font-body); font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 20px; font-weight: 800; cursor: pointer; letter-spacing: -0.02em; }
+  
+  .nav-note { color: #9b5de5; text-shadow: -1px 1px 0 #5e10d7; font-size: 22px; margin-right: 4px;}
+  
+  .nav-badge { font-family: var(--font-body); font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 10px;}
   .nav-badge.choral { background: var(--bg-surface); color: var(--accent-light); }
   .nav-badge.admin { background: var(--bg-surface); color: var(--text-muted); }
   .btn-logout { padding: 10px 20px; border-radius: 12px; border: none; background: var(--bg-surface); color: var(--text-main); font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
@@ -99,7 +158,6 @@
   .lyrics-zone::-webkit-scrollbar { display: none; }
   .no-song { text-align: center; color: var(--text-muted); font-size: 18px; font-family: var(--font-display); font-weight: 700; }
   
-  /* L'élément Signature : Le Projecteur Acoustique */
   .lyric-line { font-family: var(--font-display); font-size: 20px; color: rgba(237, 246, 249, 0.3); padding: 12px 0; cursor: pointer; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); line-height: 1.4; user-select: none; font-weight: 600; transform-origin: left center; }
   .lyric-line:hover { color: rgba(237, 246, 249, 0.7); }
   .lyric-line.prev1, .lyric-line.next1 { font-size: 26px; color: rgba(237, 246, 249, 0.8); }
@@ -202,11 +260,22 @@
 <div class="toast" id="toast"></div>
 
 <div id="home">
-  <div class="home-logo">🎵</div>
+  <div class="home-logo">♫</div>
   <div>
-    <div class="home-title">L'<span class="logo-hl">Hira</span>'ycs</div>
+    <div class="home-title">
+      L'<span class="logo-script">H</span>
+      <span class="soundwave">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </span>
+      ira
+      <span class="soundwave" style="transform: scale(0.85); margin: 0 4px;">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </span>
+      ycs
+    </div>
     <div class="home-sub">Suivez les paroles en temps réel</div>
   </div>
+  
   <div class="home-btns">
     <button class="home-btn choral" onclick="enterChoral()">
       <div class="home-btn-icon">🎶</div>
@@ -235,7 +304,8 @@
 
 <nav id="nav">
   <div class="nav-logo" onclick="goHome()">
-    🎵 L'<span class="logo-hl">Hira</span>'ycs
+    <span class="nav-note">♫</span>
+    L'<span class="logo-script" style="font-size:1.2em; transform:translateY(2px)">H</span>ira'ycs
     <span class="nav-badge" id="nav-badge"></span>
   </div>
   <button class="btn-logout" onclick="goHome()">← Accueil</button>
