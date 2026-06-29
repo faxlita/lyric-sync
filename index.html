@@ -37,9 +37,13 @@
 
   /* ── PAGE D'ACCUEIL ── */
   #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 40px; padding: 24px; position: relative; z-index: 10; }
-  .home-logo { font-size: 64px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
-  .home-title { font-family: var(--font-display); font-size: 48px; font-weight: 800; text-align: center; color: var(--text-main); text-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-  .home-sub { font-size: 16px; color: var(--text-muted); text-align: center; margin-top: -28px; font-weight: 500; }
+  .home-logo { font-size: 64px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); margin-bottom: -10px; }
+  
+  /* MODIFICATION ICI : Le Logo L'Hira'ycs stylisé et le sous-titre démêlé */
+  .home-title { font-family: var(--font-display); font-size: 56px; font-weight: 800; text-align: center; color: var(--text-main); text-shadow: 0 8px 24px rgba(0,0,0,0.15); letter-spacing: -0.04em; line-height: 1; }
+  .home-title .logo-hl { color: var(--accent); font-style: italic; padding: 0 2px; }
+  .home-sub { font-size: 17px; color: var(--text-muted); text-align: center; margin-top: 12px; font-weight: 600; letter-spacing: 0.02em; }
+  
   .home-btns { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
   
   .home-btn { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 36px 48px; border-radius: 24px; border: none; background: var(--bg-surface); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
@@ -68,7 +72,8 @@
   /* ── NAV ── */
   nav { display: none; align-items: center; justify-content: space-between; padding: 20px 32px; position: sticky; top: 0; background: linear-gradient(to bottom, rgba(0, 109, 119, 0.95), rgba(0, 109, 119, 0.6)); backdrop-filter: blur(20px); z-index: 100; }
   nav.show { display: flex; }
-  .nav-logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 20px; font-weight: 800; cursor: pointer; }
+  .nav-logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 20px; font-weight: 800; cursor: pointer; letter-spacing: -0.02em; }
+  .nav-logo .logo-hl { color: var(--accent); font-style: italic; }
   .nav-badge { font-family: var(--font-body); font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
   .nav-badge.choral { background: var(--bg-surface); color: var(--accent-light); }
   .nav-badge.admin { background: var(--bg-surface); color: var(--text-muted); }
@@ -199,7 +204,7 @@
 <div id="home">
   <div class="home-logo">🎵</div>
   <div>
-    <div class="home-title">L'Hira'ycs</div>
+    <div class="home-title">L'<span class="logo-hl">Hira</span>'ycs</div>
     <div class="home-sub">Suivez les paroles en temps réel</div>
   </div>
   <div class="home-btns">
@@ -230,7 +235,7 @@
 
 <nav id="nav">
   <div class="nav-logo" onclick="goHome()">
-    🎵 L'Hira'ycs
+    🎵 L'<span class="logo-hl">Hira</span>'ycs
     <span class="nav-badge" id="nav-badge"></span>
   </div>
   <button class="btn-logout" onclick="goHome()">← Accueil</button>
