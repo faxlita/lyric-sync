@@ -163,7 +163,7 @@
     transform: scale(0.9);
     letter-spacing: 0.01em;
   }
-  html[data-theme="light"] .lyric-line { color: rgba(7, 59, 64, 0.18); }
+  html[data-theme="light"] .lyric-line { color: rgba(7, 59, 64, 0.22); }
 
   .lyric-line.prev2, .lyric-line.next2 {
     font-size: calc(17px * var(--lyric-scale));
@@ -171,7 +171,7 @@
     filter: blur(1px);
     transform: scale(0.92);
   }
-  html[data-theme="light"] .lyric-line.prev2, html[data-theme="light"] .lyric-line.next2 { color: rgba(7, 59, 64, 0.25); }
+  html[data-theme="light"] .lyric-line.prev2, html[data-theme="light"] .lyric-line.next2 { color: rgba(7, 59, 64, 0.35); }
 
   .lyric-line.prev1, .lyric-line.next1 {
     font-size: calc(22px * var(--lyric-scale));
@@ -179,7 +179,7 @@
     filter: blur(0.5px);
     transform: scale(0.96);
   }
-  html[data-theme="light"] .lyric-line.prev1, html[data-theme="light"] .lyric-line.next1 { color: rgba(7, 59, 64, 0.55); }
+  html[data-theme="light"] .lyric-line.prev1, html[data-theme="light"] .lyric-line.next1 { color: rgba(7, 59, 64, 0.65); }
 
   .lyric-line.active {
     font-size: calc(42px * var(--lyric-scale));
@@ -194,10 +194,16 @@
     letter-spacing: -0.01em;
     padding: 12px 0;
   }
+  html[data-theme="light"] .lyric-line.active {
+    color: #b54a26;
+    text-shadow:
+      0 0 30px rgba(226, 149, 120, 0.35),
+      0 2px 16px rgba(181, 74, 38, 0.25);
+  }
 
   /* ── PLAYER BAR ── */
-  .player-bar { background: var(--bg-darker); backdrop-filter: blur(24px); padding: 24px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); flex-shrink: 0; }
-  .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .player-bar { background: var(--bg-darker); backdrop-filter: blur(24px); padding: 14px 40px 18px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); flex-shrink: 0; }
+  .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   .bar-info { display: flex; align-items: center; gap: 20px; width: 30%; }
   .bar-cover { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 8px 24px rgba(226, 149, 120, 0.3); }
   .bar-title { font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--text-main); }
@@ -337,12 +343,13 @@
     .btn-logout { padding: 8px 14px; font-size: 12px; }
 
     #reader.show { flex-direction: column; height: calc(100vh - 60px); }
-    .sidebar { width: 100%; flex-direction: row; overflow-x: auto; overflow-y: hidden; padding: 12px; gap: 8px; max-height: 110px; }
+    .sidebar { width: 100%; flex-direction: row; overflow-x: auto; overflow-y: hidden; padding: 12px; gap: 8px; max-height: 100px; order: 2; background: var(--bg-darker); border-top: 1px solid rgba(0,0,0,0.1); -webkit-overflow-scrolling: touch; }
+    .player-main { order: 1; flex: 1; min-height: 0; }
     .sidebar-label { display: none; }
-    .song-item { flex-direction: column; min-width: 90px; gap: 6px; padding: 8px; text-align: center; }
+    .song-item { flex-direction: column; min-width: 80px; flex-shrink: 0; gap: 4px; padding: 8px 6px; text-align: center; }
     .song-item:hover { transform: none; }
-    .song-cover { width: 40px; height: 40px; margin: 0 auto; }
-    .song-title { font-size: 11px; white-space: normal; }
+    .song-cover { width: 36px; height: 36px; margin: 0 auto; font-size: 16px; }
+    .song-title { font-size: 10px; white-space: normal; line-height: 1.2; }
     .song-artist { display: none; }
 
     .lyrics-toolbar { padding: 10px 12px; gap: 6px; }
@@ -351,7 +358,7 @@
     .size-btn { width: 26px; height: 26px; font-size: 13px; }
     .size-display { font-size: 11px; min-width: 32px; }
 
-    .lyrics-zone { padding: 30vh 20px; }
+    .lyrics-zone { padding: 25vh 20px; }
     .lyric-line { font-size: calc(14px * var(--lyric-scale)) !important; max-width: 100%; }
     .lyric-line.prev2, .lyric-line.next2 { font-size: calc(15px * var(--lyric-scale)) !important; }
     .lyric-line.prev1, .lyric-line.next1 { font-size: calc(18px * var(--lyric-scale)) !important; }
@@ -688,6 +695,25 @@ function initUI() {
       if (sd) sd.textContent = Math.round(lyricScale * 100) + '%';
     }
   } catch(e) {}
+
+  // ── RESTAURER LA VUE APRÈS RAFRAÎCHISSEMENT ──
+  try {
+    const savedView = localStorage.getItem('hiraycs-view');
+    const adminSession = localStorage.getItem('hiraycs-admin-session');
+    if (savedView === 'choral') {
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('nav').classList.add('show');
+      document.getElementById('reader').classList.add('show');
+      document.getElementById('nav-badge').textContent = 'Choral';
+      document.getElementById('nav-badge').className = 'nav-badge choral';
+    } else if (savedView === 'admin' && adminSession === '1') {
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('nav').classList.add('show');
+      document.getElementById('admin').classList.add('show');
+      document.getElementById('nav-badge').textContent = 'Admin';
+      document.getElementById('nav-badge').className = 'nav-badge admin';
+    }
+  } catch(e) {}
 }
 initUI();
 
@@ -707,6 +733,7 @@ window.enterChoral = function() {
   document.getElementById('reader').classList.add('show');
   document.getElementById('nav-badge').textContent = 'Choral';
   document.getElementById('nav-badge').className = 'nav-badge choral';
+  try { localStorage.setItem('hiraycs-view', 'choral'); } catch(e) {}
 }
 
 window.enterAdmin = function() {
@@ -725,6 +752,10 @@ window.doLogin = function() {
     document.getElementById('admin').classList.add('show');
     document.getElementById('nav-badge').textContent = 'Admin';
     document.getElementById('nav-badge').className = 'nav-badge admin';
+    try {
+      localStorage.setItem('hiraycs-view', 'admin');
+      localStorage.setItem('hiraycs-admin-session', '1');
+    } catch(e) {}
   } else {
     document.getElementById('login-err').style.display = 'block';
     document.getElementById('login-input').value = '';
@@ -744,6 +775,10 @@ window.goHome = function() {
   stopSim(); playing = false;
   document.getElementById('play-btn').textContent = '▶';
   stopCalibPlayback();
+  try {
+    localStorage.removeItem('hiraycs-view');
+    localStorage.removeItem('hiraycs-admin-session');
+  } catch(e) {}
 }
 
 // ── PASSWORD ──
