@@ -11,19 +11,15 @@
 
 <style>
   :root {
-    /* Palette Organique & Chaleureuse */
-    --bg-main: #006d77; /* Deep Teal - La Salle */
-    --bg-surface: rgba(131, 197, 190, 0.12); /* Soft Cyan translucide 1 */
-    --bg-surface-hover: rgba(131, 197, 190, 0.22); /* Soft Cyan translucide 2 */
-    --bg-darker: rgba(0, 0, 0, 0.2); /* Ombres profondes */
-    
-    --text-main: #edf6f9; /* Off-White - Clarté */
-    --text-muted: #83c5be; /* Soft Cyan - Texte secondaire */
-    
-    --accent: #e29578; /* Warm Terracotta - Action & Chant */
-    --accent-glow: rgba(226, 149, 120, 0.6); /* Projecteur */
-    --accent-light: #ffddd2; /* Light Peach - Douceur/Hover */
-    
+    --bg-main: #006d77;
+    --bg-surface: rgba(131, 197, 190, 0.12);
+    --bg-surface-hover: rgba(131, 197, 190, 0.22);
+    --bg-darker: rgba(0, 0, 0, 0.2);
+    --text-main: #edf6f9;
+    --text-muted: #83c5be;
+    --accent: #e29578;
+    --accent-glow: rgba(226, 149, 120, 0.6);
+    --accent-light: #ffddd2;
     --font-display: 'Syne', sans-serif;
     --font-body: 'Manrope', sans-serif;
     --font-logo: 'Dancing Script', cursive;
@@ -32,77 +28,24 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font-body); background: var(--bg-main); color: var(--text-main); min-height: 100vh; overflow-x: hidden; }
 
-  /* ── HALOS D'AMBIANCE (Le Projecteur) ── */
   .glow-purple { position: fixed; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, rgba(131, 197, 190, 0.15) 0%, transparent 70%); top: -15%; left: -10%; pointer-events: none; z-index: 1; }
   .glow-coral { position: fixed; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(226, 149, 120, 0.08) 0%, transparent 70%); bottom: -20%; right: -15%; pointer-events: none; z-index: 1; }
 
-  /* ── PAGE D'ACCUEIL & LOGO ── */
+  /* ── PAGE D'ACCUEIL ── */
   #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 32px; padding: 24px; position: relative; z-index: 10; }
-  
-  /* La note de musique 3D Violette */
-  .home-logo { 
-    font-size: 72px; 
-    color: #9b5de5; 
-    text-shadow: -1px 1px 0 #7122fa, -2px 2px 0 #7122fa, -3px 3px 0 #5e10d7, -4px 4px 15px rgba(0,0,0,0.4);
-    margin-bottom: 0px; 
-    line-height: 1;
-    transform: rotate(-5deg);
-  }
-  
-  /* Construction du logo texte */
-  .home-title { 
-    font-family: var(--font-display); 
-    font-size: 56px; 
-    font-weight: 800; 
-    text-align: center; 
-    color: var(--text-main); 
-    text-shadow: 0 8px 24px rgba(0,0,0,0.15); 
-    letter-spacing: -0.02em; 
-    line-height: 1.1; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .logo-script { 
-    font-family: var(--font-logo); 
-    font-size: 1.3em; 
-    font-weight: 700; 
-    margin: 0 2px 0 -2px;
-    display: inline-block;
-    transform: translateY(4px);
-  }
-
-  /* L'onde sonore (Soundwave) intégrée */
-  .soundwave {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    height: 32px;
-    margin: 0 6px;
-  }
-  .soundwave .bar {
-    background: var(--text-muted);
-    width: 3px;
-    border-radius: 3px;
-    display: inline-block;
-    animation: wave 1.2s ease-in-out infinite;
-  }
+  .home-logo { font-size: 72px; color: #9b5de5; text-shadow: -1px 1px 0 #7122fa, -2px 2px 0 #7122fa, -3px 3px 0 #5e10d7, -4px 4px 15px rgba(0,0,0,0.4); line-height: 1; transform: rotate(-5deg); }
+  .home-title { font-family: var(--font-display); font-size: 56px; font-weight: 800; text-align: center; color: var(--text-main); text-shadow: 0 8px 24px rgba(0,0,0,0.15); letter-spacing: -0.02em; line-height: 1.1; display: flex; align-items: center; justify-content: center; }
+  .logo-script { font-family: var(--font-logo); font-size: 1.3em; font-weight: 700; margin: 0 2px 0 -2px; display: inline-block; transform: translateY(4px); }
+  .soundwave { display: inline-flex; align-items: center; gap: 3px; height: 32px; margin: 0 6px; }
+  .soundwave .bar { background: var(--text-muted); width: 3px; border-radius: 3px; display: inline-block; animation: wave 1.2s ease-in-out infinite; }
   .soundwave .bar:nth-child(1) { height: 40%; animation-delay: 0.0s; }
   .soundwave .bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
-  .soundwave .bar:nth-child(3) { height: 100%; animation-delay: 0.4s; background: var(--text-main); } /* Barre centrale lumineuse */
+  .soundwave .bar:nth-child(3) { height: 100%; animation-delay: 0.4s; background: var(--text-main); }
   .soundwave .bar:nth-child(4) { height: 60%; animation-delay: 0.6s; }
   .soundwave .bar:nth-child(5) { height: 30%; animation-delay: 0.8s; }
-
-  @keyframes wave {
-    0%, 100% { transform: scaleY(0.6); }
-    50% { transform: scaleY(1); }
-  }
-
+  @keyframes wave { 0%, 100% { transform: scaleY(0.6); } 50% { transform: scaleY(1); } }
   .home-sub { font-size: 17px; color: var(--text-muted); text-align: center; margin-top: 8px; font-weight: 500; letter-spacing: 0.02em; }
-  
   .home-btns { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
-  
   .home-btn { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 36px 48px; border-radius: 24px; border: none; background: var(--bg-surface); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
   .home-btn:hover { background: var(--bg-surface-hover); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
   .home-btn.choral .home-btn-icon { color: var(--accent-light); }
@@ -111,7 +54,7 @@
   .home-btn-label { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-main); }
   .home-btn-sub { font-size: 13px; color: var(--text-muted); text-align: center; }
 
-  /* ── LOGIN OVERLAY ── */
+  /* ── LOGIN ── */
   #login-overlay { position: fixed; inset: 0; background: rgba(0, 109, 119, 0.95); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 500; }
   #login-overlay.show { display: flex; }
   .login-box { background: var(--bg-main); border-radius: 32px; padding: 48px; width: 380px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
@@ -121,7 +64,7 @@
   .login-input { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 16px; padding: 16px; color: var(--text-main); font-size: 24px; outline: none; text-align: center; letter-spacing: 0.25em; font-family: var(--font-body); font-weight: 800; transition: all 0.3s; }
   .login-input:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); box-shadow: 0 0 20px rgba(226, 149, 120, 0.2); }
   .login-btn { width: 100%; padding: 16px; border-radius: 16px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px var(--accent-glow); }
-  .login-btn:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 12px 32px var(--accent-glow); }
+  .login-btn:hover { background: var(--accent-light); transform: translateY(-2px); }
   .login-err { font-size: 13px; color: var(--accent-light); text-align: center; display: none; background: rgba(255, 221, 210, 0.1); padding: 12px; border-radius: 12px; font-weight: 600; }
   .login-back { background: none; border: none; color: var(--text-muted); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; padding-top: 8px; transition: color 0.2s; }
   .login-back:hover { color: var(--text-main); }
@@ -130,18 +73,18 @@
   nav { display: none; align-items: center; justify-content: space-between; padding: 20px 32px; position: sticky; top: 0; background: linear-gradient(to bottom, rgba(0, 109, 119, 0.95), rgba(0, 109, 119, 0.6)); backdrop-filter: blur(20px); z-index: 100; }
   nav.show { display: flex; }
   .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 20px; font-weight: 800; cursor: pointer; letter-spacing: -0.02em; }
-  
   .nav-note { color: #9b5de5; text-shadow: -1px 1px 0 #5e10d7; font-size: 22px; margin-right: 4px;}
-  
   .nav-badge { font-family: var(--font-body); font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 10px;}
   .nav-badge.choral { background: var(--bg-surface); color: var(--accent-light); }
   .nav-badge.admin { background: var(--bg-surface); color: var(--text-muted); }
   .btn-logout { padding: 10px 20px; border-radius: 12px; border: none; background: var(--bg-surface); color: var(--text-main); font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
   .btn-logout:hover { background: var(--bg-surface-hover); transform: translateY(-1px); }
 
-  /* ── READER (Mode Choral) ── */
+  /* ── READER ── */
   #reader { display: none; height: calc(100vh - 75px); }
   #reader.show { display: flex; }
+
+  /* Sidebar inchangée */
   .sidebar { width: 280px; flex-shrink: 0; background: var(--bg-darker); padding: 24px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
   .sidebar-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 12px; padding-left: 12px; }
   .song-item { display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 16px; cursor: pointer; transition: all 0.3s; border: none; background: transparent; text-align: left; width: 100%; }
@@ -152,18 +95,118 @@
   .song-title.active { color: var(--accent-light); }
   .song-artist { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
   .empty-lib { font-size: 14px; color: var(--text-muted); text-align: center; padding: 40px 0; font-weight: 500; }
-  
+
+  /* ── PLAYER MAIN ── */
   .player-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-  .lyrics-zone { flex: 1; overflow-y: auto; padding: 80px; display: flex; flex-direction: column; justify-content: center; scrollbar-width: none; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
-  .lyrics-zone::-webkit-scrollbar { display: none; }
+
+  /* ── LYRICS ZONE — Focus Karaoke ── */
+  .lyrics-zone {
+    flex: 1;
+    overflow: hidden; /* pas de scroll visible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 40px;
+  }
+
+  /* Conteneur qui scroll mais reste invisible */
+  .lyrics-scroll {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lyrics-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+  }
+
   .no-song { text-align: center; color: var(--text-muted); font-size: 18px; font-family: var(--font-display); font-weight: 700; }
-  
-  .lyric-line { font-family: var(--font-display); font-size: 20px; color: rgba(237, 246, 249, 0.3); padding: 12px 0; cursor: pointer; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); line-height: 1.4; user-select: none; font-weight: 600; transform-origin: left center; }
-  .lyric-line:hover { color: rgba(237, 246, 249, 0.7); }
-  .lyric-line.prev1, .lyric-line.next1 { font-size: 26px; color: rgba(237, 246, 249, 0.8); }
-  .lyric-line.active { font-size: 46px; color: var(--accent); font-weight: 800; text-shadow: 0 4px 30px var(--accent-glow), 0 0 10px rgba(255, 221, 210, 0.3); transform: scale(1.02); letter-spacing: -0.01em; }
-  
-  .player-bar { background: var(--bg-darker); backdrop-filter: blur(24px); padding: 24px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); }
+
+  /* Lyric lines — focus karaoke style */
+  .lyric-line {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    padding: 6px 0;
+    cursor: pointer;
+    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    line-height: 1.3;
+    user-select: none;
+    /* Par défaut : background, flou, opacité faible */
+    font-size: 16px;
+    color: rgba(237, 246, 249, 0.18);
+    filter: blur(1.5px);
+    transform: scale(0.9);
+    letter-spacing: 0.01em;
+  }
+
+  /* Ligne juste avant/après : un peu plus visible */
+  .lyric-line.prev2,
+  .lyric-line.next2 {
+    font-size: 17px;
+    color: rgba(237, 246, 249, 0.25);
+    filter: blur(1px);
+    transform: scale(0.92);
+  }
+
+  .lyric-line.prev1,
+  .lyric-line.next1 {
+    font-size: 22px;
+    color: rgba(237, 246, 249, 0.50);
+    filter: blur(0.5px);
+    transform: scale(0.96);
+  }
+
+  /* Ligne active : grande, lumineuse, centrée */
+  .lyric-line.active {
+    font-size: 42px;
+    color: var(--accent);
+    font-weight: 800;
+    filter: blur(0px);
+    transform: scale(1.04);
+    text-shadow:
+      0 0 40px var(--accent-glow),
+      0 4px 30px rgba(226, 149, 120, 0.4),
+      0 0 80px rgba(226, 149, 120, 0.15);
+    letter-spacing: -0.01em;
+    padding: 12px 0;
+  }
+
+  /* Masques haut/bas pour l'effet fondu */
+  .lyrics-zone::before,
+  .lyrics-zone::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 30%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .lyrics-zone::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-main) 0%, transparent 100%);
+  }
+  .lyrics-zone::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-main) 0%, transparent 100%);
+  }
+
+  /* ── PLAYER BAR ── */
+  .player-bar { background: var(--bg-darker); backdrop-filter: blur(24px); padding: 24px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); flex-shrink: 0; }
   .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .bar-info { display: flex; align-items: center; gap: 20px; width: 30%; }
   .bar-cover { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 8px 24px rgba(226, 149, 120, 0.3); }
@@ -175,14 +218,79 @@
   .ctrl-play { width: 64px; height: 64px; border-radius: 50%; background: var(--text-main); border: none; color: var(--bg-main); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
   .ctrl-play:hover { transform: scale(1.05); background: var(--accent-light); box-shadow: 0 12px 32px rgba(255, 221, 210, 0.4); }
   .bar-volume { display: flex; align-items: center; gap: 16px; width: 30%; justify-content: flex-end; }
-  .bar-progress { display: flex; align-items: center; gap: 20px; }
-  .time-label { font-size: 12px; color: var(--text-muted); min-width: 45px; font-weight: 700; letter-spacing: 0.05em; }
+
+  /* ── PROGRESS BAR — range draggable ── */
+  .bar-progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .time-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 40px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
   .time-label.right { text-align: right; }
-  .progress-track { flex: 1; height: 8px; background: rgba(0,0,0,0.25); border-radius: 4px; cursor: pointer; position: relative; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.1s linear; }
-  input[type=range] { -webkit-appearance: none; background: transparent; cursor: pointer; width: 100px; }
-  input[type=range]::-webkit-slider-runnable-track { background: rgba(0,0,0,0.25); height: 6px; border-radius: 3px; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: var(--text-main); margin-top: -5px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+  /* Le range de progression principal */
+  .progress-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    /* Couleur de fond dynamique via JS */
+    background: rgba(0,0,0,0.3);
+    position: relative;
+    transition: height 0.2s;
+  }
+  .progress-range:hover {
+    height: 8px;
+  }
+  .progress-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 0 3px rgba(226, 149, 120, 0.3), 0 2px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .progress-range::-webkit-slider-thumb:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 0 6px rgba(226, 149, 120, 0.2), 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .progress-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 0 3px rgba(226, 149, 120, 0.3);
+  }
+  .progress-range::-moz-range-track {
+    background: rgba(0,0,0,0.3);
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  /* Volume range */
+  input[type=range].vol-range {
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100px;
+  }
+  input[type=range].vol-range::-webkit-slider-runnable-track { background: rgba(0,0,0,0.25); height: 6px; border-radius: 3px; }
+  input[type=range].vol-range::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: var(--text-main); margin-top: -5px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
   /* ── ADMIN ── */
   #admin { display: none; max-width: 1000px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 10; }
@@ -191,7 +299,6 @@
   .section-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-main); }
   .btn-add { padding: 12px 24px; border-radius: 14px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 16px rgba(226, 149, 120, 0.2); }
   .btn-add:hover { background: var(--accent-light); transform: translateY(-2px); }
-  
   .song-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
   .song-row { display: flex; align-items: center; gap: 20px; padding: 16px 20px; background: var(--bg-surface); border-radius: 20px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
   .song-row:hover { background: var(--bg-surface-hover); transform: translateX(4px); }
@@ -203,43 +310,35 @@
   .btn-edit:hover { background: var(--text-muted); color: var(--bg-main); }
   .btn-del { padding: 10px 20px; border-radius: 12px; border: none; background: rgba(226, 149, 120, 0.15); color: var(--accent-light); font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.3s; }
   .btn-del:hover { background: var(--accent); color: var(--bg-main); }
-  
   .form-card { background: var(--bg-surface); border-radius: 32px; overflow: hidden; margin-bottom: 32px; box-shadow: 0 16px 48px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
   .form-header { padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); }
   .form-tabs { display: flex; gap: 8px; background: var(--bg-darker); border-radius: 14px; padding: 6px; }
   .form-tab { padding: 10px 20px; border-radius: 10px; border: none; background: transparent; color: var(--text-muted); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
   .form-tab.active { background: var(--bg-surface-hover); color: var(--text-main); }
-  
   .form-body { display: flex; flex-wrap: wrap; }
   .form-left { width: 340px; flex-shrink: 0; padding: 32px; display: flex; flex-direction: column; gap: 20px; background: rgba(0,0,0,0.08); }
   .form-right { flex: 1; padding: 32px; display: flex; flex-direction: column; gap: 20px; min-width: 320px; }
-  
   .field-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 10px; display: block; }
   .field-input { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 14px; padding: 16px; color: var(--text-main); font-size: 15px; outline: none; font-family: var(--font-body); font-weight: 600; transition: all 0.3s; }
   .field-input:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); }
   .field-textarea { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 16px; padding: 16px; color: var(--text-main); font-size: 14px; font-family: var(--font-body); font-weight: 500; resize: vertical; outline: none; line-height: 1.8; min-height: 240px; transition: all 0.3s; }
   .field-textarea:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); }
-  
   .tap-lines { background: var(--bg-darker); border-radius: 16px; padding: 20px; max-height: 280px; overflow-y: auto; }
   .tap-line { padding: 8px 0; font-size: 15px; display: flex; gap: 20px; align-items: center; font-weight: 600; transition: color 0.2s; }
   .tap-line.done { color: var(--text-muted); opacity: 0.8; }
   .tap-line.current { color: var(--accent-light); font-weight: 800; font-size: 17px; }
   .tap-line.pending { color: rgba(131, 197, 190, 0.4); }
   .tap-time { min-width: 75px; font-size: 12px; font-weight: 700; color: var(--text-muted); opacity: 0.6; }
-  
   .tap-actions { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
   .btn-tap { flex: 1; padding: 20px; border-radius: 16px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 22px; font-weight: 800; cursor: pointer; transition: all 0.1s; box-shadow: 0 8px 24px rgba(226, 149, 120, 0.3); }
-  .btn-tap:active { transform: scale(0.96); background: var(--accent-light); box-shadow: 0 4px 12px rgba(255, 221, 210, 0.4); }
+  .btn-tap:active { transform: scale(0.96); background: var(--accent-light); }
   .btn-start { padding: 14px 28px; border-radius: 14px; border: none; background: var(--text-main); color: var(--bg-main); font-family: var(--font-display); font-size: 15px; font-weight: 800; cursor: pointer; transition: all 0.3s; }
   .btn-start:hover { background: var(--accent-light); transform: translateY(-2px); }
   .btn-reset { padding: 14px 24px; border-radius: 14px; border: none; background: var(--bg-darker); color: var(--text-main); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-  .btn-reset:hover { background: rgba(0,0,0,0.3); }
   .tap-hint { font-size: 13px; color: var(--text-muted); font-weight: 600; }
-  
   .form-footer { padding-top: 24px; display: flex; justify-content: flex-end; width: 100%; }
   .btn-publish { padding: 16px 40px; border-radius: 16px; border: none; background: var(--accent); color: var(--bg-main); font-family: var(--font-display); font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px rgba(226, 149, 120, 0.3); }
-  .btn-publish:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 221, 210, 0.4); }
-  
+  .btn-publish:hover { background: var(--accent-light); transform: translateY(-2px); }
   .pwd-row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
   .btn-save-pwd { padding: 16px 32px; border-radius: 14px; border: none; background: var(--bg-darker); color: var(--text-main); font-family: var(--font-display); font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
   .btn-save-pwd:hover { background: var(--text-muted); color: var(--bg-main); }
@@ -256,26 +355,21 @@
 
 <div class="glow-purple"></div>
 <div class="glow-coral"></div>
-
 <div class="toast" id="toast"></div>
 
+<!-- HOME -->
 <div id="home">
   <div class="home-logo">♫</div>
   <div>
     <div class="home-title">
       L'<span class="logo-script">H</span>
-      <span class="soundwave">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </span>
+      <span class="soundwave"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
       ira
-      <span class="soundwave" style="transform: scale(0.85); margin: 0 4px;">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </span>
+      <span class="soundwave" style="transform: scale(0.85); margin: 0 4px;"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
       ycs
     </div>
     <div class="home-sub">Suivez les paroles en temps réel</div>
   </div>
-  
   <div class="home-btns">
     <button class="home-btn choral" onclick="enterChoral()">
       <div class="home-btn-icon">🎶</div>
@@ -290,6 +384,7 @@
   </div>
 </div>
 
+<!-- LOGIN -->
 <div id="login-overlay">
   <div class="login-box">
     <div class="login-icon">🔐</div>
@@ -302,6 +397,7 @@
   </div>
 </div>
 
+<!-- NAV -->
 <nav id="nav">
   <div class="nav-logo" onclick="goHome()">
     <span class="nav-note">♫</span>
@@ -311,15 +407,23 @@
   <button class="btn-logout" onclick="goHome()">← Accueil</button>
 </nav>
 
+<!-- READER -->
 <div id="reader">
   <div class="sidebar">
     <div class="sidebar-label">Bibliothèque</div>
     <div id="song-list-reader"><div class="loading">Chargement...</div></div>
   </div>
   <div class="player-main">
+    <!-- Zone lyrics focus karaoke -->
     <div class="lyrics-zone" id="lyrics-zone">
-      <div class="no-song">Sélectionne une chanson dans la bibliothèque</div>
+      <div class="lyrics-scroll">
+        <div class="lyrics-inner" id="lyrics-inner">
+          <div class="no-song">Sélectionne une chanson dans la bibliothèque</div>
+        </div>
+      </div>
     </div>
+
+    <!-- Player bar -->
     <div class="player-bar">
       <div class="bar-top">
         <div class="bar-info">
@@ -336,20 +440,26 @@
         </div>
         <div class="bar-volume">
           <span style="font-size:16px;color:var(--text-muted)">🔈</span>
-          <input type="range" min="0" max="1" step="0.01" value="0.8" oninput="setVol(this.value)">
+          <input type="range" class="vol-range" min="0" max="1" step="0.01" value="0.8" oninput="setVol(this.value)">
         </div>
       </div>
+      <!-- Progress bar draggable -->
       <div class="bar-progress">
         <span class="time-label" id="time-cur">0:00</span>
-        <div class="progress-track" onclick="seekClick(event)">
-          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-        </div>
+        <input
+          type="range"
+          class="progress-range"
+          id="progress-range"
+          min="0" max="1000" step="1" value="0"
+          oninput="onProgressDrag(this.value)"
+        />
         <span class="time-label right" id="time-dur">0:00</span>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ADMIN -->
 <div id="admin">
   <div class="admin-topbar">
     <span class="section-title" id="lib-title">Bibliothèque</span>
@@ -430,6 +540,7 @@ let songs=[], currentSong=null, playing=false, currentTime=0, activeIdx=0;
 let simInterval=null, editId=null, currentTab='tap';
 let tapLines=[], tapIdx=0, tapTime=0, tapInterval=null, tapRunning=false;
 let adminPassword="7625";
+let isDragging = false;
 const audio = document.getElementById('audio');
 
 // ── CONFIG ──
@@ -548,172 +659,250 @@ window.playSong = function(id) {
   renderLyrics(); renderSidebarSongs();
 }
 
+// ── LYRICS FOCUS KARAOKE ──
 function renderLyrics() {
-  const zone=document.getElementById('lyrics-zone');
-  if(!currentSong||!currentSong.lyrics?.length){zone.innerHTML='<div class="no-song">Aucun lyric pour cette chanson</div>';return;}
-  zone.innerHTML=currentSong.lyrics.map((l,i)=>{
-    const diff=i-activeIdx;
-    let cls= diff===0?'active':diff===-1?'prev1':diff===1?'next1':'';
+  const inner = document.getElementById('lyrics-inner');
+  if (!currentSong || !currentSong.lyrics?.length) {
+    inner.innerHTML = '<div class="no-song">Aucun lyric pour cette chanson</div>';
+    return;
+  }
+  inner.innerHTML = currentSong.lyrics.map((l, i) => {
+    const diff = i - activeIdx;
+    let cls = '';
+    if (diff === 0) cls = 'active';
+    else if (diff === -1) cls = 'prev1';
+    else if (diff === 1) cls = 'next1';
+    else if (diff === -2) cls = 'prev2';
+    else if (diff === 2) cls = 'next2';
     return `<div class="lyric-line ${cls}" id="line-${i}" onclick="seekToLine(${l.time})">${l.text}</div>`;
   }).join('');
-  const el=document.getElementById(`line-${activeIdx}`);
-  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  scrollLyricsToActive();
+}
+
+function scrollLyricsToActive() {
+  // On translate l'inner pour centrer la ligne active
+  const inner = document.getElementById('lyrics-inner');
+  const activeLine = document.getElementById(`line-${activeIdx}`);
+  if (!activeLine || !inner) return;
+
+  const container = inner.parentElement; // .lyrics-scroll
+  const containerH = container.offsetHeight;
+  const lineTop = activeLine.offsetTop;
+  const lineH = activeLine.offsetHeight;
+
+  // On centre la ligne active verticalement
+  const offset = lineTop - (containerH / 2) + (lineH / 2);
+  inner.style.transform = `translateY(${-offset}px)`;
 }
 
 function updateActiveIdx() {
-  if(!currentSong?.lyrics?.length) return;
-  let idx=0;
-  for(let i=0;i<currentSong.lyrics.length;i++){if(currentTime>=currentSong.lyrics[i].time)idx=i;}
-  if(idx!==activeIdx){activeIdx=idx;renderLyrics();}
+  if (!currentSong?.lyrics?.length) return;
+  let idx = 0;
+  for (let i = 0; i < currentSong.lyrics.length; i++) {
+    if (currentTime >= currentSong.lyrics[i].time) idx = i;
+  }
+  if (idx !== activeIdx) {
+    activeIdx = idx;
+    renderLyrics();
+  }
 }
 
-audio.ontimeupdate=()=>{currentTime=audio.currentTime;updateActiveIdx();updateProgress();};
-audio.onloadedmetadata=()=>updateProgress();
-audio.onended=()=>{playing=false;document.getElementById('play-btn').textContent='▶';};
+// ── AUDIO EVENTS ──
+audio.ontimeupdate = () => {
+  if (!isDragging) {
+    currentTime = audio.currentTime;
+    updateActiveIdx();
+    updateProgress();
+  }
+};
+audio.onloadedmetadata = () => updateProgress();
+audio.onended = () => { playing = false; document.getElementById('play-btn').textContent = '▶'; };
 
-function stopSim(){clearInterval(simInterval);simInterval=null;}
-function startSim(){stopSim();simInterval=setInterval(()=>{currentTime+=0.25;updateActiveIdx();updateProgress();},250);}
-
-window.togglePlay=function(){
-  if(!currentSong)return;
-  if(audio.src){if(playing){audio.pause();stopSim();}else{audio.play().catch(()=>startSim());stopSim();}}
-  else{if(playing)stopSim();else startSim();}
-  playing=!playing;
-  document.getElementById('play-btn').textContent=playing?'⏸':'▶';
+function stopSim() { clearInterval(simInterval); simInterval = null; }
+function startSim() {
+  stopSim();
+  simInterval = setInterval(() => {
+    if (!isDragging) {
+      currentTime += 0.25;
+      updateActiveIdx();
+      updateProgress();
+    }
+  }, 250);
 }
 
-window.skip=function(s){currentTime=Math.max(0,currentTime+s);if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();}
-window.seekToLine=function(t){currentTime=t;if(audio.src)audio.currentTime=t;updateActiveIdx();updateProgress();}
-window.seekClick=function(e){
-  const rect=e.currentTarget.getBoundingClientRect(),ratio=(e.clientX-rect.left)/rect.width;
-  const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
-  currentTime=ratio*dur;if(audio.src)audio.currentTime=currentTime;updateActiveIdx();updateProgress();
+window.togglePlay = function() {
+  if (!currentSong) return;
+  if (audio.src) {
+    if (playing) { audio.pause(); stopSim(); }
+    else { audio.play().catch(() => startSim()); stopSim(); }
+  } else {
+    if (playing) stopSim(); else startSim();
+  }
+  playing = !playing;
+  document.getElementById('play-btn').textContent = playing ? '⏸' : '▶';
 }
-window.setVol=function(v){audio.volume=parseFloat(v);}
-function fmt(s){return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;}
-function updateProgress(){
-  const dur=audio.duration||(currentSong?.lyrics?.slice(-1)[0]?.time+5)||60;
-  const pct=Math.min(100,(currentTime/dur)*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('time-cur').textContent=fmt(currentTime);
-  document.getElementById('time-dur').textContent=fmt(dur);
+
+window.skip = function(s) {
+  currentTime = Math.max(0, currentTime + s);
+  if (audio.src) audio.currentTime = currentTime;
+  updateActiveIdx(); updateProgress();
+}
+
+window.seekToLine = function(t) {
+  currentTime = t;
+  if (audio.src) audio.currentTime = t;
+  updateActiveIdx(); updateProgress();
+}
+
+// ── PROGRESS RANGE DRAG ──
+window.onProgressDrag = function(val) {
+  isDragging = true;
+  const dur = audio.duration || (currentSong?.lyrics?.slice(-1)[0]?.time + 5) || 60;
+  currentTime = (val / 1000) * dur;
+  document.getElementById('time-cur').textContent = fmt(currentTime);
+  updateProgressFill();
+  // Applique en temps réel si audio dispo
+  if (audio.src && isFinite(audio.duration)) audio.currentTime = currentTime;
+  updateActiveIdx();
+  // Réinitialise isDragging après un court délai
+  clearTimeout(window._dragTimeout);
+  window._dragTimeout = setTimeout(() => { isDragging = false; }, 150);
+}
+
+window.setVol = function(v) { audio.volume = parseFloat(v); }
+
+function fmt(s) { return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`; }
+
+function updateProgressFill() {
+  const dur = audio.duration || (currentSong?.lyrics?.slice(-1)[0]?.time + 5) || 60;
+  const pct = Math.min(100, (currentTime / dur) * 100);
+  // Couleur dégradée sur le range
+  const range = document.getElementById('progress-range');
+  range.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, rgba(0,0,0,0.3) ${pct}%, rgba(0,0,0,0.3) 100%)`;
+  range.value = Math.round((currentTime / dur) * 1000);
+}
+
+function updateProgress() {
+  const dur = audio.duration || (currentSong?.lyrics?.slice(-1)[0]?.time + 5) || 60;
+  document.getElementById('time-cur').textContent = fmt(currentTime);
+  document.getElementById('time-dur').textContent = fmt(dur);
+  updateProgressFill();
 }
 
 // ── ADMIN FORM ──
-window.openForm=function(){
-  editId=null;
-  document.getElementById('form-title').textContent='Nouvelle chanson';
-  ['f-title','f-artist','f-audio','f-raw','f-lrc'].forEach(id=>document.getElementById(id).value='');
+window.openForm = function() {
+  editId = null;
+  document.getElementById('form-title').textContent = 'Nouvelle chanson';
+  ['f-title','f-artist','f-audio','f-raw','f-lrc'].forEach(id => document.getElementById(id).value = '');
   resetTap();
   document.getElementById('form-card').scrollIntoView({behavior:'smooth'});
 }
 
-window.editSong=function(id){
-  const s=songs.find(x=>x.id===id);if(!s)return;
-  editId=id;
-  document.getElementById('form-title').textContent=`Modifier : ${s.title}`;
-  document.getElementById('f-title').value=s.title;
-  document.getElementById('f-artist').value=s.artist||'';
-  document.getElementById('f-audio').value=s.audioUrl||'';
-  document.getElementById('f-lrc').value=(s.lyrics||[]).map(l=>`[${fmtLRC(l.time)}] ${l.text}`).join('\n');
+window.editSong = function(id) {
+  const s = songs.find(x => x.id === id); if (!s) return;
+  editId = id;
+  document.getElementById('form-title').textContent = `Modifier : ${s.title}`;
+  document.getElementById('f-title').value = s.title;
+  document.getElementById('f-artist').value = s.artist || '';
+  document.getElementById('f-audio').value = s.audioUrl || '';
+  document.getElementById('f-lrc').value = (s.lyrics || []).map(l => `[${fmtLRC(l.time)}] ${l.text}`).join('\n');
   switchTab('lrc');
   document.getElementById('form-card').scrollIntoView({behavior:'smooth'});
 }
 
-window.deleteSong=async function(id){
-  if(!confirm('Supprimer cette chanson ?'))return;
-  await deleteDoc(doc(db,'songs',id));
-  if(currentSong?.id===id){currentSong=null;document.getElementById('lyrics-zone').innerHTML='<div class="no-song">Sélectionne une chanson</div>';}
-  toast('Chanson supprimée','ok');
+window.deleteSong = async function(id) {
+  if (!confirm('Supprimer cette chanson ?')) return;
+  await deleteDoc(doc(db, 'songs', id));
+  if (currentSong?.id === id) {
+    currentSong = null;
+    document.getElementById('lyrics-inner').innerHTML = '<div class="no-song">Sélectionne une chanson</div>';
+  }
+  toast('Chanson supprimée', 'ok');
 }
 
-window.switchTab=function(t){
-  currentTab=t;
-  document.getElementById('tap-panel').style.display=t==='tap'?'block':'none';
-  document.getElementById('lrc-panel').style.display=t==='lrc'?'block':'none';
-  document.getElementById('tab-tap').classList.toggle('active',t==='tap');
-  document.getElementById('tab-lrc').classList.toggle('active',t==='lrc');
+window.switchTab = function(t) {
+  currentTab = t;
+  document.getElementById('tap-panel').style.display = t === 'tap' ? 'block' : 'none';
+  document.getElementById('lrc-panel').style.display = t === 'lrc' ? 'block' : 'none';
+  document.getElementById('tab-tap').classList.toggle('active', t === 'tap');
+  document.getElementById('tab-lrc').classList.toggle('active', t === 'lrc');
 }
 
-function resetTap(){
-  tapLines=[];tapIdx=0;tapTime=0;tapRunning=false;clearInterval(tapInterval);
-  document.getElementById('tap-input-area').style.display='block';
-  document.getElementById('tap-sync-area').style.display='none';
-  document.getElementById('tap-actions').innerHTML='<button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button>';
-  document.getElementById('tap-hint').textContent='';
+function resetTap() {
+  tapLines=[]; tapIdx=0; tapTime=0; tapRunning=false; clearInterval(tapInterval);
+  document.getElementById('tap-input-area').style.display = 'block';
+  document.getElementById('tap-sync-area').style.display = 'none';
+  document.getElementById('tap-actions').innerHTML = '<button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button>';
+  document.getElementById('tap-hint').textContent = '';
 }
 
-window.startTap=function(){
-  const raw=document.getElementById('f-raw').value.trim().split('\n').filter(Boolean);
-  if(!raw.length){toast("Colle les paroles d'abord",'err');return;}
-  
-  // Lecture audio
+window.startTap = function() {
+  const raw = document.getElementById('f-raw').value.trim().split('\n').filter(Boolean);
+  if (!raw.length) { toast("Colle les paroles d'abord", 'err'); return; }
   const inputUrl = document.getElementById('f-audio').value.trim();
-  if(inputUrl) {
-    audio.src = inputUrl;
-    audio.load();
-  }
-
-  tapLines=raw.map(text=>({text,time:null}));tapIdx=0;tapTime=0;tapRunning=true;
-  document.getElementById('tap-input-area').style.display='none';
-  document.getElementById('tap-sync-area').style.display='block';
+  if (inputUrl) { audio.src = inputUrl; audio.load(); }
+  tapLines = raw.map(text => ({text, time: null})); tapIdx=0; tapTime=0; tapRunning=true;
+  document.getElementById('tap-input-area').style.display = 'none';
+  document.getElementById('tap-sync-area').style.display = 'block';
   renderTapLines();
-  if(audio.src){audio.currentTime=0;audio.play().catch(()=>{});}
-  document.getElementById('tap-actions').innerHTML=`<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:13px;color:var(--text-muted);min-width:50px;font-family:monospace;font-weight:700;" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
-  document.getElementById('tap-hint').textContent=`Ligne 1/${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
+  if (audio.src) { audio.currentTime=0; audio.play().catch(()=>{}); }
+  document.getElementById('tap-actions').innerHTML = `<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:13px;color:var(--text-muted);min-width:50px;font-family:monospace;font-weight:700;" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
+  document.getElementById('tap-hint').textContent = `Ligne 1/${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
   clearInterval(tapInterval);
-  tapInterval=setInterval(()=>{tapTime+=0.1;const el=document.getElementById('tap-timer');if(el)el.textContent=fmt(tapTime);},100);
+  tapInterval = setInterval(() => { tapTime+=0.1; const el=document.getElementById('tap-timer'); if(el) el.textContent=fmt(tapTime); }, 100);
 }
 
-window.doTap=function(){
-  if(!tapRunning||tapIdx>=tapLines.length)return;
-  tapLines[tapIdx].time=tapTime;tapIdx++;renderTapLines();
-  if(tapIdx>=tapLines.length){
-    clearInterval(tapInterval);tapRunning=false;audio.pause();
-    document.getElementById('tap-actions').innerHTML='<button class="btn-reset" onclick="resetTap()">Recommencer</button>';
-    document.getElementById('tap-hint').textContent='Synchronisation terminée ! Tu peux publier.';
-    toast('Synchro terminée !','ok');
+window.doTap = function() {
+  if (!tapRunning || tapIdx >= tapLines.length) return;
+  tapLines[tapIdx].time = tapTime; tapIdx++; renderTapLines();
+  if (tapIdx >= tapLines.length) {
+    clearInterval(tapInterval); tapRunning=false; audio.pause();
+    document.getElementById('tap-actions').innerHTML = '<button class="btn-reset" onclick="resetTap()">Recommencer</button>';
+    document.getElementById('tap-hint').textContent = 'Synchronisation terminée ! Tu peux publier.';
+    toast('Synchro terminée !', 'ok');
   } else {
-    document.getElementById('tap-hint').textContent=`Ligne ${tapIdx+1}/${tapLines.length}`;
+    document.getElementById('tap-hint').textContent = `Ligne ${tapIdx+1}/${tapLines.length}`;
   }
 }
 
-function renderTapLines(){
-  const el=document.getElementById('tap-lines-view');
-  el.innerHTML=tapLines.map((l,i)=>{
-    let cls=i<tapIdx?'done':i===tapIdx?'current':'pending';
+function renderTapLines() {
+  const el = document.getElementById('tap-lines-view');
+  el.innerHTML = tapLines.map((l,i) => {
+    let cls = i < tapIdx ? 'done' : i === tapIdx ? 'current' : 'pending';
     return `<div class="tap-line ${cls}"><span class="tap-time">[${l.time!==null?fmtLRC(l.time):'--:--.--'}]</span><span>${l.text}</span></div>`;
   }).join('');
-  const cur=el.querySelectorAll('.tap-line')[tapIdx];
-  if(cur)cur.scrollIntoView({block:'nearest'});
+  const cur = el.querySelectorAll('.tap-line')[tapIdx];
+  if (cur) cur.scrollIntoView({block:'nearest'});
 }
 
-function parseLRC(text){
-  const lines=[];
-  for(const raw of text.split('\n')){
-    const m=raw.match(/^\[(\d+):(\d+)\.?(\d*)\]\s*(.*)$/);
-    if(m){const t=parseInt(m[1])*60+parseInt(m[2])+(m[3]?parseInt(m[3].padEnd(2,'0'))/100:0);if(m[4].trim())lines.push({time:t,text:m[4]});}
+function parseLRC(text) {
+  const lines = [];
+  for (const raw of text.split('\n')) {
+    const m = raw.match(/^\[(\d+):(\d+)\.?(\d*)\]\s*(.*)$/);
+    if (m) { const t=parseInt(m[1])*60+parseInt(m[2])+(m[3]?parseInt(m[3].padEnd(2,'0'))/100:0); if(m[4].trim()) lines.push({time:t,text:m[4]}); }
   }
   return lines.sort((a,b)=>a.time-b.time);
 }
 
-function fmtLRC(s){const m=Math.floor(s/60),sec=Math.floor(s%60),cs=Math.round((s%1)*100);return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}.${cs.toString().padStart(2,'0')}`;}
+function fmtLRC(s) { const m=Math.floor(s/60),sec=Math.floor(s%60),cs=Math.round((s%1)*100); return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}.${cs.toString().padStart(2,'0')}`; }
 
-window.saveSong=async function(){
-  const title=document.getElementById('f-title').value.trim();
-  if(!title){toast('Titre requis','err');return;}
-  let lyrics=[];
-  if(currentTab==='lrc'){lyrics=parseLRC(document.getElementById('f-lrc').value);if(!lyrics.length){toast('Format LRC invalide','err');return;}}
-  else{lyrics=tapLines.filter(l=>l.time!==null).map(l=>({time:l.time,text:l.text}));if(!lyrics.length){toast("Lance la synchro d'abord",'err');return;}}
-  const data={title,artist:document.getElementById('f-artist').value.trim(),audioUrl:document.getElementById('f-audio').value.trim(),lyrics,createdAt:Date.now()};
-  if(editId){await updateDoc(doc(db,'songs',editId),data);toast('Chanson mise à jour !','ok');}
-  else{await addDoc(songsCol,data);toast('Chanson publiée !','ok');}
+window.saveSong = async function() {
+  const title = document.getElementById('f-title').value.trim();
+  if (!title) { toast('Titre requis', 'err'); return; }
+  let lyrics = [];
+  if (currentTab==='lrc') { lyrics=parseLRC(document.getElementById('f-lrc').value); if(!lyrics.length){toast('Format LRC invalide','err');return;} }
+  else { lyrics=tapLines.filter(l=>l.time!==null).map(l=>({time:l.time,text:l.text})); if(!lyrics.length){toast("Lance la synchro d'abord",'err');return;} }
+  const data = {title, artist:document.getElementById('f-artist').value.trim(), audioUrl:document.getElementById('f-audio').value.trim(), lyrics, createdAt:Date.now()};
+  if (editId) { await updateDoc(doc(db,'songs',editId),data); toast('Chanson mise à jour !','ok'); }
+  else { await addDoc(songsCol,data); toast('Chanson publiée !','ok'); }
   openForm();
 }
 
-function toast(msg,type){
-  const el=document.getElementById('toast');el.textContent=msg;
-  el.className=`toast ${type} show`;setTimeout(()=>el.classList.remove('show'),3000);
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type} show`;
+  setTimeout(() => el.classList.remove('show'), 3000);
 }
 
 await loadConfig();
