@@ -132,8 +132,26 @@
   .lyrics-toolbar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; flex-wrap: wrap; flex-shrink: 0; border-bottom: 1px solid var(--bg-darker); }
   .toolbar-group { display: flex; align-items: center; gap: 6px; background: var(--bg-surface); border-radius: 14px; padding: 5px; }
   .toolbar-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; padding: 0 8px; }
-  .font-select { background: transparent; border: none; color: var(--text-main); font-size: 13px; font-weight: 700; padding: 7px 10px; border-radius: 10px; cursor: pointer; outline: none; }
+  .font-select {
+    background: var(--bg-surface);
+    border: none;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: var(--font-body);
+  }
   .font-select:hover { background: var(--bg-surface-hover); }
+  .font-select option {
+    background: var(--bg-main);
+    color: var(--text-main);
+  }
   .size-btn { width: 30px; height: 30px; border-radius: 9px; border: none; background: transparent; color: var(--text-main); font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
   .size-btn:hover { background: var(--bg-surface-hover); }
   .size-display { font-size: 12px; font-weight: 700; color: var(--text-muted); min-width: 38px; text-align: center; }
@@ -274,6 +292,7 @@
   .form-right { flex: 1; padding: 32px; display: flex; flex-direction: column; gap: 20px; min-width: 320px; }
   .field-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 10px; display: block; }
   .field-input { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 14px; padding: 16px; color: var(--text-main); font-size: 15px; outline: none; font-family: var(--font-body); font-weight: 600; transition: all 0.3s; }
+  select.field-input option { background: var(--bg-main); color: var(--text-main); }
   .field-input:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); }
   .field-textarea { width: 100%; background: var(--bg-darker); border: 2px solid transparent; border-radius: 16px; padding: 16px; color: var(--text-main); font-size: 14px; font-family: var(--font-body); font-weight: 500; resize: vertical; outline: none; line-height: 1.8; min-height: 240px; transition: all 0.3s; }
   .field-textarea:focus { border-color: var(--accent); background: rgba(0,0,0,0.3); }
