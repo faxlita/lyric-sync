@@ -129,29 +129,37 @@
   .player-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; min-height: 0; }
 
   /* ── TOOLBAR (Police + Taille) ── */
-  .lyrics-toolbar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; flex-wrap: wrap; flex-shrink: 0; border-bottom: 1px solid var(--bg-darker); }
+  .lyrics-toolbar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; flex-wrap: wrap; flex-shrink: 0; border-bottom: 1px solid var(--bg-darker); position: relative; z-index: 30; }
   .toolbar-group { display: flex; align-items: center; gap: 6px; background: var(--bg-surface); border-radius: 14px; padding: 5px; }
   .toolbar-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; padding: 0 8px; }
-  .font-select {
-    background: var(--bg-surface);
-    border: none;
-    color: var(--text-main);
-    font-size: 13px;
-    font-weight: 700;
-    padding: 7px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-family: var(--font-body);
+
+  /* Custom dropdown (replaces native <select> to avoid OS-rendered invisible options on mobile) */
+  .custom-dropdown { position: relative; }
+  .dropdown-trigger {
+    background: transparent; border: none; color: var(--text-main);
+    font-size: 13px; font-weight: 700; padding: 7px 10px; border-radius: 10px;
+    cursor: pointer; outline: none; font-family: var(--font-body);
+    display: flex; align-items: center; gap: 6px; white-space: nowrap;
   }
-  .font-select:hover { background: var(--bg-surface-hover); }
-  .font-select option {
-    background: var(--bg-main);
-    color: var(--text-main);
+  .dropdown-trigger:hover { background: var(--bg-surface-hover); }
+  .dropdown-trigger .arrow { font-size: 9px; opacity: 0.6; transition: transform 0.2s; }
+  .dropdown-trigger.open .arrow { transform: rotate(180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    background: var(--bg-main); border-radius: 14px; padding: 6px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.25); min-width: 180px;
+    display: none; flex-direction: column; gap: 2px; z-index: 60;
+    border: 1px solid rgba(0,0,0,0.08); max-height: 280px; overflow-y: auto;
   }
+  .dropdown-menu.open { display: flex; }
+  .dropdown-item {
+    background: transparent; border: none; color: var(--text-main);
+    font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: 9px;
+    cursor: pointer; text-align: left; width: 100%; font-family: var(--font-body);
+  }
+  .dropdown-item:hover { background: var(--bg-surface-hover); }
+  .dropdown-item.selected { background: var(--accent); color: var(--bg-main); }
+
   .size-btn { width: 30px; height: 30px; border-radius: 9px; border: none; background: transparent; color: var(--text-main); font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
   .size-btn:hover { background: var(--bg-surface-hover); }
   .size-display { font-size: 12px; font-weight: 700; color: var(--text-muted); min-width: 38px; text-align: center; }
@@ -399,7 +407,8 @@
 
     .lyrics-toolbar { padding: 10px 12px; gap: 6px; }
     .toolbar-label { display: none; }
-    .font-select { font-size: 12px; padding: 6px 8px; }
+    .dropdown-trigger { font-size: 12px; padding: 6px 8px; }
+    .dropdown-menu { min-width: 160px; }
     .size-btn { width: 26px; height: 26px; font-size: 13px; }
     .size-display { font-size: 11px; min-width: 32px; }
 
@@ -548,15 +557,21 @@
     <div class="lyrics-toolbar">
       <div class="toolbar-group">
         <span class="toolbar-label">Police</span>
-        <select class="font-select" id="font-select" onchange="setLyricFont(this.value)">
-          <option value="'Syne', sans-serif">Syne</option>
-          <option value="'Manrope', sans-serif">Manrope</option>
-          <option value="'Playfair Display', serif">Playfair</option>
-          <option value="'Space Mono', monospace">Space Mono</option>
-          <option value="'Quicksand', sans-serif">Quicksand</option>
-          <option value="'Caveat', cursive">Caveat</option>
-          <option value="'Dancing Script', cursive">Dancing Script</option>
-        </select>
+        <div class="custom-dropdown" id="font-dropdown">
+          <button class="dropdown-trigger" id="font-trigger" onclick="toggleFontDropdown()">
+            <span id="font-trigger-label">Syne</span>
+            <span class="arrow">▾</span>
+          </button>
+          <div class="dropdown-menu" id="font-menu">
+            <button class="dropdown-item selected" data-font="'Syne', sans-serif" data-label="Syne" onclick="selectFont(this)">Syne</button>
+            <button class="dropdown-item" data-font="'Manrope', sans-serif" data-label="Manrope" onclick="selectFont(this)">Manrope</button>
+            <button class="dropdown-item" data-font="'Playfair Display', serif" data-label="Playfair" onclick="selectFont(this)">Playfair</button>
+            <button class="dropdown-item" data-font="'Space Mono', monospace" data-label="Space Mono" onclick="selectFont(this)">Space Mono</button>
+            <button class="dropdown-item" data-font="'Quicksand', sans-serif" data-label="Quicksand" onclick="selectFont(this)">Quicksand</button>
+            <button class="dropdown-item" data-font="'Caveat', cursive" data-label="Caveat" onclick="selectFont(this)">Caveat</button>
+            <button class="dropdown-item" data-font="'Dancing Script', cursive" data-label="Dancing Script" onclick="selectFont(this)">Dancing Script</button>
+          </div>
+        </div>
       </div>
       <div class="toolbar-group">
         <button class="size-btn" onclick="adjustLyricSize(-0.1)">A−</button>
@@ -717,6 +732,30 @@ window.setLyricFont = function(fontVal) {
   document.documentElement.style.setProperty('--lyric-font', fontVal);
   try { localStorage.setItem('hiraycs-font', fontVal); } catch(e) {}
 }
+
+// ── CUSTOM FONT DROPDOWN ──
+window.toggleFontDropdown = function() {
+  document.getElementById('font-menu').classList.toggle('open');
+  document.getElementById('font-trigger').classList.toggle('open');
+}
+window.selectFont = function(btn) {
+  const fontVal = btn.getAttribute('data-font');
+  const label = btn.getAttribute('data-label');
+  setLyricFont(fontVal);
+  document.getElementById('font-trigger-label').textContent = label;
+  document.querySelectorAll('#font-menu .dropdown-item').forEach(el => el.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('font-menu').classList.remove('open');
+  document.getElementById('font-trigger').classList.remove('open');
+}
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('font-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    document.getElementById('font-menu')?.classList.remove('open');
+    document.getElementById('font-trigger')?.classList.remove('open');
+  }
+});
+
 let lyricScale = 1;
 window.adjustLyricSize = function(delta) {
   lyricScale = Math.min(1.6, Math.max(0.7, Math.round((lyricScale + delta) * 10) / 10));
@@ -735,8 +774,13 @@ function initUI() {
     const savedFont = localStorage.getItem('hiraycs-font');
     if (savedFont) {
       document.documentElement.style.setProperty('--lyric-font', savedFont);
-      const sel = document.getElementById('font-select');
-      if (sel) sel.value = savedFont;
+      const matchBtn = document.querySelector(`#font-menu .dropdown-item[data-font="${savedFont}"]`);
+      if (matchBtn) {
+        document.querySelectorAll('#font-menu .dropdown-item').forEach(el => el.classList.remove('selected'));
+        matchBtn.classList.add('selected');
+        const lbl = document.getElementById('font-trigger-label');
+        if (lbl) lbl.textContent = matchBtn.getAttribute('data-label');
+      }
     }
     const savedScale = parseFloat(localStorage.getItem('hiraycs-scale'));
     if (savedScale) {
