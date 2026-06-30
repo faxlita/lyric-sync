@@ -651,12 +651,13 @@ function renderAdminSongs() {
 
 window.playSong = function(id) {
   const s=songs.find(x=>x.id===id); if(!s) return;
-  currentSong=s; currentTime=0; activeIdx=0; stopSim(); playing=false;
+  currentSong=s; currentTime=0; activeIdx=-1; stopSim(); playing=false;
   document.getElementById('play-btn').textContent='▶';
   document.getElementById('bar-title').textContent=s.title;
   document.getElementById('bar-artist').textContent=s.artist||'';
   if(s.audioUrl){audio.src=s.audioUrl;audio.load();}else{audio.src='';}
-  renderLyrics(); renderSidebarSongs();
+  updateActiveIdx(); // force le calcul correct dès t=0, et déclenche renderLyrics()
+  renderSidebarSongs();
 }
 
 // ── LYRICS FOCUS KARAOKE ──
@@ -680,30 +681,52 @@ function renderLyrics() {
 }
 
 function scrollLyricsToActive() {
-  // On translate l'inner pour centrer la ligne active
-  const inner = document.getElementById('lyrics-inner');
-  const activeLine = document.getElementById(`line-${activeIdx}`);
-  if (!activeLine || !inner) return;
+  // Toujours recalculer APRES le paint pour avoir des mesures fiables
+  requestAnimationFrame(() => {
+    const inner = document.getElementById('lyrics-inner');
+    if (!inner) return;
 
-  const container = inner.parentElement; // .lyrics-scroll
-  const containerH = container.offsetHeight;
-  const lineTop = activeLine.offsetTop;
-  const lineH = activeLine.offsetHeight;
+    // Si aucune ligne n'est active (intro instrumentale avant la 1ère ligne),
+    // on centre la cible sur la 1ère ligne (à venir) pour que ça reste cohérent
+    const targetIdx = activeIdx >= 0 ? activeIdx : 0;
+    const targetLine = document.getElementById(`line-${targetIdx}`);
+    if (!targetLine) return;
 
-  // On centre la ligne active verticalement
-  const offset = lineTop - (containerH / 2) + (lineH / 2);
-  inner.style.transform = `translateY(${-offset}px)`;
+    const container = inner.parentElement; // .lyrics-scroll
+    const containerH = container.offsetHeight;
+
+    // IMPORTANT : on annule temporairement la transform pour mesurer
+    // la position NATURELLE de la ligne (non cumulée avec l'ancienne translation)
+    const prevTransition = inner.style.transition;
+    inner.style.transition = 'none';
+    inner.style.transform = 'translateY(0px)';
+
+    const lineTop = targetLine.offsetTop;
+    const lineH = targetLine.offsetHeight;
+    const offset = lineTop - (containerH / 2) + (lineH / 2);
+
+    // Force reflow puis ré-active la transition pour l'anim fluide
+    void inner.offsetHeight;
+    inner.style.transition = prevTransition || '';
+    inner.style.transform = `translateY(${-offset}px)`;
+  });
 }
 
 function updateActiveIdx() {
   if (!currentSong?.lyrics?.length) return;
-  let idx = 0;
+  // -1 = avant la toute première ligne (ex: intro instrumentale) -> rien n'est actif
+  let idx = -1;
   for (let i = 0; i < currentSong.lyrics.length; i++) {
     if (currentTime >= currentSong.lyrics[i].time) idx = i;
+    else break;
   }
   if (idx !== activeIdx) {
     activeIdx = idx;
     renderLyrics();
+  } else {
+    // Même si l'index n'a pas changé, on s'assure que le scroll
+    // reste correctement positionné (ex: après un resize ou un premier rendu)
+    scrollLyricsToActive();
   }
 }
 
@@ -732,14 +755,37 @@ function startSim() {
 
 window.togglePlay = function() {
   if (!currentSong) return;
-  if (audio.src) {
-    if (playing) { audio.pause(); stopSim(); }
-    else { audio.play().catch(() => startSim()); stopSim(); }
+
+  if (playing) {
+    // ── PAUSE ──
+    // On fige tout : on coupe la simulation ET on met l'audio en pause.
+    // currentTime garde sa valeur exacte (audio.currentTime au moment du pause).
+    stopSim();
+    if (audio.src) {
+      currentTime = audio.currentTime; // capture la valeur exacte avant pause
+      audio.pause();
+    }
+    playing = false;
+    document.getElementById('play-btn').textContent = '▶';
   } else {
-    if (playing) stopSim(); else startSim();
+    // ── PLAY ──
+    playing = true;
+    document.getElementById('play-btn').textContent = '⏸';
+    if (audio.src) {
+      // On synchronise l'audio sur le currentTime logique avant de lancer
+      if (isFinite(audio.duration)) audio.currentTime = currentTime;
+      audio.play().then(() => {
+        // Lecture audio réelle confirmée : on s'assure qu'aucune sim ne tourne
+        stopSim();
+      }).catch(() => {
+        // Lecture audio impossible (CORS, fichier invalide, etc.) -> fallback simulation
+        startSim();
+      });
+    } else {
+      // Pas d'audio chargé : on simule le temps qui passe
+      startSim();
+    }
   }
-  playing = !playing;
-  document.getElementById('play-btn').textContent = playing ? '⏸' : '▶';
 }
 
 window.skip = function(s) {
