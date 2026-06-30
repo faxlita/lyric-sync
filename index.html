@@ -306,6 +306,93 @@
   .btn-save-pwd { padding: 16px 32px; border-radius: 14px; border: none; background: var(--bg-darker); color: var(--text-main); font-family: var(--font-display); font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
   .btn-save-pwd:hover { background: var(--text-muted); color: var(--bg-main); }
 
+  /* ── CALIBRAGE DE SYNCHRO ── */
+  .calib-select-row { display: flex; gap: 16px; align-items: flex-end; padding: 0 32px 24px; flex-wrap: wrap; }
+  .calib-select { flex: 1; min-width: 220px; }
+  .calib-body { padding: 0 32px 32px; display: flex; flex-direction: column; gap: 20px; }
+  .calib-empty { text-align: center; color: var(--text-muted); font-size: 14px; font-weight: 600; padding: 40px 0; }
+
+  .calib-lyrics-mini {
+    height: 220px;
+    overflow-y: auto;
+    padding: 90px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-darker);
+    border-radius: 20px;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  }
+  .calib-lyrics-mini::-webkit-scrollbar { display: none; }
+  .calib-line {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 4px 0;
+    font-size: 13px;
+    color: rgba(237, 246, 249, 0.25);
+    filter: blur(1px);
+    transform: scale(0.92);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    line-height: 1.3;
+  }
+  .calib-line.prev1, .calib-line.next1 { font-size: 16px; color: rgba(237, 246, 249, 0.55); filter: blur(0.3px); transform: scale(0.97); }
+  .calib-line.active {
+    font-size: 22px;
+    color: var(--accent);
+    filter: blur(0px);
+    transform: scale(1.03);
+    text-shadow: 0 0 24px var(--accent-glow);
+  }
+
+  .calib-controls { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .calib-btn-offset {
+    width: 56px; height: 56px; border-radius: 16px; border: none;
+    background: var(--bg-surface); color: var(--text-main);
+    font-family: var(--font-display); font-size: 22px; font-weight: 800;
+    cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+  }
+  .calib-btn-offset:hover { background: var(--bg-surface-hover); transform: scale(1.08); }
+  .calib-btn-offset:active { transform: scale(0.94); }
+  .calib-offset-display {
+    min-width: 140px; text-align: center;
+    font-family: var(--font-display); font-size: 20px; font-weight: 800;
+    color: var(--accent-light);
+    background: var(--bg-darker);
+    border-radius: 14px; padding: 14px 20px;
+  }
+  .calib-offset-display .label { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; margin-bottom: 4px; }
+
+  .calib-transport { display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .calib-play-btn {
+    width: 48px; height: 48px; border-radius: 50%; border: none;
+    background: var(--text-main); color: var(--bg-main); font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .calib-play-btn:hover { background: var(--accent-light); transform: scale(1.06); }
+  .calib-time { font-size: 13px; color: var(--text-muted); font-weight: 700; min-width: 90px; text-align: center; font-family: monospace; }
+
+  .calib-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-calib-apply {
+    padding: 16px 32px; border-radius: 14px; border: none;
+    background: var(--accent); color: var(--bg-main);
+    font-family: var(--font-display); font-size: 14px; font-weight: 800;
+    cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px rgba(226, 149, 120, 0.2);
+  }
+  .btn-calib-apply:hover { background: var(--accent-light); transform: translateY(-2px); }
+  .btn-calib-reset {
+    padding: 16px 28px; border-radius: 14px; border: none;
+    background: var(--bg-darker); color: var(--text-main);
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+  }
+  .btn-calib-reset:hover { background: rgba(0,0,0,0.3); }
+
   /* ── TOAST ── */
   .toast { position: fixed; top: 32px; right: 32px; padding: 16px 28px; border-radius: 16px; font-size: 15px; font-weight: 700; z-index: 999; opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; transform: translateY(-20px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); backdrop-filter: blur(12px); }
   .toast.ok { background: rgba(131, 197, 190, 0.9); color: var(--bg-main); }
@@ -463,6 +550,21 @@
   </div>
 
   <div class="form-card">
+    <div class="form-header"><span class="section-title">🎯 Calibrage de synchro</span></div>
+    <div class="calib-select-row">
+      <div class="calib-select">
+        <label class="field-label">Chanson à calibrer</label>
+        <select class="field-input" id="calib-song-select" onchange="loadCalibSong(this.value)">
+          <option value="">— Choisis une chanson —</option>
+        </select>
+      </div>
+    </div>
+    <div class="calib-body" id="calib-body">
+      <div class="calib-empty">Sélectionne une chanson pour ajuster son timing.</div>
+    </div>
+  </div>
+
+  <div class="form-card">
     <div class="form-header"><span class="section-title">🔑 Changer le mot de passe admin</span></div>
     <div style="padding:32px;display:flex;flex-direction:column;gap:16px">
       <div class="pwd-row">
@@ -501,6 +603,13 @@ let tapLines=[], tapIdx=0, tapTime=0, tapInterval=null, tapRunning=false;
 let adminPassword="7625";
 let isDragging = false;
 const audio = document.getElementById('audio');
+
+// ── État du panneau de calibrage ──
+let calibSong = null;       // chanson en cours de calibrage
+let calibOffset = 0;        // décalage courant en secondes (ex: -0.15)
+let calibPlaying = false;
+let calibActiveIdx = -1;
+let calibAudio = new Audio(); // lecteur audio dédié, séparé du player Choral
 
 // ── CONFIG ──
 async function loadConfig() {
@@ -554,6 +663,7 @@ window.goHome = function() {
   document.getElementById('admin').classList.remove('show');
   stopSim(); playing = false;
   document.getElementById('play-btn').textContent = '▶';
+  stopCalibPlayback();
 }
 
 // ── PASSWORD ──
@@ -606,6 +716,172 @@ function renderAdminSongs() {
       <button class="btn-edit" onclick="editSong('${s.id}')">Modifier</button>
       <button class="btn-del" onclick="deleteSong('${s.id}')">Supprimer</button>
     </div>`).join('');
+  renderCalibSelect();
+}
+
+// ── CALIBRAGE DE SYNCHRO ──
+function renderCalibSelect() {
+  const sel = document.getElementById('calib-song-select');
+  if (!sel) return;
+  const prevVal = sel.value;
+  sel.innerHTML = '<option value="">— Choisis une chanson —</option>' +
+    songs.map(s => `<option value="${s.id}">${s.title}${s.artist ? ' — '+s.artist : ''}</option>`).join('');
+  // Restaure la sélection si la chanson existe toujours
+  if (songs.some(s => s.id === prevVal)) sel.value = prevVal;
+}
+
+window.loadCalibSong = function(id) {
+  stopCalibPlayback();
+  const s = songs.find(x => x.id === id);
+  const body = document.getElementById('calib-body');
+  if (!s) {
+    calibSong = null;
+    body.innerHTML = '<div class="calib-empty">Sélectionne une chanson pour ajuster son timing.</div>';
+    return;
+  }
+  calibSong = s;
+  calibOffset = 0;
+  calibActiveIdx = -1;
+
+  if (s.audioUrl) { calibAudio.src = s.audioUrl; calibAudio.load(); }
+  else { calibAudio.src = ''; }
+
+  body.innerHTML = `
+    <div class="calib-lyrics-mini" id="calib-lyrics-mini"></div>
+    <div class="calib-transport">
+      <button class="calib-play-btn" id="calib-play-btn" onclick="toggleCalibPlay()">▶</button>
+      <span class="calib-time" id="calib-time">0:00 / 0:00</span>
+    </div>
+    <div class="calib-controls">
+      <button class="calib-btn-offset" onclick="adjustCalibOffset(-0.1)" title="Avancer les lyrics (-100ms)">−</button>
+      <div class="calib-offset-display">
+        <span class="label">Décalage</span>
+        <span id="calib-offset-value">0 ms</span>
+      </div>
+      <button class="calib-btn-offset" onclick="adjustCalibOffset(0.1)" title="Retarder les lyrics (+100ms)">+</button>
+    </div>
+    <div style="font-size:12px;color:var(--text-muted);font-weight:600;text-align:center;">
+      Si le texte s'allume <strong>après</strong> la voix → clique <strong>−</strong> (avance les lyrics).<br>
+      Si le texte s'allume <strong>avant</strong> la voix → clique <strong>+</strong> (retarde les lyrics).
+    </div>
+    <div class="calib-actions">
+      <button class="btn-calib-apply" onclick="applyCalibOffset()">✓ Appliquer définitivement</button>
+      <button class="btn-calib-reset" onclick="resetCalibOffset()">Annuler le réglage</button>
+    </div>
+  `;
+  renderCalibLyricsDOM();
+  updateCalibOffsetDisplay();
+}
+
+function renderCalibLyricsDOM() {
+  const zone = document.getElementById('calib-lyrics-mini');
+  if (!zone || !calibSong) return;
+  if (!calibSong.lyrics?.length) {
+    zone.innerHTML = '<div class="calib-empty">Aucun lyric pour cette chanson</div>';
+    return;
+  }
+  zone.innerHTML = calibSong.lyrics.map((l, i) =>
+    `<div class="calib-line" id="calib-line-${i}" onclick="calibSeekTo(${Number(l.time)})">${l.text}</div>`
+  ).join('');
+}
+
+function updateCalibActiveIdx() {
+  if (!calibSong?.lyrics?.length) return;
+  const t = calibAudio.currentTime + calibOffset;
+  let idx = -1;
+  for (let i = 0; i < calibSong.lyrics.length; i++) {
+    if (t >= Number(calibSong.lyrics[i].time)) idx = i;
+  }
+  if (idx !== calibActiveIdx) {
+    calibActiveIdx = idx;
+    const lines = document.querySelectorAll('#calib-lyrics-mini .calib-line');
+    lines.forEach((el, i) => {
+      const diff = i - calibActiveIdx;
+      let cls = 'calib-line';
+      if (diff === 0) cls += ' active';
+      else if (diff === -1) cls += ' prev1';
+      else if (diff === 1) cls += ' next1';
+      el.className = cls;
+    });
+    const targetIdx = calibActiveIdx >= 0 ? calibActiveIdx : 0;
+    const targetEl = document.getElementById(`calib-line-${targetIdx}`);
+    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+window.toggleCalibPlay = function() {
+  if (!calibSong) return;
+  if (calibPlaying) {
+    calibAudio.pause();
+    calibPlaying = false;
+    document.getElementById('calib-play-btn').textContent = '▶';
+  } else {
+    if (!calibAudio.src) { toast('Aucun audio pour cette chanson', 'err'); return; }
+    calibAudio.play().then(() => {
+      calibPlaying = true;
+      document.getElementById('calib-play-btn').textContent = '⏸';
+    }).catch(() => toast("Impossible de lire l'audio", 'err'));
+  }
+}
+
+function stopCalibPlayback() {
+  calibAudio.pause();
+  calibPlaying = false;
+  const btn = document.getElementById('calib-play-btn');
+  if (btn) btn.textContent = '▶';
+}
+
+window.calibSeekTo = function(t) {
+  if (!calibAudio.src) return;
+  calibAudio.currentTime = Math.max(0, t - calibOffset);
+  updateCalibActiveIdx();
+}
+
+calibAudio.ontimeupdate = () => {
+  updateCalibActiveIdx();
+  const cur = calibAudio.currentTime, dur = calibAudio.duration || 0;
+  const fmtC = s => `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;
+  const el = document.getElementById('calib-time');
+  if (el) el.textContent = `${fmtC(cur)} / ${isFinite(dur) ? fmtC(dur) : '0:00'}`;
+};
+calibAudio.onended = () => stopCalibPlayback();
+
+window.adjustCalibOffset = function(delta) {
+  if (!calibSong) return;
+  calibOffset = Math.round((calibOffset + delta) * 1000) / 1000; // évite les erreurs flottantes
+  updateCalibOffsetDisplay();
+  updateCalibActiveIdx();
+}
+
+function updateCalibOffsetDisplay() {
+  const el = document.getElementById('calib-offset-value');
+  if (!el) return;
+  const ms = Math.round(calibOffset * 1000);
+  el.textContent = `${ms > 0 ? '+' : ''}${ms} ms`;
+}
+
+window.resetCalibOffset = function() {
+  calibOffset = 0;
+  updateCalibOffsetDisplay();
+  updateCalibActiveIdx();
+  toast('Réglage annulé', 'ok');
+}
+
+window.applyCalibOffset = async function() {
+  if (!calibSong) return;
+  if (calibOffset === 0) { toast('Aucun décalage à appliquer', 'err'); return; }
+  const newLyrics = calibSong.lyrics.map(l => ({
+    time: Math.max(0, Number(l.time) + calibOffset),
+    text: l.text
+  }));
+  await updateDoc(doc(db, 'songs', calibSong.id), { lyrics: newLyrics });
+  calibSong.lyrics = newLyrics;
+  calibOffset = 0;
+  updateCalibOffsetDisplay();
+  renderCalibLyricsDOM();
+  calibActiveIdx = -1;
+  updateCalibActiveIdx();
+  toast('Timing mis à jour !', 'ok');
 }
 
 window.playSong = function(id) {
