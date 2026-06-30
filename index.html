@@ -827,16 +827,36 @@ window.startTap = function() {
   document.getElementById('tap-input-area').style.display = 'none';
   document.getElementById('tap-sync-area').style.display = 'block';
   renderTapLines();
-  if (audio.src) { audio.currentTime=0; audio.play().catch(()=>{}); }
   document.getElementById('tap-actions').innerHTML = `<button class="btn-tap" onclick="doTap()">TAP</button><span style="font-size:13px;color:var(--text-muted);min-width:50px;font-family:monospace;font-weight:700;" id="tap-timer">0:00</span><button class="btn-reset" onclick="resetTap()">Reset</button>`;
   document.getElementById('tap-hint').textContent = `Ligne 1/${tapLines.length} — Appuie TAP à chaque nouvelle ligne`;
   clearInterval(tapInterval);
-  tapInterval = setInterval(() => { tapTime+=0.1; const el=document.getElementById('tap-timer'); if(el) el.textContent=fmt(tapTime); }, 100);
+
+  if (audio.src) {
+    // Source de vérité = audio.currentTime (jamais de dérive possible),
+    // le chrono JS ne démarre qu'une fois la lecture RÉELLEMENT confirmée.
+    audio.currentTime = 0;
+    audio.play().then(() => {
+      tapInterval = setInterval(() => {
+        tapTime = audio.currentTime; // toujours synchro avec le son réel
+        const el = document.getElementById('tap-timer');
+        if (el) el.textContent = fmt(tapTime);
+      }, 50);
+    }).catch(() => {
+      // Fallback : pas d'audio jouable -> chrono JS pur
+      tapInterval = setInterval(() => { tapTime+=0.1; const el=document.getElementById('tap-timer'); if(el) el.textContent=fmt(tapTime); }, 100);
+    });
+  } else {
+    // Pas d'audio fourni : chrono JS pur dès le départ
+    tapInterval = setInterval(() => { tapTime+=0.1; const el=document.getElementById('tap-timer'); if(el) el.textContent=fmt(tapTime); }, 100);
+  }
 }
 
 window.doTap = function() {
   if (!tapRunning || tapIdx >= tapLines.length) return;
-  tapLines[tapIdx].time = tapTime; tapIdx++; renderTapLines();
+  // On capture le temps le plus frais possible au moment exact du clic,
+  // au lieu de se fier à la dernière valeur lue par le setInterval (max 50ms de retard).
+  const t = (audio.src && !audio.paused) ? audio.currentTime : tapTime;
+  tapLines[tapIdx].time = t; tapIdx++; renderTapLines();
   if (tapIdx >= tapLines.length) {
     clearInterval(tapInterval); tapRunning=false; audio.pause();
     document.getElementById('tap-actions').innerHTML = '<button class="btn-reset" onclick="resetTap()">Recommencer</button>';
