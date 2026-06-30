@@ -1049,8 +1049,7 @@ function updateCalibActiveIdx() {
       el.className = cls;
     });
     const targetIdx = calibActiveIdx >= 0 ? calibActiveIdx : 0;
-    const targetEl = document.getElementById(`calib-line-${targetIdx}`);
-    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    centerLineInZone('calib-lyrics-mini', `calib-line-${targetIdx}`);
   }
 }
 
@@ -1183,9 +1182,22 @@ function updateActiveIdx() {
     });
 
     const targetIdx = activeIdx >= 0 ? activeIdx : 0;
-    const targetEl = document.getElementById(`line-${targetIdx}`);
-    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    centerLineInZone('lyrics-zone', `line-${targetIdx}`);
   }
+}
+
+// Centre précisément un élément au milieu vertical de son conteneur scrollable,
+// quelle que soit la quantité de texte au-dessus/en dessous (1ère ligne, dernière, ou milieu).
+function centerLineInZone(zoneId, lineId) {
+  const zone = document.getElementById(zoneId);
+  const target = document.getElementById(lineId);
+  if (!zone || !target) return;
+  const zoneRect = zone.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  // Position actuelle du centre de la ligne relative au scroll du conteneur
+  const targetCenterInZone = (targetRect.top - zoneRect.top) + zone.scrollTop + (targetRect.height / 2);
+  const desiredScrollTop = targetCenterInZone - (zone.clientHeight / 2);
+  zone.scrollTo({ top: Math.max(0, desiredScrollTop), behavior: 'smooth' });
 }
 
 audio.ontimeupdate = () => {
