@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>L'Hira'ycs</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,6 +311,109 @@
   .toast.err { background: rgba(226, 149, 120, 0.95); color: var(--bg-main); }
   .toast.show { opacity: 1; transform: translateY(0); }
   .loading { text-align: center; color: var(--text-muted); font-size: 15px; font-weight: 600; padding: 32px; }
+
+  /* ══════════════ MOBILE RESPONSIVE ══════════════ */
+  @media (max-width: 768px) {
+    .theme-toggle { top: 14px; right: 14px; }
+
+    #home { gap: 24px; padding: 20px; }
+    .home-logo { font-size: 48px; }
+    .home-title { font-size: 34px; }
+    .soundwave { height: 22px; }
+    .home-sub { font-size: 14px; }
+    .home-btns { gap: 14px; width: 100%; }
+    .home-btn { padding: 24px 16px; min-width: 0; flex: 1; border-radius: 18px; gap: 8px; }
+    .home-btn-icon { font-size: 30px; }
+    .home-btn-label { font-size: 16px; }
+    .home-btn-sub { font-size: 11px; }
+
+    .login-box { width: calc(100vw - 48px); padding: 32px 24px; border-radius: 24px; }
+    .login-title { font-size: 21px; }
+    .login-input { font-size: 20px; padding: 14px; }
+
+    nav { padding: 14px 16px; }
+    .nav-logo { font-size: 16px; }
+    .nav-badge { font-size: 9px; padding: 3px 8px; margin-left: 6px; }
+    .btn-logout { padding: 8px 14px; font-size: 12px; }
+
+    #reader.show { flex-direction: column; height: calc(100vh - 60px); }
+    .sidebar { width: 100%; flex-direction: row; overflow-x: auto; overflow-y: hidden; padding: 12px; gap: 8px; max-height: 110px; }
+    .sidebar-label { display: none; }
+    .song-item { flex-direction: column; min-width: 90px; gap: 6px; padding: 8px; text-align: center; }
+    .song-item:hover { transform: none; }
+    .song-cover { width: 40px; height: 40px; margin: 0 auto; }
+    .song-title { font-size: 11px; white-space: normal; }
+    .song-artist { display: none; }
+
+    .lyrics-toolbar { padding: 10px 12px; gap: 6px; }
+    .toolbar-label { display: none; }
+    .font-select { font-size: 12px; padding: 6px 8px; }
+    .size-btn { width: 26px; height: 26px; font-size: 13px; }
+    .size-display { font-size: 11px; min-width: 32px; }
+
+    .lyrics-zone { padding: 30vh 20px; }
+    .lyric-line { font-size: calc(14px * var(--lyric-scale)) !important; max-width: 100%; }
+    .lyric-line.prev2, .lyric-line.next2 { font-size: calc(15px * var(--lyric-scale)) !important; }
+    .lyric-line.prev1, .lyric-line.next1 { font-size: calc(18px * var(--lyric-scale)) !important; }
+    .lyric-line.active { font-size: calc(28px * var(--lyric-scale)) !important; }
+
+    .player-bar { padding: 14px 16px 16px; }
+    .bar-top { flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+    .bar-info { width: auto; flex: 1; min-width: 140px; gap: 10px; }
+    .bar-cover { width: 42px; height: 42px; font-size: 18px; border-radius: 12px; }
+    .bar-title { font-size: 14px; }
+    .bar-artist { font-size: 11px; }
+    .bar-controls { gap: 18px; order: 3; width: 100%; }
+    .ctrl { font-size: 20px; }
+    .ctrl-play { width: 50px; height: 50px; font-size: 18px; }
+    .bar-volume { width: auto; }
+    .bar-volume input { width: 60px; }
+    .time-label { font-size: 10px; min-width: 32px; }
+
+    #admin { padding: 20px 14px; }
+    .admin-topbar { margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .section-title { font-size: 17px; }
+    .btn-add { padding: 10px 16px; font-size: 13px; }
+
+    .song-row { padding: 12px 14px; gap: 12px; flex-wrap: wrap; }
+    .song-row-cover { width: 42px; height: 42px; font-size: 18px; }
+    .song-row-title { font-size: 14px; }
+    .song-row-sub { font-size: 11px; }
+    .btn-edit, .btn-del { padding: 7px 12px; font-size: 11px; margin-right: 6px; }
+
+    .form-card { border-radius: 20px; margin-bottom: 20px; }
+    .form-header { padding: 16px 18px; flex-wrap: wrap; gap: 10px; }
+    .form-tabs { width: 100%; }
+    .form-tab { flex: 1; padding: 8px 10px; font-size: 12px; }
+    .form-body { flex-direction: column; }
+    .form-left { width: 100%; padding: 18px; }
+    .form-right { padding: 18px; min-width: 0; }
+    .field-input { padding: 12px; font-size: 14px; }
+    .field-textarea { min-height: 160px; padding: 12px; font-size: 13px; }
+
+    .tap-actions { flex-wrap: wrap; }
+    .btn-tap { font-size: 17px; padding: 16px; }
+    .btn-reset, .btn-start { padding: 10px 16px; font-size: 13px; }
+
+    .calib-select-row, .calib-body { padding-left: 18px; padding-right: 18px; }
+    .calib-lyrics-mini { height: 160px; padding: 60px 14px; }
+    .calib-controls { gap: 10px; }
+    .calib-btn-offset { width: 46px; height: 46px; font-size: 18px; }
+    .calib-offset-display { min-width: 110px; padding: 10px 14px; font-size: 16px; }
+    .calib-actions { flex-direction: column; }
+    .btn-calib-apply, .btn-calib-reset { width: 100%; }
+
+    .pwd-row { flex-direction: column; align-items: stretch; }
+    .btn-save-pwd { width: 100%; }
+
+    .toast { top: 14px; right: 14px; left: 14px; padding: 12px 18px; font-size: 13px; }
+  }
+
+  @media (max-width: 400px) {
+    .home-title { font-size: 28px; }
+    .home-btns { flex-direction: column; }
+    .home-btn { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -544,41 +647,49 @@ let calibAudio = new Audio();
 // ── THEME ──
 window.setTheme = function(t) {
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-light-btn').classList.toggle('active', t === 'light');
-  document.getElementById('theme-dark-btn').classList.toggle('active', t === 'dark');
-  localStorage.setItem('hiraycs-theme', t);
+  const lb = document.getElementById('theme-light-btn');
+  const db = document.getElementById('theme-dark-btn');
+  if (lb) lb.classList.toggle('active', t === 'light');
+  if (db) db.classList.toggle('active', t === 'dark');
+  try { localStorage.setItem('hiraycs-theme', t); } catch(e) {}
 }
-(function initTheme() {
-  const saved = localStorage.getItem('hiraycs-theme') || 'light';
-  setTheme(saved);
-})();
 
 // ── LYRICS APPEARANCE (font + size) ──
 window.setLyricFont = function(fontVal) {
   document.documentElement.style.setProperty('--lyric-font', fontVal);
-  localStorage.setItem('hiraycs-font', fontVal);
+  try { localStorage.setItem('hiraycs-font', fontVal); } catch(e) {}
 }
 let lyricScale = 1;
 window.adjustLyricSize = function(delta) {
   lyricScale = Math.min(1.6, Math.max(0.7, Math.round((lyricScale + delta) * 10) / 10));
   document.documentElement.style.setProperty('--lyric-scale', lyricScale);
-  document.getElementById('size-display').textContent = Math.round(lyricScale * 100) + '%';
-  localStorage.setItem('hiraycs-scale', lyricScale);
+  const sd = document.getElementById('size-display');
+  if (sd) sd.textContent = Math.round(lyricScale * 100) + '%';
+  try { localStorage.setItem('hiraycs-scale', lyricScale); } catch(e) {}
 }
-(function initLyricAppearance() {
-  const savedFont = localStorage.getItem('hiraycs-font');
-  if (savedFont) {
-    document.documentElement.style.setProperty('--lyric-font', savedFont);
-    const sel = document.getElementById('font-select');
-    if (sel) sel.value = savedFont;
-  }
-  const savedScale = parseFloat(localStorage.getItem('hiraycs-scale'));
-  if (savedScale) {
-    lyricScale = savedScale;
-    document.documentElement.style.setProperty('--lyric-scale', lyricScale);
-    document.getElementById('size-display').textContent = Math.round(lyricScale * 100) + '%';
-  }
-})();
+
+function initUI() {
+  let savedTheme = 'light';
+  try { savedTheme = localStorage.getItem('hiraycs-theme') || 'light'; } catch(e) {}
+  setTheme(savedTheme);
+
+  try {
+    const savedFont = localStorage.getItem('hiraycs-font');
+    if (savedFont) {
+      document.documentElement.style.setProperty('--lyric-font', savedFont);
+      const sel = document.getElementById('font-select');
+      if (sel) sel.value = savedFont;
+    }
+    const savedScale = parseFloat(localStorage.getItem('hiraycs-scale'));
+    if (savedScale) {
+      lyricScale = savedScale;
+      document.documentElement.style.setProperty('--lyric-scale', lyricScale);
+      const sd = document.getElementById('size-display');
+      if (sd) sd.textContent = Math.round(lyricScale * 100) + '%';
+    }
+  } catch(e) {}
+}
+initUI();
 
 // ── CONFIG ──
 async function loadConfig() {
