@@ -1136,7 +1136,7 @@ window.applyCalibOffset = async function() {
 
 window.playSong = function(id) {
   const s=songs.find(x=>x.id===id); if(!s) return;
-  currentSong=s; currentTime=0; activeIdx=-1; stopSim(); playing=false;
+  currentSong=s; currentTime=0; activeIdx=-2; stopSim(); playing=false;
   document.getElementById('play-btn').textContent='▶';
   document.getElementById('bar-title').textContent=s.title;
   document.getElementById('bar-artist').textContent=s.artist||'';
