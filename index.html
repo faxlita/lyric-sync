@@ -185,78 +185,112 @@
   .lyrics-zone {
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
+    overflow: hidden;
     padding: 0 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
-    scrollbar-width: none;
-    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
   }
+  /* Le padding-top dynamique est appliqué en JS via --zone-half-height */
   .lyrics-zone::before,
-  .lyrics-zone::after {
-    content: '';
-    flex: 1 0 24px;
-  }
+  .lyrics-zone::after { content: none; }
   .lyrics-zone::-webkit-scrollbar { display: none; }
 
-  .no-song { text-align: center; color: var(--text-muted); font-size: 16px; font-family: var(--font-ui); font-weight: 600; }
+  /* Ligne active — toujours premier élément, toujours au centre */
+  .lyric-active-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+  }
 
+  .no-song { text-align: center; color: var(--text-muted); font-size: 16px; font-family: var(--font-ui); font-weight: 600; padding-top: 40%; }
+
+  /* Base : toutes les lignes futures (grisées, empilées en dessous) */
   .lyric-line {
     font-family: var(--lyric-font);
     font-weight: 700;
     text-align: center;
     width: 100%;
     max-width: 800px;
-    padding: 6px 0;
+    padding: 5px 0;
     cursor: pointer;
-    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1), font-family 0.2s;
     line-height: 1.3;
     user-select: none;
-    font-size: calc(16px * var(--lyric-scale));
-    color: rgba(224, 225, 221, 0.16);
-    filter: blur(1.5px);
-    transform: scale(0.9);
     letter-spacing: 0.01em;
+    /* Transition douce sauf pour l'effacement (géré par .lyric-fade-out) */
+    transition: opacity 0.15s ease, font-size 0.2s ease;
+    /* Défaut : lignes futures lointaines */
+    font-size: calc(14px * var(--lyric-scale));
+    color: rgba(224, 225, 221, 0.15);
+    filter: blur(1.5px);
   }
   html[data-theme="light"] .lyric-line { color: rgba(13, 27, 42, 0.18); }
 
-  .lyric-line.prev2, .lyric-line.next2 {
+  /* Cascade décroissante vers le bas uniquement */
+  .lyric-line.next1 {
+    font-size: calc(22px * var(--lyric-scale));
+    color: rgba(224, 225, 221, 0.55);
+    filter: blur(0.4px);
+  }
+  html[data-theme="light"] .lyric-line.next1 { color: rgba(13, 27, 42, 0.6); }
+
+  .lyric-line.next2 {
     font-size: calc(17px * var(--lyric-scale));
     color: rgba(224, 225, 221, 0.28);
     filter: blur(1px);
-    transform: scale(0.92);
   }
-  html[data-theme="light"] .lyric-line.prev2, html[data-theme="light"] .lyric-line.next2 { color: rgba(13, 27, 42, 0.32); }
+  html[data-theme="light"] .lyric-line.next2 { color: rgba(13, 27, 42, 0.32); }
 
-  .lyric-line.prev1, .lyric-line.next1 {
-    font-size: calc(22px * var(--lyric-scale));
-    color: rgba(224, 225, 221, 0.55);
-    filter: blur(0.5px);
-    transform: scale(0.96);
+  .lyric-line.next3 {
+    font-size: calc(14px * var(--lyric-scale));
+    color: rgba(224, 225, 221, 0.15);
+    filter: blur(1.5px);
   }
-  html[data-theme="light"] .lyric-line.prev1, html[data-theme="light"] .lyric-line.next1 { color: rgba(13, 27, 42, 0.6); }
+  html[data-theme="light"] .lyric-line.next3 { color: rgba(13, 27, 42, 0.14); }
 
+  /* Ligne active — toujours au centre, grande, citron */
   .lyric-line.active {
     font-size: calc(40px * var(--lyric-scale));
     color: var(--accent);
     font-weight: 400;
     filter: blur(0px);
-    transform: scale(1.03);
+    letter-spacing: -0.01em;
+    padding: 12px 0;
     text-shadow:
       0 0 50px var(--accent-glow),
       0 4px 24px rgba(196, 240, 66, 0.3);
-    letter-spacing: -0.01em;
-    padding: 12px 0;
-    position: relative;
   }
   html[data-theme="light"] .lyric-line.active {
     color: var(--accent);
-    text-shadow:
-      0 0 24px rgba(93, 138, 0, 0.25);
+    text-shadow: 0 0 24px rgba(93, 138, 0, 0.25);
+  }
+
+  /* Effacement sur place quand une ligne devient passée */
+  .lyric-line.lyric-fade-out {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+  }
+
+  /* Masque dégradé en bas uniquement (pas en haut — les lignes passées n'existent plus) */
+  .lyrics-zone-mask {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .lyrics-zone-mask::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent, var(--bg-main));
+    pointer-events: none;
+    z-index: 2;
   }
 
   /* ── PLAYER BAR ── */
@@ -436,7 +470,7 @@
     .size-btn { width: 26px; height: 26px; font-size: 13px; }
     .size-display { font-size: 11px; min-width: 32px; }
 
-    .lyrics-zone { padding: 0 16px; }
+    .lyrics-zone { padding-left: 16px; padding-right: 16px; }
     .lyric-line { font-size: calc(14px * var(--lyric-scale)) !important; max-width: 100%; }
     .lyric-line.prev2, .lyric-line.next2 { font-size: calc(15px * var(--lyric-scale)) !important; }
     .lyric-line.prev1, .lyric-line.next1 { font-size: calc(18px * var(--lyric-scale)) !important; }
@@ -584,12 +618,13 @@
         <span class="toolbar-label">Police</span>
         <div class="custom-dropdown" id="font-dropdown">
           <button class="dropdown-trigger" id="font-trigger" onclick="toggleFontDropdown()">
-            <span id="font-trigger-label">Syne</span>
+            <span id="font-trigger-label">Archivo Black</span>
             <span class="arrow">▾</span>
           </button>
           <div class="dropdown-menu" id="font-menu">
-            <button class="dropdown-item selected" data-font="'Syne', sans-serif" data-label="Syne" onclick="selectFont(this)">Syne</button>
-            <button class="dropdown-item" data-font="'Manrope', sans-serif" data-label="Manrope" onclick="selectFont(this)">Manrope</button>
+            <button class="dropdown-item selected" data-font="'Archivo Black', sans-serif" data-label="Archivo Black" onclick="selectFont(this)">Archivo Black</button>
+            <button class="dropdown-item" data-font="'Space Grotesk', sans-serif" data-label="Space Grotesk" onclick="selectFont(this)">Space Grotesk</button>
+            <button class="dropdown-item" data-font="'Inter', sans-serif" data-label="Inter" onclick="selectFont(this)">Inter</button>
             <button class="dropdown-item" data-font="'Playfair Display', serif" data-label="Playfair" onclick="selectFont(this)">Playfair</button>
             <button class="dropdown-item" data-font="'Space Mono', monospace" data-label="Space Mono" onclick="selectFont(this)">Space Mono</button>
             <button class="dropdown-item" data-font="'Quicksand', sans-serif" data-label="Quicksand" onclick="selectFont(this)">Quicksand</button>
@@ -605,8 +640,10 @@
       </div>
     </div>
 
-    <div class="lyrics-zone" id="lyrics-zone">
-      <div class="no-song">Sélectionne une chanson dans la bibliothèque</div>
+    <div class="lyrics-zone-mask">
+      <div class="lyrics-zone" id="lyrics-zone">
+        <div class="no-song">Sélectionne une chanson dans la bibliothèque</div>
+      </div>
     </div>
 
     <div class="player-bar">
@@ -1148,12 +1185,28 @@ window.playSong = function(id) {
   closeSidebar();
 }
 
+// ── PROMPTEUR : calcule le padding-top pour centrer la ligne active ──
+function setLyricsZonePadding() {
+  const zone = document.getElementById('lyrics-zone');
+  if (!zone) return;
+  // On veut que le haut de la zone lyrics corresponde au centre visuel
+  // On ajoute un padding-top = moitié de la hauteur du conteneur parent
+  const mask = zone.parentElement;
+  if (mask) {
+    const halfH = Math.floor(mask.clientHeight / 2);
+    zone.style.paddingTop = halfH + 'px';
+  }
+}
+
 function renderLyricsDOM() {
   const zone = document.getElementById('lyrics-zone');
   if (!currentSong || !currentSong.lyrics?.length) {
-    zone.innerHTML = '<div class="no-song">Aucun lyric pour cette chanson</div>';
+    zone.innerHTML = '<div class="no-song">Sélectionne une chanson dans la bibliothèque</div>';
+    zone.style.paddingTop = '';
     return;
   }
+  setLyricsZonePadding();
+  // Rendu initial : toutes les lignes futures visibles, aucune active encore
   zone.innerHTML = currentSong.lyrics.map((l, i) =>
     `<div class="lyric-line" id="line-${i}" onclick="seekToLine(${Number(l.time)})">${l.text}</div>`
   ).join('');
@@ -1167,38 +1220,47 @@ function updateActiveIdx() {
   }
 
   if (idx !== activeIdx) {
-    activeIdx = idx;
-    const lines = document.querySelectorAll('#lyrics-zone .lyric-line');
+    // Effacement sur place de l'ancienne ligne active (si elle existe encore dans le DOM)
+    if (activeIdx >= 0) {
+      const oldLine = document.getElementById(`line-${activeIdx}`);
+      if (oldLine) {
+        oldLine.classList.add('lyric-fade-out');
+        // Après le fondu, retirer du DOM
+        setTimeout(() => { if (oldLine.parentNode) oldLine.parentNode.removeChild(oldLine); }, 160);
+      }
+      // Supprimer aussi toutes les lignes AVANT l'ancienne ligne active (lignes encore plus passées)
+      for (let p = 0; p < activeIdx; p++) {
+        const pastLine = document.getElementById(`line-${p}`);
+        if (pastLine && pastLine.parentNode) pastLine.parentNode.removeChild(pastLine);
+      }
+    }
 
-    lines.forEach((el, i) => {
-      const diff = i - activeIdx;
+    activeIdx = idx;
+
+    // Recalcule les classes uniquement sur les lignes encore présentes dans le DOM
+    const zone = document.getElementById('lyrics-zone');
+    if (!zone) return;
+    const remaining = zone.querySelectorAll('.lyric-line:not(.lyric-fade-out)');
+    remaining.forEach((el) => {
+      const elIdx = parseInt(el.id.replace('line-', ''));
+      const diff = elIdx - activeIdx;
       let cls = 'lyric-line';
       if (diff === 0) cls += ' active';
-      else if (diff === -1) cls += ' prev1';
       else if (diff === 1) cls += ' next1';
-      else if (diff === -2) cls += ' prev2';
       else if (diff === 2) cls += ' next2';
+      else if (diff >= 3) cls += ' next3';
       el.className = cls;
     });
 
-    const targetIdx = activeIdx >= 0 ? activeIdx : 0;
-    centerLineInZone('lyrics-zone', `line-${targetIdx}`);
+    // Recalcule le padding pour garder la ligne active au centre
+    setLyricsZonePadding();
   }
 }
 
-// Centre précisément un élément au milieu vertical de son conteneur scrollable,
-// quelle que soit la quantité de texte au-dessus/en dessous (1ère ligne, dernière, ou milieu).
-function centerLineInZone(zoneId, lineId) {
-  const zone = document.getElementById(zoneId);
-  const target = document.getElementById(lineId);
-  if (!zone || !target) return;
-  const zoneRect = zone.getBoundingClientRect();
-  const targetRect = target.getBoundingClientRect();
-  // Position actuelle du centre de la ligne relative au scroll du conteneur
-  const targetCenterInZone = (targetRect.top - zoneRect.top) + zone.scrollTop + (targetRect.height / 2);
-  const desiredScrollTop = targetCenterInZone - (zone.clientHeight / 2);
-  zone.scrollTo({ top: Math.max(0, desiredScrollTop), behavior: 'smooth' });
-}
+// Recalcule le padding si la fenêtre est redimensionnée
+window.addEventListener('resize', () => {
+  if (currentSong) setLyricsZonePadding();
+});
 
 audio.ontimeupdate = () => {
   if (!isDragging) {
@@ -1252,13 +1314,21 @@ window.togglePlay = function() {
 window.skip = function(s) {
   currentTime = Math.max(0, currentTime + s);
   if (audio.src) audio.currentTime = currentTime;
-  updateActiveIdx(); updateProgress();
+  // Rebuild DOM since we might be jumping backwards
+  activeIdx = -2;
+  renderLyricsDOM();
+  updateActiveIdx();
+  updateProgress();
 }
 
 window.seekToLine = function(t) {
   currentTime = t;
   if (audio.src) audio.currentTime = t;
-  updateActiveIdx(); updateProgress();
+  // Reconstruit le DOM à partir de cette position (efface les lignes passées déjà supprimées)
+  activeIdx = -2;
+  renderLyricsDOM();
+  updateActiveIdx();
+  updateProgress();
 }
 
 window.onProgressDrag = function(val) {
@@ -1268,6 +1338,9 @@ window.onProgressDrag = function(val) {
   document.getElementById('time-cur').textContent = fmt(currentTime);
   updateProgressFill();
   if (audio.src && isFinite(audio.duration)) audio.currentTime = currentTime;
+  // Rebuild DOM on seek (might be jumping backwards)
+  activeIdx = -2;
+  renderLyricsDOM();
   updateActiveIdx();
   clearTimeout(window._dragTimeout);
   window._dragTimeout = setTimeout(() => { isDragging = false; }, 150);
