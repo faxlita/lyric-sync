@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>L'Hira'ycs</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Quicksand:wght@500;700&family=Caveat:wght@700&family=Playfair+Display:wght@700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="glow-purple"></div>
+<div class="glow-coral"></div>
+<div class="toast" id="toast"></div>
+
+<div class="theme-toggle">
+  <button class="theme-btn active" id="theme-light-btn" onclick="setTheme('light')" title="Mode clair">☀️</button>
+  <button class="theme-btn" id="theme-dark-btn" onclick="setTheme('dark')" title="Mode sombre">🌙</button>
+</div>
+
+<div id="home">
+  <div class="home-logo-mark"><span class="eq-bars large"><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span></span></div>
+  <div>
+    <div class="home-welcome">Welcome to</div>
+    <div class="home-title">L'hira<span class="accent-dot">'</span>ycs</div>
+    <div class="home-sub">Plateforme d'écoute avec lyrics instantanés. Pour chanteurs, chefs de chœur et passionnés de musique.</div>
+  </div>
+  <div class="home-btns">
+    <button class="home-btn choral" onclick="enterChoral()">
+      <div class="home-btn-icon-row">
+        <span class="home-btn-icon">▶</span>
+        <span class="home-btn-arrow">→</span>
+      </div>
+      <div class="home-btn-label">Start</div>
+      <div class="home-btn-sub">Écouter et suivre les paroles en direct</div>
+    </button>
+    <button class="home-btn admin" onclick="enterAdmin()">
+      <div class="home-btn-icon-row">
+        <span class="home-btn-icon">⚙</span>
+        <span class="home-btn-arrow">→</span>
+      </div>
+      <div class="home-btn-label">Admin</div>
+      <div class="home-btn-sub">Gérer les chansons et les lyrics</div>
+    </button>
+  </div>
+</div>
+
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-icon"><span class="eq-bars"><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span></span></div>
+    <div class="login-title">Accès Admin</div>
+    <div class="login-sub">Entrez le mot de passe pour continuer</div>
+    <input class="login-input" type="password" id="login-input" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter') doLogin()" />
+    <div class="login-err" id="login-err">Mot de passe incorrect ❌</div>
+    <button class="login-btn" onclick="doLogin()">Accéder →</button>
+    <button class="login-back" onclick="closeLogin()">← Retour à l'accueil</button>
+  </div>
+</div>
+
+<nav id="nav">
+  <div class="nav-logo" onclick="goHome()">
+    <span class="nav-note"><span class="eq-bars" style="height:18px"><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span></span></span>
+    L'hira'ycs
+    <span class="nav-badge" id="nav-badge"></span>
+  </div>
+  <button class="hamburger-btn" id="hamburger-btn" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+  <button class="btn-logout" onclick="goHome()">← Accueil</button>
+</nav>
+
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<div id="reader">
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Bibliothèque</div>
+      <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+    </div>
+    <div id="song-list-reader"><div class="loading">Chargement...</div></div>
+  </div>
+  <div class="player-main">
+
+    <div class="lyrics-toolbar">
+      <div class="toolbar-group">
+        <span class="toolbar-label">Police</span>
+        <div class="custom-dropdown" id="font-dropdown">
+          <button class="dropdown-trigger" id="font-trigger" onclick="toggleFontDropdown()">
+            <span id="font-trigger-label">Archivo Black</span>
+            <span class="arrow">▾</span>
+          </button>
+          <div class="dropdown-menu" id="font-menu">
+            <button class="dropdown-item selected" data-font="'Archivo Black', sans-serif" data-label="Archivo Black" onclick="selectFont(this)">Archivo Black</button>
+            <button class="dropdown-item" data-font="'Space Grotesk', sans-serif" data-label="Space Grotesk" onclick="selectFont(this)">Space Grotesk</button>
+            <button class="dropdown-item" data-font="'Inter', sans-serif" data-label="Inter" onclick="selectFont(this)">Inter</button>
+            <button class="dropdown-item" data-font="'Playfair Display', serif" data-label="Playfair" onclick="selectFont(this)">Playfair</button>
+            <button class="dropdown-item" data-font="'Space Mono', monospace" data-label="Space Mono" onclick="selectFont(this)">Space Mono</button>
+            <button class="dropdown-item" data-font="'Quicksand', sans-serif" data-label="Quicksand" onclick="selectFont(this)">Quicksand</button>
+            <button class="dropdown-item" data-font="'Caveat', cursive" data-label="Caveat" onclick="selectFont(this)">Caveat</button>
+            <button class="dropdown-item" data-font="'Dancing Script', cursive" data-label="Dancing Script" onclick="selectFont(this)">Dancing Script</button>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar-group">
+        <button class="size-btn" onclick="adjustLyricSize(-0.1)">A−</button>
+        <span class="size-display" id="size-display">100%</span>
+        <button class="size-btn" onclick="adjustLyricSize(0.1)">A+</button>
+      </div>
+    </div>
+
+    <div class="lyrics-zone-mask">
+      <div class="lyrics-zone" id="lyrics-zone">
+        <div class="no-song">Sélectionne une chanson dans la bibliothèque</div>
+      </div>
+    </div>
+
+    <div class="player-bar">
+      <div class="bar-top">
+        <div class="bar-info">
+          <div class="bar-cover"><span class="eq-bars" style="height:16px"><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span></span></div>
+          <div>
+            <div class="bar-title" id="bar-title">—</div>
+            <div class="bar-artist" id="bar-artist"></div>
+          </div>
+        </div>
+        <div class="bar-controls">
+          <button class="ctrl" onclick="skip(-10)">⏮</button>
+          <button class="ctrl-play" id="play-btn" onclick="togglePlay()">▶</button>
+          <button class="ctrl" onclick="skip(10)">⏭</button>
+        </div>
+        <div class="bar-volume">
+          <span style="font-size:16px;color:var(--text-muted)">🔈</span>
+          <input type="range" class="vol-range" min="0" max="1" step="0.01" value="0.8" oninput="setVol(this.value)">
+        </div>
+      </div>
+      <div class="bar-progress">
+        <span class="time-label" id="time-cur">0:00</span>
+        <input type="range" class="progress-range" id="progress-range" min="0" max="1000" step="1" value="0" oninput="onProgressDrag(this.value)" />
+        <span class="time-label right" id="time-dur">0:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="admin">
+  <div class="admin-topbar">
+    <span class="section-title" id="lib-title">Bibliothèque</span>
+    <button class="btn-add" onclick="openForm()">+ Ajouter</button>
+  </div>
+  <div class="song-list" id="song-list-admin"><div class="loading">Chargement...</div></div>
+
+  <div class="form-card" id="form-card">
+    <div class="form-header">
+      <span class="section-title" id="form-title">Nouvelle chanson</span>
+      <div class="form-tabs">
+        <button class="form-tab active" id="tab-tap" onclick="switchTab('tap')">🥁 Tap-to-sync</button>
+        <button class="form-tab" id="tab-lrc" onclick="switchTab('lrc')">📂 Import LRC</button>
+      </div>
+    </div>
+    <div class="form-body">
+      <div class="form-left">
+        <div><label class="field-label">Titre</label><input class="field-input" id="f-title" placeholder="Nom de la chanson" /></div>
+        <div><label class="field-label">Artiste</label><input class="field-input" id="f-artist" placeholder="Nom de l'artiste" /></div>
+        <div>
+          <label class="field-label">URL du MP3</label>
+          <input class="field-input" id="f-audio" placeholder="https://... lien direct MP3" />
+          <div style="font-size:12px;color:var(--text-muted);margin-top:8px;font-weight:600;">Google Drive, Dropbox, lien direct...</div>
+        </div>
+      </div>
+      <div class="form-right">
+        <div id="tap-panel">
+          <label class="field-label">Paroles (une ligne par ligne)</label>
+          <div id="tap-input-area"><textarea class="field-textarea" id="f-raw" placeholder="Is this the real life?&#10;Is this just fantasy?&#10;Caught in a landslide..."></textarea></div>
+          <div id="tap-sync-area" style="display:none"><div class="tap-lines" id="tap-lines-view"></div></div>
+          <div class="tap-actions" id="tap-actions"><button class="btn-start" onclick="startTap()">▶ Lancer la synchro</button></div>
+          <div class="tap-hint" id="tap-hint"></div>
+        </div>
+        <div id="lrc-panel" style="display:none">
+          <label class="field-label">Contenu LRC</label>
+          <textarea class="field-textarea" id="f-lrc" placeholder="[00:12.00] Is this the real life?&#10;[00:15.50] Is this just fantasy?"></textarea>
+          <div style="font-size:12px;color:var(--text-muted);font-weight:600;">Format : [MM:SS.cc] texte — compatible lrclib.net</div>
+        </div>
+        <div class="form-footer"><button class="btn-publish" onclick="saveSong()">Publier la chanson</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-header"><span class="section-title">🎯 Calibrage de synchro</span></div>
+    <div class="calib-select-row">
+      <div class="calib-select">
+        <label class="field-label">Chanson à calibrer</label>
+        <select class="field-input" id="calib-song-select" onchange="loadCalibSong(this.value)">
+          <option value="">— Choisis une chanson —</option>
+        </select>
+      </div>
+    </div>
+    <div class="calib-body" id="calib-body">
+      <div class="calib-empty">Sélectionne une chanson pour ajuster son timing.</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-header"><span class="section-title">🔑 Changer le mot de passe admin</span></div>
+    <div style="padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div class="pwd-row">
+        <div style="flex:1"><label class="field-label">Nouveau mot de passe</label><input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe" /></div>
+        <div style="flex:1"><label class="field-label">Confirmer</label><input class="field-input" type="password" id="confirm-pwd" placeholder="Confirmer" /></div>
+        <button class="btn-save-pwd" onclick="changePassword()">Enregistrer</button>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-weight:600;">Le mot de passe est sauvegardé dans Firebase.</div>
+    </div>
+  </div>
+</div>
+
+<audio id="audio"></audio>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
